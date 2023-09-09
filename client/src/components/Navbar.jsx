@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Login } from "../pages/Login";
+
 export const Navbar = () => {
   return (
     <div className="w-full absolute z-10">
@@ -23,10 +25,10 @@ export const Navbar = () => {
         </ul>
 
         <NavLink
-          to={"/"}
+          to={"/login"}
           className="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 mx-10"
         >
-          Sign Up
+          Login
         </NavLink>
       </nav>
     </div>

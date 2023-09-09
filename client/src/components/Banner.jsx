@@ -6,7 +6,7 @@ import { styles } from "../style.js";
 
 export const Banner = () => {
   const container = {
-    backgroundImage: `url(${bannerImg})`,
+    backgroundImage: `url(${buttonImg})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
   };
