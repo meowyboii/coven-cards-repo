@@ -1,6 +1,6 @@
 import React from "react";
-import bannerImg from "../assets/img/ph.png";
-import buttonImg from "../assets/img/wallpaper2.jpg";
+import bannerImg from "../assets/img/bg_game.png";
+import buttonImg from "../assets/img/button clean.png";
 import { Button } from "./Button";
 import { styles } from "../style.js";
 
