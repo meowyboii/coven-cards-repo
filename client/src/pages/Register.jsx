@@ -3,8 +3,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import bannerImg from "../assets/img/bg_menu.png";
 
 export const Register = () => {
+  const container = {
+    backgroundImage: `url(${bannerImg})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  };
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -46,7 +52,10 @@ export const Register = () => {
     }
   };
   return (
-    <div className="flex items-center justify-center bg-slate-400 h-screen">
+    <div
+      className="flex items-center justify-center h-screen p-10"
+      style={container}
+    >
       <div className="bg-white p-10">
         <form onSubmit={handleSubmit}>
           <h1 className="text-2xl font-bold mb-4">REGISTER</h1>

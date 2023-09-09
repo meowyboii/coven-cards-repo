@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import bannerImg from "../assets/img/bg_menu.png";
 
 export const Login = () => {
+  const container = {
+    backgroundImage: `url(${bannerImg})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  };
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -42,7 +49,10 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-slate-400">
+    <div
+      className="flex items-center justify-center h-screen bg-slate-400 p-10"
+      style={container}
+    >
       <div className="bg-white p-10">
         <form onSubmit={handleSubmit}>
           <h1 className="text-2xl font-bold mb-4">LOGIN</h1>
@@ -97,6 +107,7 @@ export const Login = () => {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };
