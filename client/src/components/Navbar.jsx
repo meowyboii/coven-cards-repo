@@ -2,8 +2,21 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import logoImg from "../assets/img/__LOGO.png";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth";
+import toast, { Toaster } from "react-hot-toast";
 
 export const Navbar = () => {
+  const [auth, setAuth] = useAuth();
+  const handleLogout = () => {
+    setAuth({
+      ...auth,
+      user: null,
+      token: "",
+    });
+    localStorage.removeItem("auth");
+    toast.success("Logout Successfully");
+  };
+
   return (
     <div className="w-full absolute z-10 position">
       <nav className="flex items-center justify-between">
@@ -24,11 +37,28 @@ export const Navbar = () => {
             <NavLink to={"/merch"}>Merch</NavLink>
           </li>
         </ul>
-
-        <NavLink to={"/login"} className=" flex items-center mr-20 text-purple">
-          Login
-        </NavLink>
+        {!auth.user ? (
+          <>
+            <NavLink
+              to={"/login"}
+              className=" flex items-center mr-20 text-purple"
+            >
+              Login
+            </NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink
+              onClick={handleLogout}
+              to={"/login"}
+              className=" flex items-center mr-20 text-purple"
+            >
+              Logout
+            </NavLink>
+          </>
+        )}
       </nav>
+      <Toaster />
     </div>
   );
 };

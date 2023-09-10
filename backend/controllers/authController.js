@@ -105,14 +105,14 @@ const loginController = async (req, res) => {
         message: "Invalid Password!",
       });
     }
-    //Remember me
-    if (rememberMe) {
-      console.log("Remember User!");
-      res.status(200).send({
-        success: true,
-        message: "Remember User!",
-      });
-    }
+    // Remember me
+    // if (rememberMe) {
+    //   console.log("Remember User!");
+    //   res.status(200).send({
+    //     success: true,
+    //     message: "Remember User!",
+    //   });
+    // }
     //Token
     const token = await jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
@@ -127,8 +127,8 @@ const loginController = async (req, res) => {
         phone: user.phone,
         address: user.address,
         dateOfBirth: user.dateOfBirth,
-        parentEmail: parentEmail,
-        parentContact: parentContact,
+        parentEmail: user.parentEmail,
+        parentContact: user.parentContact,
       },
       token,
     });

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/auth";
 import bannerImg from "../assets/img/bg_menu.png";
 
 export const Login = () => {
@@ -12,11 +13,11 @@ export const Login = () => {
   };
 
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
     rememberMe: false,
   });
-
+  const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -38,13 +39,19 @@ export const Login = () => {
       );
       if (res.data.success) {
         toast.success(res.data.message);
+        setAuth({
+          ...auth,
+          user: res.data.user,
+          token: res.data.token,
+        });
+        localStorage.setItem("auth", JSON.stringify(res.data));
         navigate("/");
       } else {
         toast.error(res.data.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong");
+      toast.error("Login Failed");
     }
   };
 
@@ -57,14 +64,14 @@ export const Login = () => {
         <form onSubmit={handleSubmit}>
           <h1 className="text-2xl font-bold mb-4">LOGIN</h1>
           <div className="mb-4">
-            <label htmlFor="username" className="block font-medium mb-2">
+            <label htmlFor="email" className="block font-medium mb-2">
               Email
             </label>
             <input
               type="text"
-              id="username"
-              name="username"
-              value={formData.username}
+              id="email"
+              name="email"
+              value={formData.email}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
               required
@@ -107,7 +114,7 @@ export const Login = () => {
           </div>
         </form>
       </div>
-      <ToastContainer />
+      <Toaster />
     </div>
   );
 };

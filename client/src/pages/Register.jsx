@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from "react-hot-toast";
 import bannerImg from "../assets/img/bg_menu.png";
 
 export const Register = () => {
@@ -183,7 +183,7 @@ export const Register = () => {
           </div>
         </form>
       </div>
-      <ToastContainer />
+      <Toaster />
     </div>
   );
 };
