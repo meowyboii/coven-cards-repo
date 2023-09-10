@@ -21,7 +21,7 @@ export const Navbar = () => {
   return (
     <div className="w-full absolute z-10 position">
       <nav className="flex items-center justify-between">
-      <ul className="flex items-center space-x-20 text-purple text-2xl font-bold">
+        <ul className="flex items-center space-x-20 text-purple text-2xl font-bold">
           <Link
             to={"/"}
             className="rounded-lg px-3 py-2 text-slate-700  hover:text-slate-900 mx-10"
@@ -37,27 +37,20 @@ export const Navbar = () => {
           <li>
             <NavLink to={"/merch"}>Merch</NavLink>
           </li>
+          <li className="flex items-center pl-[76vh]">
+            {!auth.user ? (
+              <>
+                <NavLink to={"/login"}>Login</NavLink>
+              </>
+            ) : (
+              <>
+                <NavLink onClick={handleLogout} to={"/login"}>
+                  Logout
+                </NavLink>
+              </>
+            )}
+          </li>
         </ul>
-        {!auth.user ? (
-          <>
-            <NavLink
-              to={"/login"}
-              className=" flex items-center mr-20 text-purple"
-            >
-              Login
-            </NavLink>
-          </>
-        ) : (
-          <>
-            <NavLink
-              onClick={handleLogout}
-              to={"/login"}
-              className=" flex items-center mr-20 text-purple"
-            >
-              Logout
-            </NavLink>
-          </>
-        )}
       </nav>
       <Toaster />
     </div>

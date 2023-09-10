@@ -4,6 +4,9 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import bannerImg from "../assets/img/bg_menu.png";
+import buttonImg from "../assets/img/button clean.png";
+import logoImg from "../assets/img/__LOGO.png";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
   const container = {
@@ -57,12 +60,19 @@ export const Login = () => {
 
   return (
     <div
-      className="flex items-center justify-center h-screen bg-slate-400 p-10"
+      className="flex items-center justify-center h-screen  p-10"
       style={container}
     >
-      <div className="bg-white p-10">
+      <img
+        src={logoImg}
+        alt="coven cards logo"
+        className="absolute w-1/5 z-10 top-[15vh]"
+      />
+      <div className="bg-[#1E0523DF] p-10 relative rounded-3xl w-[45vh] text-purple ">
         <form onSubmit={handleSubmit}>
-          <h1 className="text-2xl font-bold mb-4">LOGIN</h1>
+          <h1 className="mt-16 text-2xl text-center font-bold mb-4">
+            Enter your login credentials
+          </h1>
           <div className="mb-4">
             <label htmlFor="email" className="block font-medium mb-2">
               Email
@@ -73,7 +83,7 @@ export const Login = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2 border border-purpler rounded focus:outline-none focus:border-purplerer text-black"
               required
             />
           </div>
@@ -87,7 +97,7 @@ export const Login = () => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2 border border-purpler rounded focus:outline-none focus:border-purplerer text-black"
               required
             />
           </div>
@@ -101,16 +111,26 @@ export const Login = () => {
                 onChange={handleChange}
                 className="mr-2"
               />
-              <span className="text-[15px] text-gray-600">Remember Me</span>
+              <span className="text-[15px]">Remember Me</span>
             </label>
           </div>
           <div>
             <button
               type="submit"
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+              className="opacity-90 hover:opacity-100 text-white font-bold py-2 px-4 rounded mx-[20px]"
             >
-              Login
+              <div className="flex justify-center items-center">
+                <img src={buttonImg} alt="login button" />
+                <p className="absolute text-[30px] text-purple">LOGIN</p>
+              </div>
             </button>
+            <div className="flex items-center text-center justify-center">
+              <div className="text-[15px]">No Account?</div>
+              <Link to={"/download"} className="text-[15px] text-white ml-1">
+                {" "}
+                Create one!
+              </Link>
+            </div>
           </div>
         </form>
       </div>
