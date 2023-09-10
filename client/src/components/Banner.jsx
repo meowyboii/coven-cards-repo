@@ -17,7 +17,8 @@ export const Banner = () => {
           The Coven beckons the magic from within...
         </p>
         <div className="mt-10">
-          <Button buttonProp={buttonImg}><p>PLAY NOW</p></Button>
+          <p className="z-10">PLAY NOW</p>
+          <Button buttonProp={buttonImg}></Button>
         </div>
       </div>
     </section>

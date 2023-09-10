@@ -1,8 +1,9 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import bannerImg from "../assets/img/ph.png";
-import buttonImg from "../assets/img/wallpaper2.jpg";
+import sc1 from "../assets/img/sc1.png";
+import sc2 from "../assets/img/sc2.png";
+import sc3 from "../assets/img/sc3.png";
 import "./Screenshot.css";
 
 export const Screenshot = () => {
@@ -17,13 +18,13 @@ export const Screenshot = () => {
       infiniteLoop={true}
     >
       <div className="carousel-image">
-        <img src={buttonImg} alt="Screenshot 1" />
+        <img src={sc1} alt="Screenshot 1" />
       </div>
       <div className="carousel-image">
-        <img src={bannerImg} alt="Screenshot 2" />
+        <img src={sc2} alt="Screenshot 2" />
       </div>
       <div className="carousel-image">
-        <img src={buttonImg} alt="Screenshot 3" />
+        <img src={sc3} alt="Screenshot 3" />
       </div>
     </Carousel>
   );
