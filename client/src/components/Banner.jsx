@@ -13,11 +13,11 @@ export const Banner = () => {
   return (
     <section style={container} className="relative h-screen p-10">
       <div className="h-auto mt-40 p-10 sm:w-full md:w-1/2">
-        <p className={styles.sectionTitle}>
+        <p className={`${styles.sectionTitle} text-purplerest font-bold`}>
           The Coven beckons the magic from within...
         </p>
         <div className="mt-10">
-          <Button buttonProp={buttonImg} />
+          <Button buttonProp={buttonImg}><p>PLAY NOW</p></Button>
         </div>
       </div>
     </section>

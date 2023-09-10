@@ -1,6 +1,7 @@
 import React from "react";
 import bannerImg from "../assets/img/bg_game.png";
 import buttonImg from "../assets/img/button clean.png";
+import witch from "../assets/img/dorothea.png";
 import { Button } from "./Button";
 import { styles } from "../style.js";
 
@@ -12,12 +13,13 @@ export const PlayNow = () => {
   };
   return (
     <section style={container} className="relative h-screen p-10">
-      <div className="h-1/3 flex items-center justify-between mt-20">
-        <div className={`${styles.sectionPar} m-10 w-1/2`}>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+      <div className="h-1/3 flex items-center justify-between mt-20 mb-0">
+        <div className={`${styles.sectionTitle} m-10 w-1/2 text-left`}>
+          Experience the Enchantment
         </div>
-        <div className={`${styles.sectionPar} m-10 w-1/2`}>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+        <img src={witch} className="justify-between w-700"></img>
+        <div className={`${styles.sectionTitle} m-10 w-1/2 text-right`}>
+          Dabble in the Divisive
         </div>
       </div>
       <div className="h-2/5 flex items-end justify-center">
