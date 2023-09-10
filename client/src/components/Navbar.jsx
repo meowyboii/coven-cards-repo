@@ -1,5 +1,4 @@
 import React from "react";
-import {styles} from "../style.js";
 import { NavLink } from "react-router-dom";
 
 import logoImg from "../assets/img/__LOGO.png";
@@ -9,7 +8,7 @@ export const Navbar = () => {
   return (
     <div className="w-full absolute z-10 position">
       <nav className="flex items-center justify-between">
-      <ul className="flex items-center space-x-10 text-purple text-2xl weight-bold">
+      <ul className="flex items-center space-x-20 text-purple text-2xl font-bold">
           <Link
             to={"/"}
             className="rounded-lg px-3 py-2 text-slate-700  hover:text-slate-900 mx-10"
