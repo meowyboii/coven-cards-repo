@@ -7,7 +7,8 @@ export const Description = () => {
     <div>
       <div className="bg-black h-screen p-10">
         <div className="flex items-center justify-center mt-0">
-          <img src={titleImg} alt="master the mystery" className="w-1/2 z-10" />
+          <img src={titleImg} alt="master the mystery" className="w-1/2" />
+          <p className="absolute text-[30px] text-purple font-bold">MASTER THE MYSTERY</p>
         </div>
         <div className="flex items-center justify-center  mt-10">
           <div className={`${styles.sectionPar} px-5 w-1/2 mr-5`}>
