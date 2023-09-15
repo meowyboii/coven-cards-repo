@@ -15,9 +15,14 @@ export const Banner = () => {
         <p className={styles.sectionTitle}>
           The Coven beckons the magic from within...
         </p>
-        <div className="mt-10 lg:w-1/2 md:w-48 sm:w-40 w-1/2">
+        <div className="mt-10 lg:w-[40vh] md:w-48 sm:w-40 w-1/2">
           <button>
-            <img src={buttonImg} alt="button" className="relative" />
+            <div className="flex justify-center items-center">
+              <img src={buttonImg} alt="play-now button" />
+              <p className="font-bold absolute text-[40px] text-purple">
+                PLAY NOW
+              </p>
+            </div>
           </button>
         </div>
       </div>
