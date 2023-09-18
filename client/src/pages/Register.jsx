@@ -198,7 +198,9 @@ export const Register = () => {
               <button type="submit" className="font-bold py-2 px-4 rounded">
                 <div className="flex justify-center items-center w-[28vh]">
                   <img src={buttonImg} alt="login button" />
-                  <p className="absolute text-[30px] text-purple">REGISTER</p>
+                  <p className="absolute text-[30px] text-purple mt-8">
+                    REGISTER
+                  </p>
                 </div>
               </button>
               <div className="flex items-center text-center justify-center">

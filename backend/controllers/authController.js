@@ -129,6 +129,7 @@ const loginController = async (req, res) => {
         dateOfBirth: user.dateOfBirth,
         parentEmail: user.parentEmail,
         parentContact: user.parentContact,
+        role: user.role,
       },
       token,
     });

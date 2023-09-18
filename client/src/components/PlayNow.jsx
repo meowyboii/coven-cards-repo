@@ -31,7 +31,9 @@ export const PlayNow = () => {
       <button className="absolute left-[80vh] top-[70vh]">
         <div className="flex justify-center items-center w-[45vh]">
           <img src={buttonImg} alt="play-now button" />
-          <p className="font-bold absolute text-[45px] text-purple">PLAY NOW</p>
+          <p className="font-bold absolute text-[45px] text-purple mt-10">
+            PLAY NOW
+          </p>
         </div>
       </button>
     </section>
