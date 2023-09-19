@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import logoImg from "../assets/img/__LOGO.png";
 import { useAuth } from "../context/auth";
 import toast, { Toaster } from "react-hot-toast";
 
-export const Navbar = () => {
+export const MerchNavbar = () => {
   const [auth, setAuth] = useAuth();
   const handleLogout = () => {
     setAuth({
@@ -22,15 +22,30 @@ export const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="w-full absolute z-10 position">
-      <nav className="flex items-center justify-between">
-        <ul className="flex items-center space-x-20 text-purple text-2xl font-bold">
-          <NavLink
-            to={"/"}
-            className="rounded-lg px-3 py-2 text-slate-700  hover:text-slate-900 mx-10"
-          >
-            <img src={logoImg} alt="Logo" style={{ width: 310 }}></img>
+    <div className="flex justify-center items-center fixed top-0 left-0 shadow-lg bg-slate-600 w-full max-h-[14vh] shadow-lg bg-slate-800">
+      <nav className="flex items-center justify-between mt-4">
+        <ul className="flex justify-center items-center space-x-20 text-purple text-2xl font-bold">
+          <NavLink to={"/"} className="rounded-lg px-3 py-2 text-slate-700 ">
+            <img src={logoImg} alt="Logo" className="w-[250px] " />
           </NavLink>
           <li>
             <NavLink to={"/"}>Home</NavLink>

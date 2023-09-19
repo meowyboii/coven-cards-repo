@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import bannerImg from "../assets/img/bg_menu.png";
+import buttonImg from "../assets/img/button clean.png";
+import logoImg from "../assets/img/__LOGO.png";
+import { Link } from "react-router-dom";
 
 export const Register = () => {
   const container = {
@@ -56,9 +59,16 @@ export const Register = () => {
       className="flex items-center justify-center h-screen p-10"
       style={container}
     >
-      <div className="bg-white p-10 ">
+      <img
+        src={logoImg}
+        alt="coven cards logo"
+        className="absolute w-1/5 z-10 top-[13vh]"
+      />
+      <div className="bg-[#1E0523DF] p-10  rounded-3xl text-purple mt-[15vh]">
         <form onSubmit={handleSubmit}>
-          <h1 className="text-2xl text-center font-bold mb-4">REGISTER</h1>
+          <h1 className="text-2xl text-center font-bold mb-4 mt-16 mb-10">
+            Create your Coven Cards Account
+          </h1>
           <div className="inline-flex justify-center">
             <div className="mr-5">
               <div className="mb-4">
@@ -71,7 +81,7 @@ export const Register = () => {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                   required
                 />
               </div>
@@ -85,7 +95,7 @@ export const Register = () => {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                   required
                 />
               </div>
@@ -99,7 +109,7 @@ export const Register = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                   required
                 />
               </div>
@@ -113,7 +123,7 @@ export const Register = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                   required
                 />
               </div>
@@ -129,7 +139,7 @@ export const Register = () => {
                   name="address"
                   value={formData.address}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                   required
                 />
               </div>
@@ -143,7 +153,7 @@ export const Register = () => {
                   name="dateOfBirth"
                   value={formData.dateOfBirth}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                   required
                 />
               </div>
@@ -161,7 +171,7 @@ export const Register = () => {
                     name="parentEmail"
                     value={formData.parentEmail}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                     required
                   />
                 </div>
@@ -180,17 +190,26 @@ export const Register = () => {
                     name="parentContact"
                     value={formData.parentContact}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                     required
                   />
                 </div>
               </div>
-              <button
-                type="submit"
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-              >
-                Register
+              <button type="submit" className="font-bold py-2 px-4 rounded">
+                <div className="flex justify-center items-center w-[28vh]">
+                  <img src={buttonImg} alt="login button" />
+                  <p className="absolute text-[30px] text-purple mt-8">
+                    REGISTER
+                  </p>
+                </div>
               </button>
+              <div className="flex items-center text-center justify-center">
+                <div className="text-[15px]">Already have an accout?</div>
+                <Link to={"/login"} className="text-[15px] text-white ml-1">
+                  {" "}
+                  Click here!
+                </Link>
+              </div>
             </div>
           </div>
         </form>

@@ -4,16 +4,17 @@ import { Description } from "../components/Description";
 import { Screenshot } from "../components/Screenshot";
 import { PlayNow } from "../components/PlayNow";
 import { useAuth } from "../context/auth";
+import { Layout } from "../components/Layout";
 
 export const Home = () => {
   const [auth, setAuth] = useAuth();
   return (
-    <div>
+    <Layout>
       <Banner />
       <pre>{JSON.stringify(auth, null, 4)}</pre>
       <Description />
       <Screenshot />
       <PlayNow />
-    </div>
+    </Layout>
   );
 };
