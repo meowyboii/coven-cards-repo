@@ -4,16 +4,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        purple: '#A484A9',
-        purpler: '#7B0E90',
-        purplerer: '#781462',
-        purplerest: '#92509C',
+        purple: "#A484A9",
+        purpler: "#7B0E90",
+        purplerer: "#781462",
+        purplerest: "#92509C",
       },
       font: {
-        'fredoka': ['Fredoka', 'serif'],
-        'fraunces': ['Fraunces', 'serif'],
-      }
+        fredoka: ["Fredoka", "serif"],
+        fraunces: ["Fraunces", "serif"],
+      },
     },
   },
+  variants: {
+    extend: {
+      translate: ["group-hover", "hover"],
+    },
+  },
+
   plugins: [],
 };

@@ -16,6 +16,7 @@ import { CreateCategory } from "./pages/Admin/CreateCategory";
 import { CreateProduct } from "./pages/Admin/CreateProduct";
 import { Users } from "./pages/Admin/Users";
 import { SingleProduct } from "./pages/Admin/SingleProduct";
+import { SingleCategory } from "./pages/Admin/SingleCategory";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/download" element={<Download />} />
         <Route path="/merch" element={<Merch />} />
         <Route path="/merch/product/:slug" element={<SingleProduct />} />
+        <Route path="/merch/category/:slug" element={<SingleCategory />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

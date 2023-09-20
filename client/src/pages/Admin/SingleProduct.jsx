@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import img1 from "../../assets/img/sc1.png";
+// import img1 from "../../assets/img/sc1.png";
 import img2 from "../../assets/img/sc2.png";
 import img3 from "../../assets/img/sc3.png";
 import { LayoutMerch } from "../../components/LayoutMerch";
+import buttonImg from "../../assets/img/button clean.png";
 
 export const SingleProduct = () => {
   const params = useParams();
@@ -37,7 +38,7 @@ export const SingleProduct = () => {
   const products = {
     name: "Sample Product",
     images: [
-      img1,
+      `${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`,
       img2,
       img3,
       // Add more image URLs here
@@ -52,8 +53,8 @@ export const SingleProduct = () => {
 
   return (
     <LayoutMerch>
-      <div className="w-full mt-40 bg-slate-700 ">
-        <div className="flex justify-center ml-20 text-white">
+      <div className="w-full mt-40 bg-[#241d2f] ">
+        <div className="flex justify-center items-center ml-20 text-white">
           {/* Image Tabs */}
           <div className="flex justify-center items-center flex-col  w-1/5 ">
             {products.images.map((image, index) => (
@@ -63,14 +64,14 @@ export const SingleProduct = () => {
                   activeImageIndex === index
                     ? "border-2 border-purpler "
                     : " text-gray-600"
-                } px-3 py-3 my-2  bg-purple w-[13vh] h-[13vh]`}
+                } px-3 py-3 my-2  bg-purple w-[13vh] h-[13vh] `}
                 onClick={() => handleTabClick(index)}
               >
                 <div className="m-0 p-0">
                   <img
                     src={products.images[index]}
                     alt={`${products.name}-mini`}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform transform scale-100 hover:scale-105 transition-transform duration-500"
                   />
                 </div>
               </button>
@@ -78,25 +79,29 @@ export const SingleProduct = () => {
           </div>
 
           {/* Product Images */}
-          <div className="flex justify-center items-center mb-4 mx-20 h-[70vh] w-3/5">
+          <div className="flex justify-center items-center mb-4  h-[70vh] w-[100vh] mx-20">
             <img
               src={products.images[activeImageIndex]}
               alt={products.name}
-              className="h-2/3 object-cover"
+              className="max-h-[65vh] object-cover"
             />
           </div>
 
           {/* Product Description */}
-          <div className="mt-4 w-1/3 max-h-[81vh] bg-slate-900 p-16">
+          <div className="mt-4 w-1/3 max-h-[81vh] bg-[#0D080E] p-16 ">
             <h1 className="text-3xl font-semibold mb-6">{product.name}</h1>
-            <h2 className="text-2xl mb-10">{`$${product.price}.00`}</h2>
+            <h2 className="text-2xl mb-4">{`$${product.price}.00`}</h2>
+            <h3 className="text-m font-thin  mb-10">{`Available Stock: ${product.quantity}`}</h3>
 
-            <p className="text-lg mb-10">{product.description}</p>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-purple text-white text-3xl rounded hover:bg-purpler my-2"
-            >
-              Add to Cart
+            <p className="text-lg mb-6">{product.description}</p>
+
+            <button className="left-[80vh] top-[70vh]" type="submit">
+              <div className="flex justify-center items-center w-[30vh]">
+                <img src={buttonImg} alt="play-now button" />
+                <p className="font-bold absolute text-[25px] text-purple mt-7">
+                  ADD TO CART
+                </p>
+              </div>
             </button>
           </div>
 
