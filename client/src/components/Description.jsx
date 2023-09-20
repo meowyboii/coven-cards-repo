@@ -9,7 +9,7 @@ export const Description = () => {
       <div className="bg-black h-screen p-10">
         <div className="flex items-center justify-center mt-0">
           <img src={titleImg} alt="master the mystery" className="w-1/2" />
-          <ReactCurvedText
+          {/*<ReactCurvedText
             width={300}
             height={345}
             cx={145}
@@ -18,7 +18,7 @@ export const Description = () => {
             ry={109}
             startOffset={0}
             text='MASTER THE MYSTERY'
-          />
+        /> */}
             <p className="absolute text-[30px] text-purple font-bold">MASTER THE MYSTERY</p>
           
         </div>
