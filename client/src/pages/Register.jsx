@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import bannerImg from "../assets/img/bg_menu.png";
+import bannerImg from "../assets/img/login_bg.png";
 import buttonImg from "../assets/img/button clean.png";
 import logoImg from "../assets/img/__LOGO.png";
 import { Link } from "react-router-dom";

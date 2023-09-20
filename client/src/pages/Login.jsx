@@ -3,7 +3,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
-import bannerImg from "../assets/img/bg_menu.png";
+import bannerImg from "../assets/img/login_bg.png";
 import buttonImg from "../assets/img/button clean.png";
 import logoImg from "../assets/img/__LOGO.png";
 import { Link } from "react-router-dom";
@@ -116,6 +116,7 @@ export const Login = () => {
                 <span className="text-[15px]">Remember Me</span>
               </label>
             </div>
+            <br></br>
             <div>
               <button
                 type="submit"
@@ -126,6 +127,9 @@ export const Login = () => {
                   <p className="absolute text-[30px] text-purple mt-8">LOGIN</p>
                 </div>
               </button>
+              <br></br>
+              <br></br>
+              <br></br>
               <div className="flex items-center text-center justify-center">
                 <div className="text-[15px]">No Account?</div>
                 <Link to={"/download"} className="text-[15px] text-white ml-1">
