@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import logoImg from "../assets/img/__LOGO.png";
 import { useAuth } from "../context/auth";
 import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
 
 export const MerchNavbar = () => {
   const [auth, setAuth] = useAuth();
@@ -21,27 +22,34 @@ export const MerchNavbar = () => {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const [isSticky, setIsSticky] = useState(false);
+  const activateDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  //Get categories
+  const [categories, setCategories] = useState([]);
+  const getAllCategory = async (req, res) => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/category/get-category`
+      );
+      if (data.success) {
+        setCategories(data?.category);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong while retrieving the categories");
+    }
+  };
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    getAllCategory();
   }, []);
 
   return (
-    <div className="flex justify-center items-center fixed top-0 left-0 shadow-lg bg-slate-600 w-full max-h-[14vh] shadow-lg bg-slate-800">
+    <div className="flex justify-center items-center fixed top-0 left-0 shadow-lg w-full max-h-[14vh] shadow-lg bg-[#0D080E] z-10 ">
       <nav className="flex items-center justify-between mt-4">
         <ul className="flex justify-center items-center space-x-20 text-purple text-2xl font-bold">
           <NavLink to={"/"} className="rounded-lg px-3 py-2 text-slate-700 ">
@@ -54,7 +62,28 @@ export const MerchNavbar = () => {
             <NavLink to={"/download"}>Download</NavLink>
           </li>
           <li>
-            <NavLink to={"/merch"}>Merch</NavLink>
+            <div
+              className="relative inline-block py-2"
+              onMouseEnter={activateDropdown}
+              onMouseLeave={activateDropdown}
+            >
+              <NavLink to={"/merch"}>Merch▼</NavLink>
+              {isDropdownOpen && (
+                <div className="absolute top-10 left-0 bg-white border border-gray-300 shadow-lg py-2 px-4 rounded-md w-auto font-normal">
+                  <ul>
+                    {categories.map((c) => (
+                      <>
+                        <li>
+                          <NavLink to={`/merch/category/${c.slug}`}>
+                            {c.name}
+                          </NavLink>
+                        </li>
+                      </>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
           </li>
           <li className="flex items-center pl-[76vh]">
             {!auth.user ? (

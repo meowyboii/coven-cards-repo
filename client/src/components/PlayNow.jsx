@@ -2,7 +2,6 @@ import React from "react";
 import bannerImg from "../assets/img/bg_game.png";
 import buttonImg from "../assets/img/button clean.png";
 import witch from "../assets/img/dorothea.png";
-import { Button } from "./Button";
 import { styles } from "../style.js";
 
 export const PlayNow = () => {

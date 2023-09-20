@@ -150,7 +150,7 @@ const updateProductController = async (req, res) => {
     if (!quantity) {
       return res.status(500).send({ error: "Quantity is Required" });
     }
-    if (photo && photo.size > 1000000) {
+    if (photo && photo.size > 2000000) {
       return res.status(500).send({
         error: "Photo is required and should be less than 1 mb",
       });
