@@ -35,7 +35,7 @@ export const Checkout = () => {
               }`
             : "Your Cart is empty!"}
         </h3>
-        {cart?.length > 1 && (
+        {cart?.length > 0 && (
           <table className="table-auto border-collapse w-3/4">
             <thead>
               <tr>
