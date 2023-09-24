@@ -72,12 +72,12 @@ export const Login = () => {
         />
         <div className="bg-[#1E0523DF] p-10 relative rounded-3xl w-[45vh] text-purple ">
           <form onSubmit={handleSubmit}>
-            <h1 className="mt-16 text-2xl text-center font-bold mb-4">
+            <h1 className="mt-16 text-3xl text-center font-bold font-maintoo mb-4">
               Enter your login credentials
             </h1>
             <div className="mb-4">
-              <label htmlFor="email" className="block font-medium mb-2">
-                Email
+              <label htmlFor="email" className="block text-xl font-medium font-main mb-2">
+                email
               </label>
               <input
                 type="text"
@@ -85,13 +85,13 @@ export const Login = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-purpler rounded focus:outline-none focus:border-purplerer text-black"
+                className="w-full px-3 py-2 font-main border border-purpler rounded focus:outline-none focus:border-purplerer text-black"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="password" className="block font-medium mb-2">
-                Password
+              <label htmlFor="password" className="block text-xl font-medium font-main mb-2">
+                password
               </label>
               <input
                 type="password"
@@ -99,7 +99,7 @@ export const Login = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-purpler rounded focus:outline-none focus:border-purplerer text-black"
+                className="w-full px-3 py-2 font-main border border-purpler rounded focus:outline-none focus:border-purplerer text-black"
                 required
               />
             </div>
@@ -113,7 +113,7 @@ export const Login = () => {
                   onChange={handleChange}
                   className="mr-2"
                 />
-                <span className="text-[15px]">Remember Me</span>
+                <span className="text-[17px] font-main">Remember Me</span>
               </label>
             </div>
             <br></br>
@@ -131,8 +131,8 @@ export const Login = () => {
               <br></br>
               <br></br>
               <div className="flex items-center text-center justify-center">
-                <div className="text-[15px]">No Account?</div>
-                <Link to={"/download"} className="text-[15px] text-white ml-1">
+                <div className="text-[17px] font-main">No Account?</div>
+                <Link to={"/download"} className="text-[17px] text-[#92509C] ml-1 font-main font-bold">
                   {" "}
                   Create one!
                 </Link>

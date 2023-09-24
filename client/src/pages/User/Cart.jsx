@@ -20,7 +20,7 @@ export const Cart = () => {
         className="cursor-pointer display flex justify-center"
         onClick={togglePanel}
       >
-        <AiOutlineShoppingCart />
+        <AiOutlineShoppingCart className=" text-[45px]" />
         <Badge count={cart?.length} showZero />
       </div>
 
