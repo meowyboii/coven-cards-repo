@@ -172,9 +172,31 @@ const updateProductController = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send({
+    res.status(400).send({
       success: false,
       message: "Error in updating the product",
+      error,
+    });
+  }
+};
+
+const searchProductController = async (req, res) => {
+  try {
+    const { keyword } = req.params;
+    const result = await productModel
+      .find({
+        $or: [
+          { name: { $regex: keyword, $options: "i" } },
+          { description: { $regex: keyword, $options: "i" } },
+        ],
+      })
+      .select("-photo");
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error in Search Product API",
       error,
     });
   }
@@ -187,4 +209,5 @@ module.exports = {
   productPhotoController,
   deleteProductController,
   updateProductController,
+  searchProductController,
 };

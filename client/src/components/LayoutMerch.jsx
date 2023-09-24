@@ -5,6 +5,7 @@ export const LayoutMerch = ({ children }) => {
   return (
     <div>
       <MerchNavbar />
+      <div className="mt-[14vh]"></div>
       <main className="min-h-[80vh]"> {children}</main>
       <Footer />
     </div>

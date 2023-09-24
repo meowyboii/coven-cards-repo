@@ -4,9 +4,13 @@ import logoImg from "../assets/img/__LOGO.png";
 import { useAuth } from "../context/auth";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
+import { SearchInput } from "./SearchInput";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Cart } from "../pages/User/Cart";
 
 export const MerchNavbar = () => {
   const [auth, setAuth] = useAuth();
+
   const handleLogout = () => {
     setAuth({
       ...auth,
@@ -51,7 +55,7 @@ export const MerchNavbar = () => {
   return (
     <div className="flex justify-center items-center fixed top-0 left-0 shadow-lg w-full max-h-[14vh] shadow-lg bg-[#0D080E] z-10 ">
       <nav className="flex items-center justify-between mt-4">
-        <ul className="flex justify-center items-center space-x-20 text-purple text-2xl font-bold">
+        <ul className="flex justify-center items-center space-x-16 text-purple text-2xl font-bold">
           <NavLink to={"/"} className="rounded-lg px-3 py-2 text-slate-700 ">
             <img src={logoImg} alt="Logo" className="w-[250px] " />
           </NavLink>
@@ -85,7 +89,15 @@ export const MerchNavbar = () => {
               )}
             </div>
           </li>
-          <li className="flex items-center pl-[76vh]">
+          <li>
+            <SearchInput />
+          </li>
+          <li className=" text-[45px] pl-[14vh] ">
+            <div>
+              <Cart />
+            </div>
+          </li>
+          <li className="flex items-center space-x-0">
             {!auth.user ? (
               <>
                 <NavLink to={"/login"}>Log in</NavLink>
@@ -132,6 +144,7 @@ export const MerchNavbar = () => {
           </li>
         </ul>
       </nav>
+
       <Toaster />
     </div>
   );

@@ -1,13 +1,11 @@
 import React from "react";
 import "./App.css";
-import { Navbar } from "./components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { Download } from "./pages/Download";
-import { Merch } from "./pages/Merch";
-import { Footer } from "./components/Footer";
-import { Login } from "./pages/Login";
-import { Register } from "./pages/Register";
+import { Home } from "./pages/User/Home";
+import { Download } from "./pages/User/Download";
+import { Merch } from "./pages/User/Merch";
+import { Login } from "./pages/User/Login";
+import { Register } from "./pages/User/Register";
 import { Dashboard } from "./pages/User/Dashboard";
 import { PrivateRoute } from "./components/Routes/Private";
 import { AdminRoute } from "./components/Routes/AdminRoute";
@@ -15,8 +13,10 @@ import { AdminDashboard } from "./pages/Admin/AdminDashboard";
 import { CreateCategory } from "./pages/Admin/CreateCategory";
 import { CreateProduct } from "./pages/Admin/CreateProduct";
 import { Users } from "./pages/Admin/Users";
-import { SingleProduct } from "./pages/Admin/SingleProduct";
-import { SingleCategory } from "./pages/Admin/SingleCategory";
+import { SingleProduct } from "./pages/User/SingleProduct";
+import { SingleCategory } from "./pages/User/SingleCategory";
+import { Search } from "./pages/User/Search";
+import { Checkout } from "./pages/User/Checkout";
 
 function App() {
   return (
@@ -38,6 +38,8 @@ function App() {
         <Route path="/merch/category/:slug" element={<SingleCategory />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/merch/search/:keyword" element={<Search />} />
+        <Route path="/merch/checkout" element={<Checkout />} />
       </Routes>
     </div>
   );
