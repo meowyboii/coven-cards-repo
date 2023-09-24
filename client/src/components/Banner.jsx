@@ -15,16 +15,11 @@ export const Banner = () => {
         <p className={styles.sectionTitle}>
           The Coven beckons the magic from within...
         </p>
-        <div className="mt-10 lg:w-[40vh] md:w-48 sm:w-40 w-1/2">
+        <div className="mt-10 lg:w-[40vh] md:w-48 sm:w-40 w-1/2 glow">
           <button>
             <div className="flex justify-center items-center">
               <img src={buttonImg} className="button" alt="play-now button" />
-              <p className="text font-maintoo">
-                PLAY NOW 
-              </p>
-            </div>
-            <div className="glow w-[385px] h-[80px] bottom-[85px] left-[4px]">
-              .
+              <p className="text font-maintoo">PLAY NOW</p>
             </div>
           </button>
         </div>

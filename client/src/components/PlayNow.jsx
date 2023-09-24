@@ -27,17 +27,14 @@ export const PlayNow = () => {
           <p className="text-purpler">Divisive</p>
         </div>
       </div>
-      <button className="absolute left-[74vh] top-[70vh]">
-        <div className="flex justify-center items-center w-[45vh]">
-          <img src={buttonImg} className="button" alt="play-now button" />
-          <p className="text">
-            PLAY NOW
-          </p>
-        </div>
-        <div className="glow w-[425px] h-[85px] bottom-[93px] left-[9px]">
-              .
-        </div>
-      </button>
+      <div className="flex justify-center items-center z-10 glow w-1/4 left-[75vh] top-40">
+        <button>
+          <div className="flex justify-center items-center ">
+            <img src={buttonImg} className="button" alt="play-now button" />
+            <p className="text">PLAY NOW</p>
+          </div>
+        </button>
+      </div>
     </section>
   );
 };
