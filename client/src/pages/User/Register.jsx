@@ -62,17 +62,18 @@ export const Register = () => {
       <img
         src={logoImg}
         alt="coven cards logo"
-        className="absolute w-1/5 z-10 top-[13vh]"
+        className="absolute w-1/5 z-10 top-[18vh]"
       />
       <div className="bg-[#1E0523DF] p-10  rounded-3xl text-purple mt-[15vh]">
         <form onSubmit={handleSubmit}>
-          <h1 className="text-2xl text-center font-bold mb-4 mt-16 mb-10">
+          <h1 className="text-3xl text-center font-bold font-maintoo mb-4 mt-16 mb-10">
             Create your Coven Cards Account
           </h1>
+          <br></br>
           <div className="inline-flex justify-center">
             <div className="mr-5">
               <div className="mb-4">
-                <label htmlFor="firstName" className="block font-medium mb-2">
+                <label htmlFor="firstName" className="block font-medium font-main mb-2">
                   First Name
                 </label>
                 <input
@@ -81,12 +82,12 @@ export const Register = () => {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                  className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                   required
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="lastName" className="block font-medium mb-2">
+                <label htmlFor="lastName" className="block font-medium font-main mb-2">
                   Last Name
                 </label>
                 <input
@@ -95,26 +96,27 @@ export const Register = () => {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                  className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                   required
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="email" className="block font-medium mb-2">
+                <label htmlFor="email" className="block font-medium font-main mb-2">
                   Email
                 </label>
                 <input
                   type="text"
                   id="email"
                   name="email"
+                  placeholder="sample@gmail.com"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                  className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                   required
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="password" className="block font-medium mb-2">
+                <label htmlFor="password" className="block font-medium font-main mb-2">
                   Password
                 </label>
                 <input
@@ -123,14 +125,14 @@ export const Register = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                  className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                   required
                 />
               </div>
             </div>
             <div className="ml-5">
               <div className="mb-4">
-                <label htmlFor="address" className="block font-medium mb-2">
+                <label htmlFor="address" className="block font-medium font-main mb-2">
                   Address
                 </label>
                 <input
@@ -139,12 +141,12 @@ export const Register = () => {
                   name="address"
                   value={formData.address}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                  className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                   required
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="dateOfBirth" className="block font-medium mb-2">
+                <label htmlFor="dateOfBirth" className="block font-medium font-main mb-2">
                   Date of Birth
                 </label>
                 <input
@@ -153,7 +155,7 @@ export const Register = () => {
                   name="dateOfBirth"
                   value={formData.dateOfBirth}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                  className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                   required
                 />
               </div>
@@ -161,7 +163,7 @@ export const Register = () => {
                 <div className="mb-4">
                   <label
                     htmlFor="parentEmail"
-                    className="block font-medium mb-2"
+                    className="block font-medium mb-2 font-main"
                   >
                     Parent Email
                   </label>
@@ -169,16 +171,17 @@ export const Register = () => {
                     type="text"
                     id="parentEmail"
                     name="parentEmail"
+                    placeholder="sample@gmail.com"
                     value={formData.parentEmail}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                    className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                     required
                   />
                 </div>
                 <div className="mb-4">
                   <label
                     htmlFor="parentContact"
-                    className="block font-medium mb-2"
+                    className="block font-medium mb-2 font-main"
                   >
                     Parent Contact
                   </label>
@@ -190,7 +193,7 @@ export const Register = () => {
                     name="parentContact"
                     value={formData.parentContact}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                    className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                     required
                   />
                 </div>
@@ -203,9 +206,11 @@ export const Register = () => {
                   </p>
                 </div>
               </button>
+              <br></br>
+              <br></br>
               <div className="flex items-center text-center justify-center">
-                <div className="text-[15px]">Already have an accout?</div>
-                <Link to={"/login"} className="text-[15px] text-white ml-1">
+                <div className="font-main text-[15px] font-main">Already have an accout?</div>
+                <Link to={"/login"} className="text-[17px] font-main text-[#92509C] font-bold ml-1">
                   {" "}
                   Click here!
                 </Link>

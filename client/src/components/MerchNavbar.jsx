@@ -5,7 +5,6 @@ import { useAuth } from "../context/auth";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { SearchInput } from "./SearchInput";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Cart } from "../pages/User/Cart";
 
 export const MerchNavbar = () => {
@@ -92,11 +91,10 @@ export const MerchNavbar = () => {
           <li>
             <SearchInput />
           </li>
-          <li className=" text-[45px] pl-[14vh] ">
-            <div>
-              <Cart />
-            </div>
-          </li>
+          <div className="pl-20">
+            <Cart />
+          </div>
+
           <li className="flex items-center space-x-0">
             {!auth.user ? (
               <>

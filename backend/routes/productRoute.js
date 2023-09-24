@@ -44,4 +44,5 @@ router.delete("/product/:pid", deleteProductController);
 
 //search product
 router.get("/search/:keyword", searchProductController);
+
 module.exports = router;

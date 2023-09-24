@@ -30,7 +30,7 @@ export const Navbar = () => {
             to={"/"}
             className="rounded-lg px-3 py-2 text-slate-700  hover:text-slate-900 mx-10"
           >
-            <img src={logoImg} alt="Logo" style={{ width: 310 }}></img>
+            <img src={logoImg} className="img" alt="Logo" style={{ width: 310 }}></img>
           </NavLink>
           <li>
             <NavLink to={"/"}>Home</NavLink>

@@ -9,9 +9,9 @@ module.exports = {
         purplerer: "#781462",
         purplerest: "#92509C",
       },
-      font: {
-        fredoka: ["Fredoka", "serif"],
-        fraunces: ["Fraunces", "serif"],
+      fontFamily: {
+        main: 'Fredoka, serif',
+        maintoo: 'Fraunces, serif',
       },
     },
   },

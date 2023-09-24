@@ -14,8 +14,8 @@ export const Checkout = () => {
     try {
       setCart((prevCart) => {
         const updatedCart = prevCart.filter((product) => product._id !== pid);
-        prevCart.filter((product) => product._id !== pid);
         localStorage.setItem("cart", JSON.stringify(updatedCart));
+        return updatedCart;
       });
     } catch (error) {
       console.log(error);
@@ -35,7 +35,7 @@ export const Checkout = () => {
               }`
             : "Your Cart is empty!"}
         </h3>
-        {cart?.length && (
+        {cart?.length > 1 && (
           <table className="table-auto border-collapse w-3/4">
             <thead>
               <tr>
