@@ -1,5 +1,5 @@
 import React from "react";
-import bannerImg from "../assets/img/bg_game.png";
+import bannerImg from "../assets/img/home_playnow.png";
 import buttonImg from "../assets/img/button clean.png";
 import witch from "../assets/img/dorothea.png";
 import { styles } from "../style.js";
@@ -19,7 +19,7 @@ export const PlayNow = () => {
           Experience the
           <p className="text-purpler">Enchantment</p>
         </div>
-        <img src={witch} className="justify-between w-[80vh] mt-40"></img>
+        <img src={witch} className="justify-between w-[80vh] mt-[200px]"></img>
         <div
           className={`${styles.sectionTitle} m-10 w-1/2 text-right font-bold text-purplerest`}
         >
@@ -27,12 +27,15 @@ export const PlayNow = () => {
           <p className="text-purpler">Divisive</p>
         </div>
       </div>
-      <button className="absolute left-[80vh] top-[70vh]">
+      <button className="absolute left-[74vh] top-[70vh]">
         <div className="flex justify-center items-center w-[45vh]">
-          <img src={buttonImg} alt="play-now button" />
-          <p className="font-bold absolute text-[45px] text-purple mt-10">
+          <img src={buttonImg} className="button" alt="play-now button" />
+          <p className="text">
             PLAY NOW
           </p>
+        </div>
+        <div className="glow w-[425px] h-[85px] bottom-[93px] left-[9px]">
+              .
         </div>
       </button>
     </section>
