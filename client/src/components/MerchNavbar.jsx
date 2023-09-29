@@ -52,7 +52,7 @@ export const MerchNavbar = () => {
   }, []);
 
   return (
-    <div className="flex justify-center items-center fixed top-0 left-0 shadow-lg w-full max-h-[14vh] shadow-lg bg-[#0D080E] z-10 ">
+    <div className="flex justify-center items-center fixed top-0 left-0 shadow-lg w-full max-h-[14vh] shadow-lg bg-black z-10 ">
       <nav className="flex items-center justify-between mt-4">
         <ul className="flex justify-center items-center space-x-16 text-purple text-2xl font-bold">
           <NavLink to={"/"} className="rounded-lg px-3 py-2 text-slate-700 ">

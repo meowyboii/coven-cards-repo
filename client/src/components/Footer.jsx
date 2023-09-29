@@ -5,7 +5,9 @@ export const Footer = () => {
   return (
     <footer className="h-auto bg-black p-20">
       <div className="flex items-center m-auto w-3/4 ">
-        <div className="logo w-1/2 justify-center"><img src={logoImg} alt="Logo" style={{ width: 310 }}></img></div>
+        <div className="logo w-1/2 justify-center">
+          <img src={logoImg} alt="Logo" style={{ width: 310 }}></img>
+        </div>
         <div className="w-1/2">
           <div className="socials text-purple justify-center font-main">
             <h1 className="text-xl">Facebook | Twitter | Reddit</h1>

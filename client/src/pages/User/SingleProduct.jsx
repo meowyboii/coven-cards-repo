@@ -8,7 +8,7 @@ import img3 from "../../assets/img/sc3.png";
 import { LayoutMerch } from "../../components/LayoutMerch";
 import buttonImg from "../../assets/img/button clean.png";
 import { useCart } from "../../context/cart";
-import { InputNumber, ConfigProvider } from "antd";
+import { InputNumber, ConfigProvider, theme } from "antd";
 
 export const SingleProduct = () => {
   const params = useParams();
@@ -17,7 +17,7 @@ export const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
 
   const inputNumberStyle = {
-    backgroundColor: "white",
+    backgroundColor: "#2E1832",
     padding: "5px",
     fontzFamily: "",
   };
@@ -124,12 +124,13 @@ export const SingleProduct = () => {
             <div className="mb-4">
               <ConfigProvider
                 theme={{
+                  algorithm: theme.darkAlgorithm,
                   components: {
                     InputNumber: {
                       activeBorderColor: "#2E1832",
                       addonBg: "white",
                       handleBg: "#2E1832",
-                      handleBorderColor: "white",
+                      handleBorderColor: "#781462",
                       handleHoverColor: "white",
                       hoverBorderColor: "#781462",
                     },

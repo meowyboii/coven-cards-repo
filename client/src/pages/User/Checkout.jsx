@@ -71,6 +71,7 @@ export const Checkout = () => {
                             updatedCart[index].quantity--;
                             setCart(updatedCart);
                           }}
+                          disabled={product.quantity === 1}
                         >
                           -
                         </button>
@@ -84,6 +85,7 @@ export const Checkout = () => {
                             updatedCart[index].quantity++;
                             setCart(updatedCart);
                           }}
+                          disabled={product.quantity === product.stock}
                         >
                           +
                         </button>

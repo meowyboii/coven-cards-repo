@@ -95,12 +95,13 @@ nav li {
 	-webkit-text-fill-color: transparent;
   filter: drop-shadow(0px 0px 3px #580E67);
 
-  .ant-input-number-input {
-    color: red; /* Change this to your desired text color */
+  
+}
+.ant-input-number-input {
+    color: #360640; /* Change this to your desired text color */
   }
   .custom-input-number .ant-input-number-handler {
     background-color: red; /* Change the handle background color to red */
     border-color: blue; /* Change the handle border color to blue */
     color: white; /* Change the text color of the handle */
   }
-}
