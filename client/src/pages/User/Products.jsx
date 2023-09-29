@@ -28,7 +28,7 @@ export const Products = () => {
     <div className="grid grid-cols-4 gap-8 text-white px-40 p-20">
       {products.map((product) => (
         <Link key={product._id} to={`/merch/product/${product.slug}`}>
-          <div className="bg-purple p-4 rounded shadow-md h-[45vh] mb-4 flex justify-center items-center">
+          <div className="bg-purple p-4 rounded shadow-md h-[33vh] mb-4 flex justify-center items-center">
             <img
               src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
               alt={product.name}

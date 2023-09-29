@@ -52,7 +52,7 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: red;
+  background-color: #000;
   border-radius: 10px;
   animation: neon 2s ease-in-out infinite alternate;
 }
