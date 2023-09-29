@@ -130,7 +130,7 @@ export const Login = () => {
                 >
                   <div className="flex justify-center items-center">
                     <img src={buttonImg} alt="login button" />
-                    <p className="absolute text-[30px] text-purple mt-8">
+                    <p className="text absolute text-[40px] text-purple mt-8">
                       LOGIN
                     </p>
                   </div>

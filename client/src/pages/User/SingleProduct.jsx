@@ -79,7 +79,7 @@ export const SingleProduct = () => {
   };
   return (
     <LayoutMerch>
-      <div className="w-full mt-40 bg-[#241d2f] h-full">
+      <div className="w-full bg-gradient-to-b from-[#0e0014] to-[#08000b] h-full">
         <div className="flex justify-end ml-20 text-white h-full">
           {/* Image Tabs */}
           <div className="flex justify-center items-center flex-col">
@@ -90,14 +90,14 @@ export const SingleProduct = () => {
                   activeImageIndex === index
                     ? "border-2 border-purpler "
                     : " text-gray-600"
-                } px-3 py-3 my-2  bg-purple w-[13vh] h-[13vh] `}
+                } px-3 py-3 my-2  bg-gradient-to-b from-[#00000050] to-[#1E0523] rounded-lg w-[13vh] h-[13vh] `}
                 onClick={() => handleTabClick(index)}
               >
                 <div className="m-0 p-0">
                   <img
                     src={products.images[index]}
                     alt={`${products.name}-mini`}
-                    className="h-full w-full object-cover transition-transform transform scale-100 hover:scale-105 transition-transform duration-500"
+                    className="h-full w-full object-cover transition-transform transform scale-100 hover:scale-110 transition-transform duration-500"
                   />
                 </div>
               </button>
@@ -105,7 +105,7 @@ export const SingleProduct = () => {
           </div>
 
           {/* Product Images */}
-          <div className="flex justify-center items-center mb-4 h-[70vh] w-1/2 mx-20 bg-black">
+          <div className="flex justify-center items-center mb-4 h-[70vh] w-1/2 mx-5 mt-16 mb-20 border-2 border-[#78146235] bg-gradient-to-b from-[#1E0523] to-[#00000050] rounded-lg">
             <img
               src={products.images[activeImageIndex]}
               alt={products.name}
@@ -114,8 +114,8 @@ export const SingleProduct = () => {
           </div>
 
           {/* Product Description */}
-          <div className="mt-4 max-w-1/3 max-h-[81vh] bg-[#0D080E] p-16 ">
-            <h1 className="text-3xl font-semibold mb-6">{product.name}</h1>
+          <div className="mt-16 mb-20 max-w-1/3 max-h-[81vh] bg-[#1E0523] p-16 ">
+            <h1 className="text2 text-3xl font-bold font-maintoo mb-6">{product.name}</h1>
             <h2 className="text-2xl mb-4">{`$${product.price}.00`}</h2>
             <h3 className="text-m font-thin  mb-10">{`Available Stock: ${product.stock}`}</h3>
 
@@ -170,7 +170,7 @@ export const SingleProduct = () => {
                 <img src={buttonImg} alt="play-now button" />
 
                 <h2
-                  className="font-bold absolute text-[25px] text-purple mt-5"
+                  className="text font-bold absolute text-[30px] text-purple mb-10"
                   onClick={handleSubmit}
                 >
                   ADD TO CART

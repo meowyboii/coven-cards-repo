@@ -31,7 +31,7 @@ export const PlayNow = () => {
         <button>
           <div className="flex justify-center items-center ">
             <img src={buttonImg} className="button" alt="play-now button" />
-            <p className="text">PLAY NOW</p>
+            <p className="text text-[55px]">PLAY NOW</p>
           </div>
         </button>
       </div>
