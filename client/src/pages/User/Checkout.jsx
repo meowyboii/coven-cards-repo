@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import { LayoutMerch } from "../../components/LayoutMerch";
 import { useCart } from "../../context/cart";
 import { useAuth } from "../../context/auth";
-import { InputNumber } from "antd";
 import toast from "react-hot-toast";
 
 export const Checkout = () => {
   const [cart, setCart] = useCart();
   const [auth, setAuth] = useAuth();
-  const [value, setValue] = useState(null);
 
   const removeFromCart = (pid) => {
     try {
@@ -41,13 +39,13 @@ export const Checkout = () => {
               <tr>
                 <th className="border px-4 py-2 ">Product</th>
                 <th className="border px-4 py-2 ">Unit Price</th>
-                <th className="border px-4 py-2 ">Quantity</th>
+                <th className="border px-4 py-2 min-w-[18vh]">Quantity</th>
                 <th className="border px-4 py-2 ">Total Price</th>
                 <th className="border px-4 py-2 ">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {cart?.map((product) => (
+              {cart?.map((product, index) => (
                 <>
                   <tr key={product.id}>
                     <td className="flex justify-center items-center border-b border-gray-400 py-2">
@@ -62,20 +60,38 @@ export const Checkout = () => {
                       {product.name}
                     </td>
                     <td className="border-b border-gray-400 px-4 py-2">
-                      {product.price}
+                      ${product.price}
                     </td>
                     <td className="border-b border-gray-400 px-4 py-2">
-                      <InputNumber
-                        value={value}
-                        min={1}
-                        max={product.quantity}
-                        defaultValue={1}
-                        onChange={setValue}
-                      />
+                      <div className="flex justify-center items-center p-4 mb-4 ">
+                        <button
+                          className="border p-1"
+                          onClick={() => {
+                            const updatedCart = [...cart];
+                            updatedCart[index].quantity--;
+                            setCart(updatedCart);
+                          }}
+                        >
+                          -
+                        </button>
+                        <span className="px-4 border py-1">
+                          {product.quantity}
+                        </span>
+                        <button
+                          className="border  p-1"
+                          onClick={() => {
+                            const updatedCart = [...cart];
+                            updatedCart[index].quantity++;
+                            setCart(updatedCart);
+                          }}
+                        >
+                          +
+                        </button>
+                      </div>
                     </td>
-                    <td className="border-b border-gray-400 px-4 py-2">{`$${
-                      value * product.price
-                    }`}</td>
+                    <td className="border-b border-gray-400 px-4 py-2">
+                      ${product.quantity * product.price}
+                    </td>
                     <td className="border-b border-gray-400 px-4 py-2">
                       <button
                         className="px-4 py-2 bg-purple text-white rounded hover:bg-purpler my-2 mx-2"

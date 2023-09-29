@@ -12,7 +12,7 @@ export const CreateProduct = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
-  const [quantity, setQuantity] = useState("");
+  const [stock, setStock] = useState("");
   const [shipping, setShipping] = useState("");
   const [photo, setPhoto] = useState("");
 
@@ -42,7 +42,7 @@ export const CreateProduct = () => {
       productData.append("description", description);
       productData.append("price", price);
       productData.append("category", category);
-      productData.append("quantity", quantity);
+      productData.append("stock", stock);
       productData.append("photo", photo);
       productData.append("shipping", shipping);
       const { data } = await axios.post(
@@ -164,18 +164,18 @@ export const CreateProduct = () => {
             </div>
             <div className="mb-4">
               <label htmlFor="quantity" className="block text-sm font-medium">
-                Quantity
+                Stock Quantity
               </label>
               <input
                 type="number"
-                id="quantity"
-                name="quantity"
-                value={quantity}
+                id="stock"
+                name="stock"
+                value={stock}
                 onChange={(e) => {
-                  setQuantity(e.target.value);
+                  setStock(e.target.value);
                 }}
                 className="mt-1 p-2 w-full border border-gray-300 rounded focus:ring focus:ring-indigo-300 focus:outline-none text-black"
-                placeholder="Product Quantity"
+                placeholder="Product Stock"
                 required
               />
             </div>

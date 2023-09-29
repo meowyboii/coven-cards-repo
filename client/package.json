@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.9.1",
     "axios": "^1.5.0",
+    "rc-input-number": "^8.2.0",
     "react": "^18.2.0",
     "react-curved-text": "^2.0.2",
     "react-dom": "^18.2.0",

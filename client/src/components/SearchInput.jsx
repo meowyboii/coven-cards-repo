@@ -30,7 +30,7 @@ export const SearchInput = () => {
     <div className="flex justify-center items-center mx-2 sm:mx-4 lg:mx-6">
       <form onSubmit={handleSearch} role="search">
         <input
-          type="text"
+          type="search"
           placeholder="Search..."
           className="py-2 px-3 w-40 sm:w-48 lg:w-80 border border-gray-300 rounded-full focus:outline-none focus:border-blue-500 mr-5 w-3/4 font-normal text-black"
           value={values.keyword}

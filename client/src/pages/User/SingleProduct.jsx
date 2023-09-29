@@ -8,11 +8,19 @@ import img3 from "../../assets/img/sc3.png";
 import { LayoutMerch } from "../../components/LayoutMerch";
 import buttonImg from "../../assets/img/button clean.png";
 import { useCart } from "../../context/cart";
+import { InputNumber, ConfigProvider } from "antd";
 
 export const SingleProduct = () => {
   const params = useParams();
   const [product, setProduct] = useState([]);
   const [cart, setCart] = useCart();
+  const [quantity, setQuantity] = useState(1);
+
+  const inputNumberStyle = {
+    backgroundColor: "white",
+    padding: "5px",
+    fontzFamily: "",
+  };
 
   const getSingleProduct = async (req, res) => {
     try {
@@ -52,13 +60,29 @@ export const SingleProduct = () => {
   const handleTabClick = (index) => {
     setActiveImageIndex(index);
   };
-
+  const handleSubmit = (e) => {
+    console.log(quantity);
+    if (product.quantity >= 1 && product.quantity !== "") {
+      toast.error("Please input the right quantity");
+    } else {
+      const productWithQuantity = {
+        ...product,
+        quantity: quantity,
+      };
+      setCart([...cart, productWithQuantity]);
+      localStorage.setItem(
+        "cart",
+        JSON.stringify([...cart, productWithQuantity])
+      );
+      toast.success("Item Added to Cart");
+    }
+  };
   return (
     <LayoutMerch>
-      <div className="w-full mt-40 bg-[#241d2f] ">
-        <div className="flex justify-center items-center ml-20 text-white">
+      <div className="w-full mt-40 bg-[#241d2f] h-full">
+        <div className="flex justify-end ml-20 text-white h-full">
           {/* Image Tabs */}
-          <div className="flex justify-center items-center flex-col  w-1/5 ">
+          <div className="flex justify-center items-center flex-col">
             {products.images.map((image, index) => (
               <button
                 key={index}
@@ -81,38 +105,75 @@ export const SingleProduct = () => {
           </div>
 
           {/* Product Images */}
-          <div className="flex justify-center items-center mb-4  h-[70vh] w-[100vh] mx-20">
+          <div className="flex justify-center items-center mb-4 h-[70vh] w-1/2 mx-20 bg-black">
             <img
               src={products.images[activeImageIndex]}
               alt={products.name}
-              className="max-h-[65vh] object-cover"
+              className="max-w-full object-cover"
             />
           </div>
 
           {/* Product Description */}
-          <div className="mt-4 w-1/3 max-h-[81vh] bg-[#0D080E] p-16 ">
+          <div className="mt-4 max-w-1/3 max-h-[81vh] bg-[#0D080E] p-16 ">
             <h1 className="text-3xl font-semibold mb-6">{product.name}</h1>
             <h2 className="text-2xl mb-4">{`$${product.price}.00`}</h2>
-            <h3 className="text-m font-thin  mb-10">{`Available Stock: ${product.quantity}`}</h3>
+            <h3 className="text-m font-thin  mb-10">{`Available Stock: ${product.stock}`}</h3>
 
             <p className="text-lg mb-6">{product.description}</p>
+            <h3 className="text-m font-thin  mb-3">Quantity: </h3>
+            <div className="mb-4">
+              <ConfigProvider
+                theme={{
+                  components: {
+                    InputNumber: {
+                      activeBorderColor: "#2E1832",
+                      addonBg: "white",
+                      handleBg: "#2E1832",
+                      handleBorderColor: "white",
+                      handleHoverColor: "white",
+                      hoverBorderColor: "#781462",
+                    },
+                  },
+                }}
+              >
+                <InputNumber
+                  value={quantity}
+                  min={1}
+                  max={product.stock}
+                  defaultValue={1}
+                  onChange={setQuantity}
+                  style={inputNumberStyle}
+                />
+              </ConfigProvider>
+            </div>
 
+            {/* <div className="flex justify-center items-center p-4 bg-[#2E1832] w-1/4 mb-4 rounded-2xl">
+              <button
+                className="mr-4"
+                onClick={() => setQuantity(quantity - 1)}
+                disabled={quantity === 1}
+              >
+                -
+              </button>
+              {quantity}
+              <button
+                className="ml-4"
+                onClick={() => setQuantity(quantity + 1)}
+                disabled={quantity === product.stock}
+              >
+                +
+              </button>
+            </div> */}
             <button className="left-[80vh] top-[70vh]" type="submit">
               <div className="flex justify-center items-center w-[30vh]">
                 <img src={buttonImg} alt="play-now button" />
-                <p
-                  className="font-bold absolute text-[25px] text-purple mt-7"
-                  onClick={() => {
-                    setCart([...cart, product]);
-                    localStorage.setItem(
-                      "cart",
-                      JSON.stringify([...cart, product])
-                    );
-                    toast.success("Item Added to Cart");
-                  }}
+
+                <h2
+                  className="font-bold absolute text-[25px] text-purple mt-5"
+                  onClick={handleSubmit}
                 >
                   ADD TO CART
-                </p>
+                </h2>
               </div>
             </button>
           </div>

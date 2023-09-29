@@ -131,7 +131,7 @@ const deleteProductController = async (req, res) => {
 
 const updateProductController = async (req, res) => {
   try {
-    const { name, slug, description, price, category, quantity, shipping } =
+    const { name, slug, description, price, category, stock, shipping } =
       req.fields;
     const { photo } = req.files;
     //validation
@@ -147,8 +147,8 @@ const updateProductController = async (req, res) => {
     if (!category) {
       return res.status(500).send({ error: "Category is Required" });
     }
-    if (!quantity) {
-      return res.status(500).send({ error: "Quantity is Required" });
+    if (!stock) {
+      return res.status(500).send({ error: "Stock is Required" });
     }
     if (photo && photo.size > 2000000) {
       return res.status(500).send({
