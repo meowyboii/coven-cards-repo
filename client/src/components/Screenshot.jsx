@@ -1,31 +1,17 @@
 import React from "react";
-import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import sc1 from "../assets/img/sc1.png";
-import sc2 from "../assets/img/sc2.png";
-import sc3 from "../assets/img/sc3.png";
+import banner1 from "../assets/img/sale1.png";
+import banner2 from "../assets/img/sale2.png";
 import "./Screenshot.css";
 
 export const Screenshot = () => {
   return (
-    <Carousel
-      transitionTime={1000}
-      showThumbs={false}
-      showStatus={false}
-      emulateTouch
-      autoPlay={true}
-      interval={5000}
-      infiniteLoop={true}
-    >
-      <div className="carousel-image">
-        <img src={sc1} alt="Screenshot 1" />
+    <section className="relative h-screen bg-gradient-to-b from-[#0e0014] to-black">
+    <div className="">
+      <div className="flex justify-items-center align-items-center">
+        <img src = {banner1} className="rounded-3xl h-[900px] opacity-60 mt-10 ml-[20px]"></img><img src = {banner2} className="rounded-3xl h-[900px] opacity-60 mt-10 ml-[20px]"></img>
       </div>
-      <div className="carousel-image">
-        <img src={sc2} alt="Screenshot 2" />
-      </div>
-      <div className="carousel-image">
-        <img src={sc3} alt="Screenshot 3" />
-      </div>
-    </Carousel>
+    </div>
+    </section>
   );
 };

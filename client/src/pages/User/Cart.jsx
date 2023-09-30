@@ -21,7 +21,11 @@ export const Cart = () => {
         onClick={togglePanel}
       >
         <AiOutlineShoppingCart className=" text-[45px]" />
-        <Badge count={cart?.length} showZero />
+        <span class="relative flex h-[20px] w-[20px]">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-100"></span>
+          <span class="relative inline-flex rounded-full h-[20px] w-[20px] bg-violet-500"></span>
+          <Badge color="violet" count={cart?.length} showZero /> 
+        </span>
       </div>
 
       <SlidingSidePanel

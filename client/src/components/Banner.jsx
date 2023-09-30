@@ -19,7 +19,7 @@ export const Banner = () => {
           <button>
             <div className="flex justify-center items-center">
               <img src={buttonImg} className="button" alt="play-now button" />
-              <p className="text font-maintoo">PLAY NOW</p>
+              <p className="text font-maintoo text-[50px]">PLAY NOW</p>
             </div>
           </button>
         </div>

@@ -89,14 +89,21 @@ nav li {
   margin-top: 50px;
 	text-transform: uppercase;
   font-weight: bold;
-  font-size: 50px;
+  /*font-size: 50px;*/
 	background: linear-gradient(to bottom, #92509C 25%, #360640 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-  filter: drop-shadow(0px 0px 3px #580E67);
-
-  
+  filter: drop-shadow(0px 0px 3px #580E67);  
 }
+
+.text2{
+  font-weight: bold;
+	background: linear-gradient(to bottom, #92509C 50%, #360640 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+  filter: drop-shadow(0px 0px 3px #580E67);  
+}
+
 .ant-input-number-input {
     color: #360640; /* Change this to your desired text color */
   }
