@@ -1,7 +1,19 @@
 const categoryModel = require("../models/categoryModel");
 const slugify = require("slugify");
 const productModel = require("../models/productModel");
+const orderModel = require("../models/orderModel");
 const fs = require("fs");
+const braintree = require("braintree");
+const { error } = require("console");
+require("dotenv").config();
+//payment gateway
+
+var gateway = new braintree.BraintreeGateway({
+  environment: braintree.Environment.Sandbox,
+  merchantId: process.env.BRAINTREE_MERCHANT_ID,
+  publicKey: process.env.BRAINTREE_PUBLIC_KEY,
+  privateKey: process.env.BRAINTREE_PRIVATE_KEY,
+});
 
 const createProductController = async (req, res) => {
   try {
@@ -202,6 +214,54 @@ const searchProductController = async (req, res) => {
   }
 };
 
+//payment gateway api
+const braintreeTokenController = async (req, res) => {
+  try {
+    gateway.clientToken.generate({}, function (err, response) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.send(response);
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const braintreePaymentController = async (req, res) => {
+  try {
+    const { cart, nonce } = req.body;
+    let total = 0;
+    cart.map((product) => {
+      total += product.price * product.quantity;
+    });
+    let newTransaction = gateway.transaction.sale(
+      {
+        amount: total,
+        paymentMethodNonce: nonce,
+        options: {
+          submitForSettlement: true,
+        },
+      },
+      function (error, result) {
+        if (response) {
+          const order = new orderModel({
+            products: cart,
+            payment: result,
+            buyer: req.user._id,
+          }).save();
+          res.json({ ok: true });
+        } else {
+          res.status(500).send(error);
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createProductController,
   getProductController,
@@ -210,4 +270,6 @@ module.exports = {
   deleteProductController,
   updateProductController,
   searchProductController,
+  braintreeTokenController,
+  braintreePaymentController,
 };

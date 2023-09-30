@@ -171,7 +171,7 @@ export const SingleProduct = () => {
 
                 <h2
                   className="font-bold absolute text-[25px] text-purple mt-5"
-                  onClick={handleSubmit}
+                  onClick={() => handleSubmit()}
                 >
                   ADD TO CART
                 </h2>

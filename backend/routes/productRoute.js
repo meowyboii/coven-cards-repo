@@ -8,6 +8,7 @@ const {
   deleteProductController,
   updateProductController,
   searchProductController,
+  braintreeTokenController,
 } = require("../controllers/productController");
 const formidable = require("express-formidable");
 
@@ -44,5 +45,12 @@ router.delete("/product/:pid", deleteProductController);
 
 //search product
 router.get("/search/:keyword", searchProductController);
+
+//payments routes
+//token
+router.get("/braintree/token", braintreeTokenController);
+
+//payments
+router.post("");
 
 module.exports = router;

@@ -17,6 +17,7 @@ import { SingleProduct } from "./pages/User/SingleProduct";
 import { SingleCategory } from "./pages/User/SingleCategory";
 import { Search } from "./pages/User/Search";
 import { Checkout } from "./pages/User/Checkout";
+import { CheckoutSuccess } from "./pages/User/CheckoutSuccess";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/merch/search/:keyword" element={<Search />} />
         <Route path="/merch/checkout" element={<Checkout />} />
+        <Route path="/merch/checkout-success" element={<CheckoutSuccess />} />
       </Routes>
     </div>
   );
