@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 import { PayButton } from "../../components/PayButton";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import DropIn from "braintree-web-drop-in-react";
 
 export const Checkout = () => {
   const [cart, setCart] = useCart();
