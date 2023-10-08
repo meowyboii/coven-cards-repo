@@ -96,6 +96,15 @@ nav li {
   filter: drop-shadow(0px 0px 3px #580E67);  
 }
 
+.card-header{
+  position: relative;
+  bottom: 24vh;
+  left: 20vh;
+  color: #1E0523;
+  z-index: 10;
+  border-bottom: 5px solid #fff;
+}
+
 .text2{
   font-weight: bold;
 	background: linear-gradient(to bottom, #92509C 50%, #360640 100%);

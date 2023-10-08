@@ -22,23 +22,17 @@ export const Download = () => {
             </div>
           </button></a>
       </div>
-      <div className="flex items-center justify-center w-[800px] bg-[#1E0523DF] p-10 relative rounded-3xl text-purple mt-[20vh] ml-[50vh] mr-[5vh] inline-block">
-        <div className>
-
+      <div className="flex items-center justify-center w-[800px] h-[400px] bg-[#1E0523DF] p-10 relative rounded-3xl text-purple mt-[20vh] ml-[50vh] mr-[5vh] inline-block">
+        <div className="card-header">
+          <h2 className = "text font-maintoo text-[43px]">DOWNLOAD & INSTALLATION</h2>
         </div>
-        Coven Cards is a turn-based card-matching game set in a world of
-        mythical creatures, wizards, and witches. You and your opponent are
-        two spell-casters competing against each other in a potion-making
-        contest—gathering as many ingredients as you can for your respective
-        concoctions. Every card match is an ingredient obtained and added to
-        the pot, so players must match as many cards as they can!
-        <br></br>
-        <br></br>
-        Coven Cards takes card-matching to a whole new level, introducing
-        magic into a casual game that is known and loved. Simple yet
-        effective, it adds an element of competition in card-matching—making
-        it a fun, addicting game that can be played anytime. Join the coven
-        and test your luck and logic.
+        <ol className="list-decimal list-outside text-[20px] font-bold">
+          <li>Click the download link for the Coven Cards Installer.</li>
+          <br></br>
+          <li>Launch the installer.</li>
+          <br></br>
+          <li>Follow the steps on the installer.</li>
+        </ol>
       </div>
     </div>
     </section>
