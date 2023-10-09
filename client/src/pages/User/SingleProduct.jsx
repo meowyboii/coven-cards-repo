@@ -61,10 +61,17 @@ export const SingleProduct = () => {
     setActiveImageIndex(index);
   };
   const handleSubmit = (e) => {
-    console.log(quantity);
-    if (product.quantity >= 1 && product.quantity !== "") {
-      toast.error("Please input the right quantity");
-    } else {
+    if (quantity >= 1 && quantity <= product.stock) {
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i]._id === product._id) {
+          const updatedCart = [...cart];
+          updatedCart[i].quantity += quantity;
+          setCart(updatedCart);
+          localStorage.setItem("cart", JSON.stringify([...cart]));
+          toast.success("Item Added to Cart");
+          return;
+        }
+      }
       const productWithQuantity = {
         ...product,
         quantity: quantity,
@@ -75,14 +82,16 @@ export const SingleProduct = () => {
         JSON.stringify([...cart, productWithQuantity])
       );
       toast.success("Item Added to Cart");
+    } else {
+      toast.error("Please input the right quantity");
     }
   };
   return (
     <LayoutMerch>
       <div className="w-full bg-gradient-to-b from-[#0e0014] to-[#08000b] h-full">
-        <div className="flex justify-end ml-20 text-white h-full">
+        <div className="flex justify-end text-white h-full">
           {/* Image Tabs */}
-          <div className="flex justify-center items-center flex-col">
+          <div className="flex justify-center items-center pl-16 flex-col w-1/4 ">
             {products.images.map((image, index) => (
               <button
                 key={index}
@@ -105,7 +114,7 @@ export const SingleProduct = () => {
           </div>
 
           {/* Product Images */}
-          <div className="flex justify-center items-center mb-4 h-[70vh] w-1/2 mx-5 mt-16 mb-20 border-2 border-[#78146235] bg-gradient-to-b from-[#1E0523] to-[#00000050] rounded-lg">
+          <div className="flex justify-center items-center h-[70vh] w-2/4 mx-[15vh] px-5 mt-16 mb-20 border-2 border-[#78146235] bg-gradient-to-b from-[#1E0523] to-[#00000050] rounded-lg">
             <img
               src={products.images[activeImageIndex]}
               alt={products.name}
@@ -114,14 +123,16 @@ export const SingleProduct = () => {
           </div>
 
           {/* Product Description */}
-          <div className="mt-16 mb-20 max-w-1/3 max-h-[81vh] bg-[#1E0523] p-16 ">
+          <div className="mt-14 mb-20 max-w-1/3 max-h-[81vh] bg-[#1E0523] p-16 ">
             <h1 className="text2 text-3xl font-bold font-maintoo mb-6">
               {product.name}
             </h1>
             <h2 className="text-2xl mb-4">{`$${product.price}.00`}</h2>
             <h3 className="text-m font-thin  mb-10">{`Available Stock: ${product.stock}`}</h3>
+            <div className="w-[40vh] h-auto">
+              <p className="text-lg mb-6">{product.description}</p>
+            </div>
 
-            <p className="text-lg mb-6">{product.description}</p>
             <h3 className="text-m font-thin  mb-3">Quantity: </h3>
             <div className="mb-4">
               <ConfigProvider
@@ -149,24 +160,6 @@ export const SingleProduct = () => {
                 />
               </ConfigProvider>
             </div>
-
-            {/* <div className="flex justify-center items-center p-4 bg-[#2E1832] w-1/4 mb-4 rounded-2xl">
-              <button
-                className="mr-4"
-                onClick={() => setQuantity(quantity - 1)}
-                disabled={quantity === 1}
-              >
-                -
-              </button>
-              {quantity}
-              <button
-                className="ml-4"
-                onClick={() => setQuantity(quantity + 1)}
-                disabled={quantity === product.stock}
-              >
-                +
-              </button>
-            </div> */}
             <button className="left-[80vh] top-[70vh]" type="submit">
               <div className="flex justify-center items-center w-[30vh]">
                 <img src={buttonImg} alt="play-now button" />

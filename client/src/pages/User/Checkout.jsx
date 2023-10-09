@@ -5,15 +5,15 @@ import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
 import { PayButton } from "../../components/PayButton";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import DropIn from "braintree-web-drop-in-react";
+// import axios from "axios";
+// import DropIn from "braintree-web-drop-in-react";
 
 export const Checkout = () => {
   const [cart, setCart] = useCart();
   const [auth, setAuth] = useAuth();
-  const [clientToken, setClientToken] = useState("");
-  const [instance, setInstance] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [clientToken, setClientToken] = useState("");
+  // const [instance, setInstance] = useState("");
+  // const [loading, setLoading] = useState(false);
 
   const removeFromCart = (pid) => {
     try {
@@ -28,21 +28,21 @@ export const Checkout = () => {
     }
   };
 
-  const getToken = async () => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/product/braintree/token`
-      );
-      setClientToken(data?.clientToken);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getToken();
-  }, [auth?.token]);
+  // const getToken = async () => {
+  //   try {
+  //     const { data } = await axios.get(
+  //       `${process.env.REACT_APP_API}/api/v1/product/braintree/token`
+  //     );
+  //     setClientToken(data?.clientToken);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   getToken();
+  // }, [auth?.token]);
 
-  const handlePayment = () => {};
+  // const handlePayment = () => {};
 
   return (
     <LayoutMerch>

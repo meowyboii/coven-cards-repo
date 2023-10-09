@@ -23,6 +23,7 @@ const stripeController = async (req, res) => {
         quantity: product.quantity,
       };
     });
+
     const shippingRate = await stripe.shippingRates.create({
       display_name: "Ground shipping",
       type: "fixed_amount",
