@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
@@ -25,6 +25,8 @@ export const Register = () => {
     parentEmail: "",
     parentContact: "",
   });
+
+  const [belowEighteen, setBelowEighteen] = useState(true);
 
   const navigate = useNavigate();
 
@@ -54,6 +56,21 @@ export const Register = () => {
       toast.error("Something went wrong");
     }
   };
+  const calculateAge = (birthdate) => {
+    const birthYear = new Date(birthdate).getFullYear();
+    const currentYear = new Date().getFullYear();
+    return currentYear - birthYear;
+  };
+  useEffect(() => {
+    const age = calculateAge(formData.dateOfBirth);
+    console.log(age);
+    if (age <= 18) {
+      setBelowEighteen(true);
+    } else {
+      setBelowEighteen(false);
+    }
+  }, [formData.dateOfBirth]);
+
   return (
     <Layout>
       <div
@@ -172,7 +189,7 @@ export const Register = () => {
                     type="date"
                     id="dateOfBirth"
                     name="dateOfBirth"
-                    max={current}
+                    // max={current}
                     value={formData.dateOfBirth}
                     onChange={handleChange}
                     className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
@@ -196,6 +213,7 @@ export const Register = () => {
                       onChange={handleChange}
                       className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                       required
+                      disabled={belowEighteen}
                     />
                   </div>
                   <div className="mb-4">
@@ -215,6 +233,7 @@ export const Register = () => {
                       onChange={handleChange}
                       className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                       required
+                      disabled={belowEighteen}
                     />
                   </div>
                 </div>
