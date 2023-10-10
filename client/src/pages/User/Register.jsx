@@ -65,9 +65,9 @@ export const Register = () => {
     const age = calculateAge(formData.dateOfBirth);
     console.log(age);
     if (age <= 18) {
-      setBelowEighteen(true);
-    } else {
       setBelowEighteen(false);
+    } else {
+      setBelowEighteen(true);
     }
   }, [formData.dateOfBirth]);
 
@@ -212,7 +212,6 @@ export const Register = () => {
                       value={formData.parentEmail}
                       onChange={handleChange}
                       className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
-                      required
                       disabled={belowEighteen}
                     />
                   </div>
@@ -232,7 +231,6 @@ export const Register = () => {
                       value={formData.parentContact}
                       onChange={handleChange}
                       className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
-                      required
                       disabled={belowEighteen}
                     />
                   </div>

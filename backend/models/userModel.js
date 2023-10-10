@@ -31,12 +31,10 @@ const userSchema = new mongoose.Schema(
     },
     parentEmail: {
       type: String,
-      required: false,
       unique: true,
     },
     parentContact: {
       type: String,
-      required: false,
     },
     role: {
       type: Number,

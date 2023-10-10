@@ -6,6 +6,7 @@ import { useCart } from "../../context/cart";
 import { Badge } from "antd";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import emptycart from "../../assets/img/empty-cart.png";
 
 export const Cart = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -100,7 +101,10 @@ export const Cart = () => {
               </button>
             </>
           ) : (
-            <h2 className="text-center">Your cart is empty!</h2>
+            <div className="flex flex-col justify-center items-center">
+              <h2 className="text-center mb-6">Your cart is empty!</h2>
+              <img src={emptycart} className="h-[10vh] w-auto" />
+            </div>
           )}
         </div>
       </SlidingSidePanel>

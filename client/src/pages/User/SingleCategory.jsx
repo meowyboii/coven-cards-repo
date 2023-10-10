@@ -57,13 +57,13 @@ export const SingleCategory = () => {
   return (
     <LayoutMerch>
       <div className="min-h-[80vh] pt-20 justify content-center items-center ">
-        <h2 className="text-4xl font-bold mb-14 text-white text-center">
+        <h2 className="text-4xl font-bold mb-14 text-[#f1e9f1] text-center uppercase">
           {category.name}
         </h2>
         <div className="grid grid-cols-4 gap-8 text-white px-40 ">
           {filteredProducts.map((product) => (
             <Link key={product._id} to={`/merch/product/${product.slug}`}>
-              <div className="bg-purple p-4 rounded shadow-md h-[45vh] mb-4 flex justify-center items-center">
+              <div className="bg-gradient-to-br from-[#340449] to-[#0E0014] p-4 rounded shadow-md h-[45vh] mb-4 flex justify-center items-center">
                 <img
                   src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
                   alt={product.name}

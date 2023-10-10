@@ -201,18 +201,20 @@ export const SingleProduct = () => {
                 />
               </ConfigProvider>
             </div>
-            <button className="left-[80vh] top-[70vh]" type="submit">
-              <div className="flex justify-center items-center w-[30vh]">
-                <img src={buttonImg} alt="play-now button" />
+            <div className="mt-10 glow w-[30vh] mb-6">
+              <button className="left-[80vh] top-[70vh]" type="submit">
+                <div className="flex justify-center items-center ">
+                  <img src={buttonImg} alt="play-now button" />
 
-                <h2
-                  className="font-bold absolute text-[25px] text-purple mt-5"
-                  onClick={() => handleSubmit()}
-                >
-                  ADD TO CART
-                </h2>
-              </div>
-            </button>
+                  <h2
+                    className="font-bold absolute text-[25px] text-purple mt-5"
+                    onClick={() => handleSubmit()}
+                  >
+                    ADD TO CART
+                  </h2>
+                </div>
+              </button>
+            </div>
           </div>
 
           {/* Add more product details here */}

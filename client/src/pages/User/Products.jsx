@@ -26,10 +26,10 @@ export const Products = () => {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold mt-[10vh] p-4 text-white text-center">
+      <h1 className="text-4xl font-bold mt-[10vh] p-4 text-[#f1e9f1] text-center">
         PRODUCTS
       </h1>
-      <div className="grid grid-cols-4 gap-8 text-white px-40 pb-40 pt-10">
+      <div className="grid grid-cols-4 gap-8 text-[#f1e9f1] px-40 pb-40 pt-10">
         {products.map((product) => (
           <Link key={product._id} to={`/merch/product/${product.slug}`}>
             <div className="bg-gradient-to-br from-[#340449] to-[#0E0014] p-4 rounded shadow-md h-[39vh] mb-4 flex justify-center items-center">
