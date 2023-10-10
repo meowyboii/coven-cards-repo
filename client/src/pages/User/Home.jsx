@@ -11,7 +11,7 @@ export const Home = () => {
   return (
     <Layout>
       <Banner />
-      <pre>{JSON.stringify(auth, null, 4)}</pre>
+      {/* <pre>{JSON.stringify(auth, null, 4)}</pre> */}
       <Description />
       <Screenshot />
       <PlayNow />

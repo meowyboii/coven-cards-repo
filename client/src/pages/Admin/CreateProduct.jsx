@@ -15,6 +15,7 @@ export const CreateProduct = () => {
   const [stock, setStock] = useState("");
   const [shipping, setShipping] = useState("");
   const [photo, setPhoto] = useState("");
+  const [productImages, setProductImages] = useState([]);
 
   const getAllCategory = async (req, res) => {
     try {
@@ -45,10 +46,12 @@ export const CreateProduct = () => {
       productData.append("stock", stock);
       productData.append("photo", photo);
       productData.append("shipping", shipping);
+
       const { data } = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/product/create-product`,
         productData
       );
+
       if (data?.success) {
         toast.success("Product Created Successfully");
         window.location.reload();
@@ -58,6 +61,22 @@ export const CreateProduct = () => {
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
+    }
+
+    //Images
+    try {
+      //Images
+      const productImagesData = new FormData();
+      productImages.forEach((image, index) => {
+        productImagesData.append(`productImage${index}`, image);
+      });
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/product/uploads`,
+        productImagesData
+      );
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -107,6 +126,39 @@ export const CreateProduct = () => {
                   />
                 </div>
               )}
+            </div>
+            <div className="mt-10 ">
+              <label className="px-4 py-2 bg-purple text-white rounded hover:bg-purpler my-2 cursor-pointer ">
+                Upload Alternative Photo/s
+                <input
+                  type="file"
+                  multiple
+                  name="photos"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const selectedFiles = e.target.files;
+                    const newPhotos = [];
+                    for (let i = 0; i < selectedFiles.length; i++) {
+                      newPhotos.push(selectedFiles[i]);
+                    }
+                    setProductImages(newPhotos);
+                  }}
+                  required
+                  hidden
+                />
+              </label>
+            </div>
+            <div className="mt-10 flex">
+              {productImages.length > 0 &&
+                productImages.map((image, index) => (
+                  <div className="text-center">
+                    <img
+                      src={URL.createObjectURL(image)}
+                      alt="product"
+                      className="h-[200px]"
+                    />
+                  </div>
+                ))}
             </div>
             <div className="mb-4 mt-10">
               <label htmlFor="name" className="block text-sm font-medium">

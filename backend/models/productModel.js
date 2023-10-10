@@ -1,5 +1,13 @@
 const mongoose = require("mongoose");
 
+// Create a photo schema
+const photoSchema = new mongoose.Schema({
+  filename: String,
+  description: String,
+  path: String,
+});
+const Photo = mongoose.model("Photo", photoSchema);
+
 const productSchema = new mongoose.Schema(
   {
     name: {
