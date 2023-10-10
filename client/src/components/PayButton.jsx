@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/auth";
 import { useCart } from "../context/cart";
 import axios from "axios";
@@ -6,7 +6,7 @@ import axios from "axios";
 export const PayButton = () => {
   const [cart, setCart] = useCart();
   const [auth, setAuth] = useAuth();
-
+  const [total, setTotal] = useState(0);
   const handleCheckout = async () => {
     try {
       const response = await axios.post(
@@ -21,9 +21,25 @@ export const PayButton = () => {
       console.log(error);
     }
   };
+  const calculateTotal = () => {
+    let total = 0;
+    for (let i = 0; i < cart.length; i++) {
+      total += cart[i].price * cart[i].quantity;
+    }
+    return total;
+  };
+  useEffect(() => {
+    setTotal(calculateTotal);
+  }, [cart]);
   return (
     <div>
-      <button onClick={() => handleCheckout()}>Checkout</button>
+      <h2 className="text-2xl">Total: ${total}</h2>
+      <button
+        className="px-4 py-2 bg-purple text-white text-2xl rounded hover:bg-purpler mt-6 place-self-end"
+        onClick={() => handleCheckout()}
+      >
+        Checkout
+      </button>
     </div>
   );
 };

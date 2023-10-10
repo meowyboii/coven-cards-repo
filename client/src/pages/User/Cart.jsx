@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import SlidingSidePanel from "react-sliding-side-panel";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineShoppingCart, AiFillCloseCircle } from "react-icons/ai";
 import { useCart } from "../../context/cart";
 import { Badge } from "antd";
 import { Link } from "react-router-dom";
@@ -33,7 +33,7 @@ export const Cart = () => {
         className="cursor-pointer display flex justify-center"
         onClick={togglePanel}
       >
-        <AiOutlineShoppingCart className=" text-[45px]" />
+        <AiOutlineShoppingCart className="text-[45px]" />
         <span class="relative flex h-[20px] w-[20px]">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-100"></span>
           <span class="relative inline-flex rounded-full h-[20px] w-[20px] bg-violet-500"></span>
@@ -49,20 +49,26 @@ export const Cart = () => {
         backdropClicked={togglePanel}
       >
         {/* Content for your sliding panel */}
-        <div className="bg-white p-8 min-h-[40vh]">
-          <div className="flex justify-end mr-4">
-            <button onClick={togglePanel}>X</button>
+        <div className="bg-[#f1e9f1] p-8 min-h-[30vh]">
+          <div className="flex justify-end mr-4 cursor-pointer  ">
+            <AiFillCloseCircle
+              onClick={togglePanel}
+              className="text-3xl hover:text-purpler"
+            >
+              X
+            </AiFillCloseCircle>
           </div>
 
           {cart?.length > 0 ? (
             <>
-              <table className="table-auto border-collapse w-3/4">
+              <table className="table-auto border-collapse text-lg">
+                <div>Added Products:</div>
                 <tbody>
                   {cart?.map((product, index) => (
                     <>
                       <tr key={product.id}>
-                        <td className="flex justify-center items-center border-b border-gray-400 py-2">
-                          <div className="shadow-md h-[20vh] mr-6">
+                        <td className="flex justify-left items-center py-2">
+                          <div className="flex justify-center items-center shadow-md h-[8vh] w-[8vh] mr-6">
                             <img
                               src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
                               alt={product.name}
@@ -72,13 +78,11 @@ export const Cart = () => {
 
                           {product.name}
                         </td>
-                        <td className="border-b border-gray-400 px-4 py-2">
-                          ${product.price}
-                        </td>
+                        <td className="px-4 py-2">${product.price}</td>
 
-                        <td className="border-b border-gray-400 px-4 py-2">
+                        <td className="px-4 py-2">
                           <button
-                            className="px-4 py-2 bg-purple text-white rounded hover:bg-purpler my-2 mx-2"
+                            className="px-4 py-2 bg-purple text-white rounded hover:bg-purpler my-2 mx-2 text-sm"
                             onClick={() => removeFromCart(product._id)}
                           >
                             Remove
@@ -89,7 +93,11 @@ export const Cart = () => {
                   ))}
                 </tbody>
               </table>
-              <Link to="/merch/checkout">Checkout</Link>
+              <button className="px-4 py-2 bg-purple text-white text-lg rounded hover:bg-purpler mt-6 place-self-end">
+                <Link to="/merch/checkout" className="place-self-end">
+                  View Cart
+                </Link>
+              </button>
             </>
           ) : (
             <h2 className="text-center">Your cart is empty!</h2>
