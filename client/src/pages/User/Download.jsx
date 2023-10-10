@@ -19,15 +19,18 @@ export const Download = () => {
               href="../assets/download/coven-cards-installer-1.0.3.exe"
               download
             >
-              <button>
+              <button className="w-full h-full">
                 <div className="flex justify-center items-center ">
                   <img
                     src={buttonImg}
-                    className="button"
+                    className="button w-[500px] h-[100px]"
                     alt="play-now button"
                   />
-                  <p className="text font-maintoo text-[43px]">
-                    DOWNLOAD COVEN CARDS
+                  <p className="text font-maintoo text-[40px] mb-[9vh]">
+                    DOWNLOAD
+                  </p>
+                  <p className="text font-maintoo text-[35px] mb-[1vh]">
+                    COVEN CARDS
                   </p>
                 </div>
               </button>
@@ -39,7 +42,7 @@ export const Download = () => {
                 DOWNLOAD & INSTALLATION
               </h2>
             </div>
-            <ol className="list-decimal list-outside text-[20px] font-bold mx-[3vh] hover:text-red-500">
+            <ol className="list-decimal list-outside text-[20px] font-bold mx-[3vh]">
               <li> Click the download link for the Coven Cards Installer.</li>
               <br></br>
               <li> Launch the installer.</li>
