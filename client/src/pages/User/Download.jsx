@@ -19,15 +19,18 @@ export const Download = () => {
               href="../assets/download/coven-cards-installer-1.0.3.exe"
               download
             >
-              <button>
+              <button className="w-full h-full">
                 <div className="flex justify-center items-center ">
                   <img
                     src={buttonImg}
-                    className="button"
+                    className="button w-[500px] h-[100px]"
                     alt="play-now button"
                   />
-                  <p className="text font-maintoo text-[43px]">
-                    DOWNLOAD COVEN CARDS
+                  <p className="text font-maintoo text-[40px] mb-[9vh]">
+                    DOWNLOAD
+                  </p>
+                  <p className="text font-maintoo text-[35px] mb-[1vh]">
+                    COVEN CARDS
                   </p>
                 </div>
               </button>
