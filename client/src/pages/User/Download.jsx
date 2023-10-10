@@ -39,7 +39,7 @@ export const Download = () => {
                 DOWNLOAD & INSTALLATION
               </h2>
             </div>
-            <ol className="list-decimal list-outside text-[20px] font-bold mx-[3vh] hover:text-red-500">
+            <ol className="list-decimal list-outside text-[20px] font-bold mx-[3vh]">
               <li> Click the download link for the Coven Cards Installer.</li>
               <br></br>
               <li> Launch the installer.</li>
