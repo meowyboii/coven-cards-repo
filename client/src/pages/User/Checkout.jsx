@@ -134,7 +134,9 @@ export const Checkout = () => {
             <div className="mt-6">
               {!auth.user ? (
                 <>
-                  <Link to={"/login"}>Log in</Link>
+                  <button className="px-4 py-2 bg-purple text-white text-2xl rounded hover:bg-purpler mt-6 place-self-end">
+                    <Link to={"/login"}>Log in</Link>
+                  </button>
                 </>
               ) : (
                 <>
