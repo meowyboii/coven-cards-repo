@@ -19,35 +19,32 @@ export const Download = () => {
               href="../assets/download/coven-cards-installer-1.0.3.exe"
               download
             >
-              <button className="w-full h-full">
+              <button>
                 <div className="flex justify-center items-center ">
                   <img
                     src={buttonImg}
-                    className="button w-[500px] h-[100px]"
+                    className="button"
                     alt="play-now button"
                   />
-                  <p className="text font-maintoo text-[40px] mb-[9vh]">
-                    DOWNLOAD
-                  </p>
-                  <p className="text font-maintoo text-[35px] mb-[1vh]">
-                    COVEN CARDS
+                  <p className="text font-maintoo text-[43px]">
+                    DOWNLOAD COVEN CARDS
                   </p>
                 </div>
               </button>
             </a>
           </div>
-          <div className="flex items-center w-[800px] h-[400px] bg-[#1E0523DF] p-10 relative rounded-3xl text-purple mt-[20vh] ml-[50vh] mr-[5vh] inline-block">
-            <div className="card-header">
+          <div className="flex items-center justify-center w-[800px] h-[400px] bg-[#1E0523DF] p-10 relative rounded-3xl text-purple mt-[20vh] ml-[50vh] mr-[5vh] inline-block">
+            <div className="card-header ">
               <h2 className="text font-maintoo text-[43px] ">
                 DOWNLOAD & INSTALLATION
               </h2>
             </div>
-            <ol className="list-decimal list-outside text-[20px] font-bold mx-[3vh]">
-              <li> Click the download link for the Coven Cards Installer.</li>
+            <ol className="list-decimal list-outside text-[20px] font-bold ">
+              <li>Click the download link for the Coven Cards Installer.</li>
               <br></br>
-              <li> Launch the installer.</li>
+              <li>Launch the installer.</li>
               <br></br>
-              <li> Follow the steps on the installer.</li>
+              <li>Follow the steps on the installer.</li>
             </ol>
           </div>
         </div>

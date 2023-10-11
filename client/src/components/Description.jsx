@@ -4,6 +4,7 @@ import { styles } from "../style.js";
 import ReactCurvedText from "react-curved-text";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css";
+import trailerVideo from "../assets/videos/Trailer.mp4";
 
 export const Description = () => {
   return (
@@ -59,7 +60,12 @@ export const Description = () => {
 
         <div className="w-1/2">
           <ScrollAnimation animateIn="fadeInRight">
-            <div className="trailer bg-purplerer h-96 ml-5 px-5 ml-10 mr-5"></div>{" "}
+            <div className="trailer bg-purplerer h-auto w-auto ml-10 mr-5">
+              <video controls loop autoPlay muted>
+                <source src={trailerVideo} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
           </ScrollAnimation>
         </div>
       </div>
