@@ -40,7 +40,7 @@ export const Description = () => {
       </ScrollAnimation>
 
       <div className="flex items-center justify-center  mt-10 ">
-        <div className={`${styles.sectionPar} px-5 w-1/2 mr-5 text-purplerest`}>
+        <div className={`${styles.sectionPar} px-5 w-1/2 mr-5 text-purple`}>
           <ScrollAnimation animateIn="fadeInLeft">
             Coven Cards is a turn-based card-matching game set in a world of
             mythical creatures, wizards, and witches. You and your opponent are

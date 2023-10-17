@@ -44,7 +44,7 @@ export const Checkout = () => {
 
   return (
     <LayoutMerch>
-      <div className="py-20 items-center flex-col flex justify-center text-white text-center">
+      <div className="py-20 items-center flex-col flex justify-center text-white text-center bg-gradient-to-b from-black to-[#0e0014]">
         <h2 className="text-2xl font-semibold text-white mb-4">{`Hello ${
           auth?.token && auth?.user?.firstName
         }!`}</h2>
