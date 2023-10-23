@@ -5,7 +5,6 @@ export const CategoryForm = ({ handleSubmit, value, setValue, buttonName }) => {
   const handleChange = (e) => {
     setValue(e.target.value);
   };
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
