@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "../../components/Layout";
 import buttonImg from "../../assets/img/button clean.png";
-import bannerImg from "../../assets/img/login_bg.png";
+import bannerImg from "../../assets/img/home_playnow.png";
 import { Cart } from "./Cart";
 
 export const Download = () => {
