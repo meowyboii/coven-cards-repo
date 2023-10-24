@@ -127,7 +127,7 @@ export const CreateProduct = () => {
                 </div>
               )}
             </div>
-            <div className="mt-10 ">
+            {/* <div className="mt-10 ">
               <label className="px-4 py-2 bg-purple text-white rounded hover:bg-purpler my-2 cursor-pointer ">
                 Upload Alternative Photo/s
                 <input
@@ -147,7 +147,7 @@ export const CreateProduct = () => {
                   hidden
                 />
               </label>
-            </div>
+            </div> */}
             <div className="mt-10 flex">
               {productImages.length > 0 &&
                 productImages.map((image, index) => (

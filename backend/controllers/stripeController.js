@@ -1,9 +1,18 @@
 const Stripe = require("stripe");
 require("dotenv").config();
 const stripe = Stripe(process.env.STRIPE_KEY);
+const endpointSecret =
+  "whsec_2d57ad11a001a5388971f50af0005542683a58ef8410edd742b1405e8d472ba4";
 
 const stripeController = async (req, res) => {
   try {
+    const customer = await stripe.customers.create({
+      metadata: {
+        userId: req.body.userId,
+        cart: JSON.stringify(req.body.cart),
+      },
+    });
+
     const line_items = await req.body.cart.map((product) => {
       return {
         price_data: {
@@ -108,6 +117,7 @@ const stripeController = async (req, res) => {
       phone_number_collection: {
         enabled: true,
       },
+      customer: customer.id,
       line_items,
       mode: "payment",
       success_url: `${process.env.CLIENT_URL}/merch/checkout-success`,
@@ -120,4 +130,46 @@ const stripeController = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-module.exports = stripeController;
+const stripeWebHookController = async (req, res) => {
+  // This is your Stripe CLI webhook secret for testing your endpoint locally.
+  const sig = req.headers["stripe-signature"];
+
+  let data, event, eventType;
+
+  try {
+    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+    console.log("Webhook verified");
+
+    data = event.data.object;
+    eventType = event.type;
+  } catch (err) {
+    console.log(`Webhook Error: ${err.message}`);
+    res.status(400).send(`Webhook Error: ${err.message}`);
+    return;
+  }
+
+  // Handle the event
+  if (eventType === "checkout.session.completed") {
+    stripe.customers
+      .retrieve(data.customer)
+      .then((customer) => {
+        console.log(customer);
+        console.log("data:", data);
+      })
+      .catch((err) => console.log(err.message));
+  }
+
+  // switch (event.type) {
+  //   case "payment_intent.succeeded":
+  //     const paymentIntentSucceeded = event.data.object;
+  //     // Then define and call a function to handle the event payment_intent.succeeded
+  //     break;
+  //   // ... handle other event types
+  //   default:
+  //     console.log(`Unhandled event type ${event.type}`);
+  // }
+
+  // Return a 200 response to acknowledge receipt of the event
+  res.send().end();
+};
+module.exports = { stripeController, stripeWebHookController };
