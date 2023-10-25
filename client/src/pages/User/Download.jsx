@@ -16,8 +16,8 @@ export const Download = () => {
         <div className="flex items-center justify-center  mt-10 inline-block">
           <div className="left-[15vh] mt-[25vh] lg:w-[50vh] md:w-48 sm:w-40 w-1/2 glow">
             <a
-              href="../../assets/download/coven-cards-installer-1.0.3.exe"
-              download
+              href="coven-cards-installer-1.0.3.exe"
+              download="coven-cards-installer-1.0.3.exe"
             >
               <button className="w-full h-full hover:text-red-500">
                 <div className="flex justify-center items-center ">
