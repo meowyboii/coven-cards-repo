@@ -20,7 +20,7 @@ export const Search = () => {
         <div className="grid grid-cols-4 gap-8 text-white px-40 ">
           {values?.results.map((product) => (
             <Link key={product._id} to={`/merch/product/${product.slug}`}>
-              <div className="bg-purple p-4 rounded shadow-md h-[45vh] mb-4 flex justify-center items-center">
+              <div className="bg-gradient-to-br from-[#340449] to-[#0E0014] p-4 rounded shadow-md h-[45vh] mb-4 flex justify-center items-center">
                 <img
                   src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
                   alt={product.name}
