@@ -13,11 +13,13 @@ export const AdminDashboard = () => {
     backgroundPosition: "center",
   };
   return (
-    <section style={container} className="relative h-[100vh] p-10">
-      <div className="flex item-center justify-center py-[25vh]">
-        <AdminMenu />
-      </div>
+    <>
+      <section style={container} className="relative h-[100vh] p-10">
+        <div className="flex item-center justify-center py-[10vh]">
+          <AdminMenu />
+        </div>
+      </section>
       <Footer />
-    </section>
+    </>
   );
 };

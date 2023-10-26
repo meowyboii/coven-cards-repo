@@ -5,6 +5,7 @@ import axios from "axios";
 import { CategoryForm } from "./CategoryForm";
 import { Modal } from "antd";
 import { Layout } from "../../components/Layout";
+import { Footer } from "../../components/Footer";
 
 export const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -90,10 +91,11 @@ export const CreateCategory = () => {
   };
 
   return (
-    <Layout>
-      <div className="flex item-center justify-center py-[20vh] text-white mx-20">
+    <>
+      <div className="flex item-center justify-center text-white">
         <AdminMenu />
-        <div className="container mx-auto mt-4 ml-20">
+
+        <div className="container mx-auto mt-4 ml-20 py-[10vh]">
           <div className="w-1/3 mb-10">
             <h2 className="text-4xl font-bold mb-4 ">Manage Categories</h2>
             <CategoryForm
@@ -165,6 +167,7 @@ export const CreateCategory = () => {
           </Modal>
         </div>
       </div>
-    </Layout>
+      <Footer />
+    </>
   );
 };

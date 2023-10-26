@@ -8,9 +8,9 @@ const {
 const router = express.Router();
 
 router.post("/create-checkout-session", requireSignIn, stripeController);
-router.post(
-  "/webhook",
-  express.raw({ type: "application/json" }),
-  stripeWebHookController
-);
+// router.post(
+//   "/webhook",
+//   express.raw({ type: "application/json" }),
+//   stripeWebHookController
+// );
 module.exports = router;

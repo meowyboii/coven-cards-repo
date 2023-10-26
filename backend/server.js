@@ -36,12 +36,12 @@ app.use(
 );
 
 //stripe route
-app.use("/api/v1/stripe", stripeRoute);
 
 app.use(express.json());
 app.use(express.static("public"));
 
 //routes
+app.use("/api/v1/stripe", stripeRoute);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/product", productRoute);

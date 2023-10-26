@@ -18,6 +18,7 @@ import { SingleCategory } from "./pages/User/SingleCategory";
 import { Search } from "./pages/User/Search";
 import { Checkout } from "./pages/User/Checkout";
 import { CheckoutSuccess } from "./pages/User/CheckoutSuccess";
+import { ManageProduct } from "./pages/Admin/ManageProduct";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="admin/create-category" element={<CreateCategory />} />
           <Route path="admin/create-product" element={<CreateProduct />} />
+          <Route path="admin/manage-product" element={<ManageProduct />} />
           <Route path="admin/users" element={<Users />} />
         </Route>
         <Route path="/download" element={<Download />} />
