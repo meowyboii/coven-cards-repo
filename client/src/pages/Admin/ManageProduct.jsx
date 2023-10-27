@@ -8,28 +8,71 @@ import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
 
 const { Option } = Select;
 
-export const ManageProduct = () => {
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+// const [modifiedProducts, setModifiedProducts] = React.useState(new Set());
+const modifiedProducts = new Set();
 
-  const CategorySelect = ({
-    value,
-    productId,
-    categories,
-    handleCategoryChange,
-  }) => (
+const CategorySelect = ({ product, categories, handleCategoryChange }) => {
+  const [category, setCategory] = useState(product.category.name);
+
+  const onCategoryChange = (newCategory) => {
+    setCategory(newCategory);
+    handleCategoryChange(product, newCategory);
+    modifiedProducts.add(product._id);
+  };
+  return (
     <Select
       style={{ width: "100%" }}
-      value={value}
-      onChange={(newValue) => handleCategoryChange(productId, newValue)}
+      value={category}
+      onChange={(value) => onCategoryChange(value)}
     >
-      {categories.map((category) => (
-        <Option key={category._id} value={category.name}>
-          {category.name}
+      {categories.map((c) => (
+        <Option key={c._id} value={c.name}>
+          {c.name}
         </Option>
       ))}
     </Select>
   );
+};
+
+const StockCell = ({ product, handleStockChange }) => {
+  const [stock, setStock] = useState(product.stock);
+
+  const onStockChange = (newStock) => {
+    setStock(newStock);
+    handleStockChange(product, newStock);
+    modifiedProducts.add(product._id);
+  };
+
+  return (
+    <input
+      type="number"
+      value={stock}
+      onChange={(e) => onStockChange(e.target.value)}
+    />
+  );
+};
+
+const PriceCell = ({ product, handlePriceChange }) => {
+  const [price, setPrice] = useState(product.price);
+
+  const onPriceChange = (newPrice) => {
+    setPrice(newPrice);
+    handlePriceChange(product, newPrice);
+    modifiedProducts.add(product._id);
+  };
+
+  return (
+    <input
+      type="number"
+      value={price}
+      onChange={(e) => onPriceChange(e.target.value)}
+    />
+  );
+};
+
+export const ManageProduct = () => {
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const columns = [
     {
@@ -40,31 +83,22 @@ export const ManageProduct = () => {
       name: "Category",
       cell: (row) => (
         <CategorySelect
-          value={row.category.name}
-          productId={row.category._id}
+          product={row}
           categories={categories}
-          // onChange={handleCategoryChange}
+          handleCategoryChange={handleCategoryChange}
         />
       ),
     },
     {
       name: "Stock",
       cell: (row) => (
-        <input
-          type="number"
-          value={row.stock}
-          onChange={(e) => handleStockChange(row, e.target.value)}
-        />
+        <StockCell product={row} handleStockChange={handleStockChange} />
       ),
     },
     {
       name: "Price",
       cell: (row) => (
-        <input
-          type="number"
-          value={row.price}
-          onChange={(e) => handlePriceChange(row, e.target.value)}
-        />
+        <PriceCell product={row} handlePriceChange={handlePriceChange} />
       ),
     },
     {
@@ -104,15 +138,22 @@ export const ManageProduct = () => {
       toast.error("Something went wrong while retrieving the categories");
     }
   };
+  const updateProduct = async (productId, data) => {
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_API}/api/v1/update-product/${productId}`,
+        data
+      );
 
-  useEffect(() => {
-    getAllProducts();
-    getAllCategory();
-  }, []);
-
-  useEffect(() => {
-    getAllProducts();
-  }, []);
+      if (response.status === 200) {
+        console.log("Product updated successfully");
+      } else {
+        console.error("Product update failed");
+      }
+    } catch (error) {
+      console.error("Error updating product:", error);
+    }
+  };
 
   const handleStockChange = (product, newStock) => {
     const updatedProducts = products.map((item) =>
@@ -128,11 +169,38 @@ export const ManageProduct = () => {
     setProducts(updatedProducts);
   };
 
+  const handleCategoryChange = (product, newCategory) => {
+    const updatedProducts = products.map((item) =>
+      item.id === product.id ? { ...item, category: newCategory } : item
+    );
+    setProducts(updatedProducts);
+  };
+
+  const handleSubmit = () => {
+    for (let i = 0; i < modifiedProducts.length; i++) {
+      for (let j = 0; j < products.length; j++) {
+        if (products[j]._id === modifiedProducts.getByIndex(i)) {
+          updateProduct(products[j]._id, products[j]);
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    getAllProducts();
+    getAllCategory();
+  }, []);
+
+  useEffect(() => {
+    console.log(products);
+    console.log(modifiedProducts);
+  }, [products]);
+
   return (
     <div className="flex item-center justify-center py-[20vh] text-white mx-20 ">
       <AdminMenu />
 
-      <div className="h-[40vh] w-4/5 ml-10">
+      <div className="h-[40vh] w-4/5 ml-10 ">
         <DataTable
           title="Product List"
           columns={columns}
@@ -140,6 +208,12 @@ export const ManageProduct = () => {
           pagination
           highlightOnHover
         />
+        <button
+          className=" mt-5 p-5 bg-white text-black"
+          // onClick={handleSubmit}
+        >
+          Save
+        </button>
       </div>
     </div>
   );

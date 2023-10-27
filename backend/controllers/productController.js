@@ -143,41 +143,58 @@ const deleteProductController = async (req, res) => {
 
 const updateProductController = async (req, res) => {
   try {
-    const { name, slug, description, price, category, stock, shipping } =
-      req.fields;
-    const { photo } = req.files;
-    //validation
-    if (!name) {
-      return res.status(500).send({ error: "Name is Required" });
-    }
-    if (!description) {
-      return res.status(500).send({ error: "Description is Required" });
-    }
-    if (!price) {
-      return res.status(500).send({ error: "Price is Required" });
-    }
-    if (!category) {
-      return res.status(500).send({ error: "Category is Required" });
-    }
-    if (!stock) {
-      return res.status(500).send({ error: "Stock is Required" });
-    }
-    if (photo && photo.size > 2000000) {
-      return res.status(500).send({
-        error: "Photo is required and should be less than 1 mb",
-      });
-    }
-    const product = await productModel.findByIdAndUpdate(
-      req.params.pid,
-      { ...req.fields, slug: slugify(name) },
-      { new: true }
+    // const { name, slug, description, price, category, stock, shipping } =
+    //   req.fields;
+    // const { photo } = req.files;
+    // //validation
+    // if (!name) {
+    //   return res.status(500).send({ error: "Name is Required" });
+    // }
+    // if (!description) {
+    //   return res.status(500).send({ error: "Description is Required" });
+    // }
+    // if (!price) {
+    //   return res.status(500).send({ error: "Price is Required" });
+    // }
+    // if (!category) {
+    //   return res.status(500).send({ error: "Category is Required" });
+    // }
+    // if (!stock) {
+    //   return res.status(500).send({ error: "Stock is Required" });
+    // }
+    // if (photo && photo.size > 2000000) {
+    //   return res.status(500).send({
+    //     error: "Photo is required and should be less than 1 mb",
+    //   });
+    // }
+    // const product = await productModel.findByIdAndUpdate(
+    //   req.params.pid,
+    //   { ...req.fields, slug: slugify(name) },
+    //   { new: true }
+    // );
+    // if (photo) {
+    //   product.photo.data = fs.readFileSync(photo.path);
+    //   product.photo.contentType = photo.type;
+    // }
+
+    const { productId } = req.params;
+    const updateData = req.body;
+
+    const product = await productModel.updateOne(
+      { _id: productId },
+      { $set: updateData }
     );
-    if (photo) {
-      product.photo.data = fs.readFileSync(photo.path);
-      product.photo.contentType = photo.type;
+
+    if (product.nModified === 0) {
+      return res
+        .status(404)
+        .send({
+          success: false,
+          message: "Product not found or no changes applied",
+        });
     }
     await product.save();
-    res.status(201).send({
+    res.status(200).send({
       success: true,
       message: "Product Updated Successfully",
       product,
