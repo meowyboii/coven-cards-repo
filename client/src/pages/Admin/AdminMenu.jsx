@@ -30,7 +30,7 @@ export const AdminMenu = () => {
             ADMIN MENU
           </h2>
 
-          <ul className="space-y-2 ">
+          <ul className="space-y-5 ">
             <li className="border-2 border-purpler rounded">
               <NavLink
                 to={"/dashboard/admin/create-category"}
