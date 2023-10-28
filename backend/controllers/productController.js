@@ -142,6 +142,7 @@ const deleteProductController = async (req, res) => {
 };
 
 const updateProductController = async (req, res) => {
+  const updateData = req.body;
   try {
     // const { name, slug, description, price, category, stock, shipping } =
     //   req.fields;
@@ -176,28 +177,38 @@ const updateProductController = async (req, res) => {
     //   product.photo.data = fs.readFileSync(photo.path);
     //   product.photo.contentType = photo.type;
     // }
+    const product = await productModel.findById(req.params.pid);
 
-    const { productId } = req.params;
-    const updateData = req.body;
-
-    const product = await productModel.updateOne(
-      { _id: productId },
-      { $set: updateData }
-    );
-
-    if (product.nModified === 0) {
+    if (!product) {
       return res
         .status(404)
         .send({
           success: false,
-          message: "Product not found or no changes applied",
+          message: "Product not found",
+          id: req.params.pid,
         });
     }
-    await product.save();
+
+    // Update only the specified fields: price, category, and stock
+    if (updateData.price !== undefined) {
+      product.price = updateData.price;
+    }
+
+    if (updateData.category !== undefined) {
+      product.category = updateData.category;
+    }
+
+    if (updateData.stock !== undefined) {
+      product.stock = updateData.stock;
+    }
+
+    // Save the updated product
+    const updatedProduct = await product.save();
+    // await product.save();
     res.status(200).send({
       success: true,
       message: "Product Updated Successfully",
-      product,
+      product: updatedProduct,
     });
   } catch (error) {
     console.log(error);

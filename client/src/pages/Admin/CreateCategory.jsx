@@ -4,7 +4,6 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { CategoryForm } from "./CategoryForm";
 import { Modal } from "antd";
-import { Layout } from "../../components/Layout";
 import { Footer } from "../../components/Footer";
 
 export const CreateCategory = () => {
@@ -92,7 +91,7 @@ export const CreateCategory = () => {
 
   return (
     <>
-      <div className="flex item-center justify-center text-white">
+      <div className="flex item-center justify-center text-white bg-white">
         <AdminMenu />
 
         <div className="container mx-auto mt-4 ml-20 py-[10vh]">
