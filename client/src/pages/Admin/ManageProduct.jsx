@@ -6,10 +6,10 @@ import toast from "react-hot-toast";
 import { Select } from "antd";
 import { Layout } from "../../components/LayoutAdmin";
 import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
+import { Footer } from "../../components/Footer";
 
 const { Option } = Select;
 
-// const [modifiedProducts, setModifiedProducts] = React.useState(new Set());
 const modifiedProducts = new Set();
 
 const CategorySelect = ({ product, categories, handleCategoryChange }) => {
@@ -39,6 +39,7 @@ const StockCell = ({ product, handleStockChange }) => {
   const [stock, setStock] = useState(product.stock);
 
   const onStockChange = (newStock) => {
+    newStock = parseInt(newStock);
     setStock(newStock);
     handleStockChange(product, newStock);
     modifiedProducts.add(product._id);
@@ -57,6 +58,7 @@ const PriceCell = ({ product, handlePriceChange }) => {
   const [price, setPrice] = useState(product.price);
 
   const onPriceChange = (newPrice) => {
+    newPrice = parseInt(newPrice);
     setPrice(newPrice);
     handlePriceChange(product, newPrice);
     modifiedProducts.add(product._id);
@@ -140,51 +142,70 @@ export const ManageProduct = () => {
     }
   };
   const updateProduct = async (productId, data) => {
+    const modifiedObject = {
+      price: data.price,
+      category: data.category,
+      stock: data.stock,
+    };
     try {
+      console.log(modifiedObject);
       const response = await axios.put(
-        `${process.env.REACT_APP_API}/api/v1/update-product/${productId}`,
-        data
+        `${process.env.REACT_APP_API}/api/v1/product/update-product/${productId}`,
+        modifiedObject
       );
 
       if (response.status === 200) {
-        console.log("Product updated successfully");
+        toast.success(`Product ${data.name} updated successfully`);
+        console.log(`Product ${data.name} updated successfully`);
       } else {
+        toast.error("Product update failed");
         console.error("Product update failed");
       }
     } catch (error) {
+      toast.error(`Error in updating product: ${data.name}`);
       console.error("Error updating product:", error);
     }
   };
 
   const handleStockChange = (product, newStock) => {
     const updatedProducts = products.map((item) =>
-      item.id === product.id ? { ...item, stock: newStock } : item
+      item._id === product._id ? { ...item, stock: newStock } : item
     );
     setProducts(updatedProducts);
   };
 
   const handlePriceChange = (product, newPrice) => {
     const updatedProducts = products.map((item) =>
-      item.id === product.id ? { ...item, price: newPrice } : item
+      item._id === product._id ? { ...item, price: newPrice } : item
     );
     setProducts(updatedProducts);
   };
 
   const handleCategoryChange = (product, newCategory) => {
     const updatedProducts = products.map((item) =>
-      item.id === product.id ? { ...item, category: newCategory } : item
+      item._id === product._id ? { ...item, category: newCategory } : item
     );
     setProducts(updatedProducts);
   };
 
-  const handleSubmit = () => {
-    for (let i = 0; i < modifiedProducts.length; i++) {
-      for (let j = 0; j < products.length; j++) {
-        if (products[j]._id === modifiedProducts.getByIndex(i)) {
-          updateProduct(products[j]._id, products[j]);
+  const handleSubmit = async () => {
+    const modifiedProductIds = Array.from(modifiedProducts);
+
+    for (const productId of modifiedProductIds) {
+      const product = products.find((p) => p._id === productId);
+
+      if (product) {
+        try {
+          await updateProduct(productId, product);
+          console.log(`Product ${product.name} updated successfully`);
+        } catch (error) {
+          console.error(`Error updating product: ${product.name}`, error);
+          toast.error(`Error in updating product: ${product.name}`);
         }
       }
     }
+    modifiedProducts = new Set();
+    getAllProducts();
   };
 
   useEffect(() => {
@@ -194,7 +215,7 @@ export const ManageProduct = () => {
 
   useEffect(() => {
     console.log(products);
-    console.log(modifiedProducts);
+    console.log(modifiedProducts.size);
   }, [products]);
 
   return (
@@ -210,12 +231,14 @@ export const ManageProduct = () => {
           pagination
           highlightOnHover
         />
-        <button
-          className=" mt-5 p-5 bg-white text-black"
-          // onClick={handleSubmit}
-        >
-          Save
-        </button>
+          <button
+            className=" mt-5 p-5 bg-white text-black"
+            onClick={handleSubmit}
+            //disabled if no modifications were made
+            disabled={modifiedProducts.size === 0}
+          >
+            Save
+          </button>
       </div>
     </div>
     </Layout>
