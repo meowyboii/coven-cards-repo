@@ -9,7 +9,6 @@ export const PayButton = () => {
   const [total, setTotal] = useState(0);
   const handleCheckout = async () => {
     try {
-      console.log(cart);
       const response = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/stripe/create-checkout-session`,
         { cart, userId: auth?.id }

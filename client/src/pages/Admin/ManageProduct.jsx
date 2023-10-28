@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 import { Select } from "antd";
 import { Layout } from "../../components/LayoutAdmin";
 import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
-import { Footer } from "../../components/Footer";
 
 const { Option } = Select;
 
@@ -220,27 +219,34 @@ export const ManageProduct = () => {
 
   return (
     <Layout>
-    <div className="flex item-center justify-center text-white bg-gradient-to-b from-black to-[#0e0014]">
-      <AdminMenu />
+      <div className="flex item-center justify-center text-white bg-gradient-to-b from-black to-[#0e0014]">
+        <AdminMenu />
 
-      <div className="w-[199vh] ml-10 h-[100vh] py-[10vh]">
-        <DataTable
-          title="Product List"
-          columns={columns}
-          data={products}
-          pagination
-          highlightOnHover
-        />
-          <button
-            className=" mt-5 p-5 bg-white text-black"
-            onClick={handleSubmit}
-            //disabled if no modifications were made
-            disabled={modifiedProducts.size === 0}
-          >
-            Save
-          </button>
+        <div className="w-[199vh] ml-10 h-[100vh] py-[10vh]">
+          <DataTable
+            title="Product List"
+            columns={columns}
+            data={products}
+            pagination
+            highlightOnHover
+          />
+          {modifiedProducts.size > 0 ? (
+            <button
+              className=" mt-5 p-5 bg-white text-black hover:bg-slate-100"
+              onClick={handleSubmit}
+            >
+              Save
+            </button>
+          ) : (
+            <button
+              className=" mt-5 p-5 bg-white text-slate-400"
+              onClick={() => toast.error("No changes applied to save")}
+            >
+              Save
+            </button>
+          )}
+        </div>
       </div>
-    </div>
     </Layout>
   );
 };
