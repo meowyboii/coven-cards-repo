@@ -20,7 +20,7 @@ export const Download = () => {
               download="coven-cards-installer-1.0.3.exe"
             >
               <button className="w-full h-full hover:text-red-500">
-                <div className="flex justify-center items-center ">
+                <div className="flex justify-center items-center">
                   <img
                     src={buttonImg}
                     className="button w-[1000px] h-[100px]"
@@ -38,7 +38,7 @@ export const Download = () => {
           </div>
           <div className="flex items-center w-[800px] h-[400px] bg-[#1E0523DF] p-10 relative rounded-3xl text-purple mt-[20vh] ml-[50vh] mr-[5vh] inline-block">
             <div className="card-header">
-              <h2 className="text font-maintoo text-[43px] ">
+              <h2 className="text font-maintoo text-[43px]">
                 DOWNLOAD & INSTALLATION
               </h2>
             </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -49,7 +49,6 @@ export const Login = () => {
           token: res.data.token,
         });
         localStorage.setItem("auth", JSON.stringify(res.data));
-        navigate(location.state || "/");
       } else {
         toast.error(res.data.message);
       }
@@ -58,6 +57,16 @@ export const Login = () => {
       toast.error("Login Failed");
     }
   };
+  useEffect(() => {
+    if(auth?.user){
+      if(auth?.user?.role === 1){
+        navigate("/dashboard/admin");
+      }
+       else{
+        navigate(location.state || "/");
+      }
+    }
+  }, [auth]);
 
   return (
     <Layout>

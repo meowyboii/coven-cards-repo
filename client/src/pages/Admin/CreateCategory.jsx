@@ -4,8 +4,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { CategoryForm } from "./CategoryForm";
 import { Modal } from "antd";
-import { Layout } from "../../components/Layout";
-import { Footer } from "../../components/Footer";
+import { Layout } from "../../components/LayoutAdmin";
 
 export const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -91,11 +90,11 @@ export const CreateCategory = () => {
   };
 
   return (
-    <>
-      <div className="flex item-center justify-center text-white">
+    <Layout>
+      <div className="flex item-center justify-center text-white bg-gradient-to-b from-black to-[#0e0014]">
         <AdminMenu />
 
-        <div className="container mx-auto mt-4 ml-20 py-[10vh]">
+        <div className="container mx-auto mt-4 ml-20 h-[100vh] py-[10vh]">
           <div className="w-1/3 mb-10">
             <h2 className="text-4xl font-bold mb-4 ">Manage Categories</h2>
             <CategoryForm
@@ -167,7 +166,6 @@ export const CreateCategory = () => {
           </Modal>
         </div>
       </div>
-      <Footer />
-    </>
+    </Layout>
   );
 };

@@ -4,6 +4,7 @@ import DataTable from "react-data-table-component";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Select } from "antd";
+import { Layout } from "../../components/LayoutAdmin";
 import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
 
 const { Option } = Select;
@@ -197,10 +198,11 @@ export const ManageProduct = () => {
   }, [products]);
 
   return (
-    <div className="flex item-center justify-center py-[20vh] text-white mx-20 ">
+    <Layout>
+    <div className="flex item-center justify-center text-white bg-gradient-to-b from-black to-[#0e0014]">
       <AdminMenu />
 
-      <div className="h-[40vh] w-4/5 ml-10 ">
+      <div className="w-[199vh] ml-10 h-[100vh] py-[10vh]">
         <DataTable
           title="Product List"
           columns={columns}
@@ -216,5 +218,6 @@ export const ManageProduct = () => {
         </button>
       </div>
     </div>
+    </Layout>
   );
 };

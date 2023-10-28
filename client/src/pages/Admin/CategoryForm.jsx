@@ -1,5 +1,4 @@
 import React from "react";
-import { Layout } from "../../components/Layout";
 
 export const CategoryForm = ({ handleSubmit, value, setValue, buttonName }) => {
   const handleChange = (e) => {

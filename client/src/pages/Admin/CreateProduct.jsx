@@ -3,7 +3,7 @@ import { AdminMenu } from "./AdminMenu";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Select } from "antd";
-import { Layout } from "../../components/Layout";
+import { Layout } from "../../components/LayoutAdmin";
 const { Option } = Select;
 
 export const CreateProduct = () => {
@@ -82,9 +82,9 @@ export const CreateProduct = () => {
 
   return (
     <Layout>
-      <div className="flex item-center justify-center py-[20vh] text-white mx-20">
+      <div className="flex item-center justify-center text-white bg-gradient-to-b from-black to-[#0e0014]">
         <AdminMenu />
-        <div className="container ml-20 mt-4">
+        <div className="container ml-20 mt-4 h-[100vh] py-[10vh]">
           <h2 className="text-4xl font-bold mb-4 ">Create Product</h2>
           <div className="mt-10 text-white bg">
             <Select
