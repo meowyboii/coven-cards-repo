@@ -91,12 +91,11 @@ export const CreateCategory = () => {
 
   return (
     <Layout>
-      <div className="flex item-center justify-center text-white bg-gradient-to-b from-black to-[#0e0014]">
+      <div className="flex item-center justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
         <AdminMenu />
-
-        <div className="container mx-auto mt-4 ml-20 h-[100vh] py-[10vh]">
+        <div className="container mx-auto mt-2 ml-20 h-[100vh] py-[10vh]">
           <div className="w-1/3 mb-10">
-            <h2 className="text-4xl font-bold mb-4 ">Manage Categories</h2>
+            <h2 className="text-3xl mb-4 ">Manage Categories</h2>
             <CategoryForm
               handleSubmit={handleSubmit}
               value={name}
@@ -105,7 +104,7 @@ export const CreateCategory = () => {
             />
           </div>
 
-          <table className="table-auto  border-collapse w-1/2 ">
+          <table className="table-auto font-main border-collapse w-1/2 ">
             <thead>
               <tr>
                 <th className="border-b border-gray-400 px-4 py-2 text-justify">

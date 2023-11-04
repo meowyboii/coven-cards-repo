@@ -240,18 +240,39 @@ export const ManageProduct = () => {
     console.log(modifiedProducts.size);
   }, [products]);
 
+  const tableCustomStyles = {
+    headRow: {
+      style: {
+        color:'#343434',
+        backgroundColor: '#e7eef0'
+      },
+    },
+    rows: {
+      style: {
+        color: "#343434",
+        backgroundColor: "#ffffff"
+      },
+      stripedStyle: {
+        color: "#343434",
+        backgroundColor: "#ffffff"
+      }
+    }
+  }
+
   return (
     <Layout>
-      <div className="flex item-center justify-center text-white bg-gradient-to-b from-black to-[#0e0014]">
+      <div className="flex item-center justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
         <AdminMenu />
 
-        <div className="w-[199vh] ml-10 h-[100vh] py-[10vh]">
+        <div className="w-[192.5vh] ml-10 mr-10 h-[100vh] py-[10vh]">
           <DataTable
-            title="Product List"
+            title="Manage Products"
             columns={columns}
             data={products}
             pagination
             highlightOnHover
+            striped
+            customStyles={tableCustomStyles}
           />
           {modifiedProducts.size > 0 ? (
             <button

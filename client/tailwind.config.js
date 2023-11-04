@@ -4,6 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        transparent: 'transparent',
+        current: 'currentColor',
         purple: "#A484A9",
         purpler: "#7B0E90",
         purplerer: "#781462",
