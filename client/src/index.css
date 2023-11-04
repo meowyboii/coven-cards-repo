@@ -160,8 +160,3 @@ nav li {
   .float{
     animation: floatAnimation 6s ease-in-out infinite;
   }
-
-  .active {
-    background-color: #92509C;
-    color: #fff;
-  }

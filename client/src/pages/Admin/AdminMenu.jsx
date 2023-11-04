@@ -33,7 +33,7 @@ export const AdminMenu = () => {
             <li className="rounded">
               <NavLink
                 to={"/dashboard/admin/create-category"}
-                activeClassName="active"
+                style={({isActive})=>{return{background: isActive?'#92509C':'', color: isActive?'white':''}}}
                 className="block hover:bg-purplerest hover:text-white text-[#343434] px-2 py-1 rounded"
               >
                 <div className="flex items-center ml-[2vh] text-2xl">
@@ -44,7 +44,7 @@ export const AdminMenu = () => {
             <li className="rounded">
               <NavLink
                 to={"/dashboard/admin/create-product"}
-                activeClassName="active"
+                style={({isActive})=>{return{background: isActive?'#92509C':'', color: isActive?'white':''}}}
                 className="block hover:bg-purplerest hover:text-white text-[#343434] px-2 py-1 rounded"
               >
                 <div className="flex items-center ml-[2vh] text-2xl">
@@ -55,7 +55,7 @@ export const AdminMenu = () => {
             <li className="rounded">
               <NavLink
                 to={"/dashboard/admin/manage-product"}
-                activeClassName="active"
+                style={({isActive})=>{return{background: isActive?'#92509C':'', color: isActive?'white':''}}}
                 className="block hover:bg-purplerest hover:text-white text-[#343434]  px-2 py-1 rounded"
               >
                 <div className="flex items-center ml-[2vh] text-2xl">
@@ -67,7 +67,7 @@ export const AdminMenu = () => {
               <NavLink
                 onClick={handleLogout}
                 to={"/login"}
-                activeClassName="active"
+                style={({isActive})=>{return{background: isActive?'#92509C':'', color: isActive?'white':''}}}
                 className="block hover:bg-purplerest hover:text-white text-[#343434] px-2 py-1 rounded"
               >
                 <div className="flex items-center ml-[2vh] text-2xl">
