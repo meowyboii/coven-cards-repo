@@ -11,7 +11,7 @@ export const CategoryForm = ({ handleSubmit, value, setValue, buttonName }) => {
           <input
             type="text"
             id="categoryName"
-            className=" bg-slate-800 px-4 py-2 border rounded-md text-white w-3/4 "
+            className=" bg-white px-4 py-2 border rounded-md text-[#343434] font-main w-[35vh] h-[4.5vh] mb-3"
             placeholder="Enter category name"
             value={value}
             onChange={handleChange}
@@ -21,7 +21,7 @@ export const CategoryForm = ({ handleSubmit, value, setValue, buttonName }) => {
         <div>
           <button
             type="submit"
-            className="px-4 py-2 bg-purple text-white rounded hover:bg-purpler"
+            className="px-4 py-2 bg-purple text-white rounded hover:bg-purpler h-[3.9vh]"
           >
             {buttonName}
           </button>

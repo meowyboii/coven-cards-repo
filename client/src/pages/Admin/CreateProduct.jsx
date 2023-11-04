@@ -82,17 +82,17 @@ export const CreateProduct = () => {
 
   return (
     <Layout>
-      <div className="flex item-center justify-center text-white bg-gradient-to-b from-black to-[#0e0014]">
+      <div className="flex item-center justify-center font-main text-[#343434] bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
         <AdminMenu />
-        <div className="container ml-20 mt-4 h-[100vh] py-[10vh]">
-          <h2 className="text-4xl font-bold mb-4 ">Create Product</h2>
-          <div className="mt-10 text-white bg">
+        <div className="container mx-auto ml-20 mt-2 h-[100vh] py-[10vh]">
+          <h2 className="text-3xl mb-4 ">Create Product</h2>
+          <div className="mt-3 text-[#343434]">
             <Select
               bordered={false}
               placeholder="Select a category"
               size="large"
               showSearch
-              className="bg-white text-black border-white w-1/3"
+              className="rounded bg-white text-black border-white w-[35vh]"
               onChange={(value) => {
                 setCategory(value);
               }}
@@ -161,7 +161,7 @@ export const CreateProduct = () => {
                 ))}
             </div>
             <div className="mb-4 mt-10">
-              <label htmlFor="name" className="block text-sm font-medium">
+              <label htmlFor="name" className="block text-m font-bold">
                 Name
               </label>
               <input
@@ -180,7 +180,7 @@ export const CreateProduct = () => {
             <div className="mb-4">
               <label
                 htmlFor="description"
-                className="block text-sm font-medium"
+                className="block text-m font-bold"
               >
                 Description
               </label>
@@ -198,7 +198,7 @@ export const CreateProduct = () => {
               ></textarea>
             </div>
             <div className="mb-4">
-              <label htmlFor="price" className="block text-sm font-medium ">
+              <label htmlFor="price" className="block text-m font-bold">
                 Price
               </label>
               <input
@@ -215,7 +215,7 @@ export const CreateProduct = () => {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="quantity" className="block text-sm font-medium">
+              <label htmlFor="quantity" className="block text-m font-bold">
                 Stock Quantity
               </label>
               <input
@@ -234,7 +234,7 @@ export const CreateProduct = () => {
             <div className="mb-4">
               <label
                 htmlFor="quantity"
-                className="block text-sm font-medium mb-1"
+                className="block text-m font-bold mb-1"
               >
                 Shipping
               </label>
