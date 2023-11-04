@@ -241,7 +241,7 @@ export const ManageProduct = () => {
       <div className="flex item-center justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
         <AdminMenu />
 
-        <div className="w-[208vh] ml-10 h-[100vh] py-[10vh]">
+        <div className="w-[192.5vh] ml-10 mr-10 h-[100vh] py-[10vh]">
           <DataTable
             title="Manage Products"
             columns={columns}

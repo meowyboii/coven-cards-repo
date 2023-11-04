@@ -172,7 +172,7 @@ export const CreateProduct = () => {
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
-                className="mt-1 p-2 w-full border border-gray-300 rounded focus:ring focus:ring-indigo-300 focus:outline-none text-black"
+                className="mt-1 p-2 w-[50vh] border border-gray-300 rounded focus:ring focus:ring-indigo-300 focus:outline-none text-black"
                 placeholder="Product Name"
                 required
               />
@@ -192,7 +192,7 @@ export const CreateProduct = () => {
                   setDescription(e.target.value);
                 }}
                 rows="4"
-                className="mt-1 p-2 w-full border border-gray-300 rounded focus:ring focus:ring-indigo-300 focus:outline-none text-black"
+                className="mt-1 p-2 w-[50vh] border border-gray-300 rounded focus:ring focus:ring-indigo-300 focus:outline-none text-black"
                 placeholder="Product Description"
                 required
               ></textarea>
@@ -209,7 +209,7 @@ export const CreateProduct = () => {
                 onChange={(e) => {
                   setPrice(e.target.value);
                 }}
-                className="mt-1 p-2 w-full border border-gray-300 rounded focus:ring focus:ring-indigo-300 focus:outline-none text-black"
+                className="mt-1 p-2 w-[50vh] border border-gray-300 rounded focus:ring focus:ring-indigo-300 focus:outline-none text-black"
                 placeholder="Product Price"
                 required
               />
@@ -226,7 +226,7 @@ export const CreateProduct = () => {
                 onChange={(e) => {
                   setStock(e.target.value);
                 }}
-                className="mt-1 p-2 w-full border border-gray-300 rounded focus:ring focus:ring-indigo-300 focus:outline-none text-black"
+                className="mt-1 p-2 w-[50vh] border border-gray-300 rounded focus:ring focus:ring-indigo-300 focus:outline-none text-black"
                 placeholder="Product Stock"
                 required
               />
