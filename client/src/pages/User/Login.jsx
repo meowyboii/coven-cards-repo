@@ -58,11 +58,10 @@ export const Login = () => {
     }
   };
   useEffect(() => {
-    if(auth?.user){
-      if(auth?.user?.role === 1){
+    if (auth?.user) {
+      if (auth?.user?.role === 1) {
         navigate("/dashboard/admin");
-      }
-       else{
+      } else {
         navigate(location.state || "/");
       }
     }

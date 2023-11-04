@@ -130,6 +130,7 @@ const loginController = async (req, res) => {
         parentEmail: user.parentEmail,
         parentContact: user.parentContact,
         role: user.role,
+        id: user._id,
       },
       token,
     });

@@ -11,7 +11,7 @@ export const PayButton = () => {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/stripe/create-checkout-session`,
-        { cart, userId: auth?.id }
+        { cart, userId: auth?.user.id }
       );
       if (response.data.url) {
         console.log(response.data.url);

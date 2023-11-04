@@ -4,7 +4,8 @@ const authRoutes = require("./routes/authRoute");
 const cors = require("cors");
 const categoryRoute = require("./routes/categoryRoute");
 const productRoute = require("./routes/productRoute");
-const stripeRoute = require("./routes/stripeRoute");
+const stripeCheckoutRoute = require("./routes/stripeCheckoutRoute");
+const stripeWebhookRoute = require("./routes/strieWebhookRoute");
 
 //configure env
 require("dotenv").config();
@@ -35,13 +36,13 @@ app.use(
   })
 );
 
-//stripe route
-
-app.use(express.json());
 app.use(express.static("public"));
+//stripe webhook route
+app.use("/api/v1/stripe", stripeWebhookRoute);
+app.use(express.json());
 
 //routes
-app.use("/api/v1/stripe", stripeRoute);
+app.use("/api/v1/stripe", stripeCheckoutRoute);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/product", productRoute);

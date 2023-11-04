@@ -16,6 +16,9 @@ const CategorySelect = ({ product, categories, handleCategoryChange }) => {
 
   const onCategoryChange = (newCategory) => {
     setCategory(newCategory);
+    const foundCategory = categories.find(
+      (category) => category.name === newCategory
+    );
     handleCategoryChange(product, newCategory);
     modifiedProducts.add(product._id);
   };
@@ -105,8 +108,13 @@ export const ManageProduct = () => {
     },
     {
       name: "Remove",
-      selector: () => (
-        <button>
+      selector: (row) => (
+        <button
+          onClick={() => {
+            handleDeleteProduct(row._id);
+            console.log(row._id);
+          }}
+        >
           <AiFillDelete className="text-2xl ml-2 text-[#bd2b2b] " />
         </button>
       ),
@@ -185,6 +193,21 @@ export const ManageProduct = () => {
       item._id === product._id ? { ...item, category: newCategory } : item
     );
     setProducts(updatedProducts);
+  };
+
+  const handleDeleteProduct = async (productId) => {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API}/api/v1/product/delete-product/${productId}`
+      );
+      if (response) {
+        toast.success("Successfully deleted product");
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to delete product");
+    }
   };
 
   const handleSubmit = async () => {

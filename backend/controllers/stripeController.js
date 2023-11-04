@@ -1,7 +1,8 @@
 const Stripe = require("stripe");
 require("dotenv").config();
 const stripe = Stripe(process.env.STRIPE_KEY);
-const endpointSecret =
+let endpointSecret;
+endpointSecret =
   "whsec_2d57ad11a001a5388971f50af0005542683a58ef8410edd742b1405e8d472ba4";
 
 const stripeController = async (req, res) => {
@@ -130,22 +131,26 @@ const stripeController = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-const stripeWebHookController = async (req, res) => {
+const stripeWebhookController = async (req, res) => {
   // This is your Stripe CLI webhook secret for testing your endpoint locally.
   const sig = req.headers["stripe-signature"];
 
-  let data, event, eventType;
-
-  try {
-    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-    console.log("Webhook verified");
-
+  let data, eventType;
+  if (endpointSecret) {
+    let event;
+    try {
+      event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+      console.log("Webhook verified");
+    } catch (err) {
+      console.log(`Webhook Error: ${err.message}`);
+      res.status(400).send(`Webhook Error: ${err.message}`);
+      return;
+    }
     data = event.data.object;
     eventType = event.type;
-  } catch (err) {
-    console.log(`Webhook Error: ${err.message}`);
-    res.status(400).send(`Webhook Error: ${err.message}`);
-    return;
+  } else {
+    data = req.body.data.object;
+    eventType = req.body.type;
   }
 
   // Handle the event
@@ -172,4 +177,4 @@ const stripeWebHookController = async (req, res) => {
   // Return a 200 response to acknowledge receipt of the event
   res.send().end();
 };
-module.exports = { stripeController, stripeWebHookController };
+module.exports = { stripeController, stripeWebhookController };
