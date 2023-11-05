@@ -5,6 +5,7 @@ const getAllOrderController = async (req, res) => {
   try {
     const orders = await orderModel
       .find({})
+      .sort({ createdAt: -1 })
       .populate("buyer")
       .populate("products");
     res.status(200).send({ success: true, message: "All Orders List", orders });

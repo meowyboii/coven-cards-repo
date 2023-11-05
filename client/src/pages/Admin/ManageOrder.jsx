@@ -86,6 +86,7 @@ export const ManageOrder = () => {
         />
       ),
       sortable: true,
+      sortField: "delivery_status",
     },
     // {
     //   name: "Remove",
@@ -109,7 +110,7 @@ export const ManageOrder = () => {
 
         <div className="w-[192.5vh] ml-10 mr-10 h-[100vh] py-[10vh]">
           <DataTable
-            title="Manage Products"
+            title="Manage Orders"
             columns={columns}
             data={orders}
             pagination
