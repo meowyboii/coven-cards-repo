@@ -28,8 +28,7 @@ export const Navbar = () => {
         <ul className="flex items-center space-x-20 text-purple text-2xl font-bold">
           <NavLink
             to={"/"}
-            className="rounded-lg px-3 py-2 text-slate-700  hover:text-slate-900 mx-10"
-          >
+            className="rounded-lg px-3 py-2 text-slate-700  hover:text-slate-900 mx-10">
             <img
               src={logoImg}
               className="img"
@@ -38,13 +37,22 @@ export const Navbar = () => {
             ></img>
           </NavLink>
           <li>
-            <NavLink to={"/"}>Home</NavLink>
+            <NavLink
+              to={"/"}>
+            Home
+            </NavLink>
           </li>
           <li>
-            <NavLink to={"/download"}>Download</NavLink>
+            <NavLink
+              to={"/download"}>
+              Download
+            </NavLink>
           </li>
           <li>
-            <NavLink to={"/merch"}>Merch</NavLink>
+            <NavLink
+              to={"/merch"}>
+              Merch
+            </NavLink>
           </li>
           <li className="flex items-center pl-[76vh]">
             {!auth.user ? (
@@ -57,7 +65,7 @@ export const Navbar = () => {
                   <div className="relative inline-block text-left">
                     <button
                       type="button"
-                      className="transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[#1E0523bd] hover:scale-110 duration-300 inline-flex justify-center w-full px-4 py-2 rounded-md focus:outline-none"
+                      className="inline-flex justify-center w-full px-4 py-2 rounded-md focus:outline-none"
                       id="options-menu"
                       aria-haspopup="true"
                       aria-expanded="true"
@@ -72,14 +80,14 @@ export const Navbar = () => {
                             to={`/dashboard/${
                               auth?.user?.role === 1 ? "admin" : "user"
                             }`}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                            className="block px-4 py-2 text-sm text-gray-700"
                           >
                             Dashboard
                           </NavLink>
                           <NavLink
                             onClick={handleLogout}
                             to="/login"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                            className="block px-4 py-2 text-sm text-gray-700"
                           >
                             Logout
                           </NavLink>
