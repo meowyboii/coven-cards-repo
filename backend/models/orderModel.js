@@ -2,18 +2,23 @@ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema(
   {
-    products: [
-      {
-        type: mongoose.ObjectId,
-        ref: "product",
-      },
-    ],
-    payment: {},
     buyer: {
       type: mongoose.ObjectId,
       ref: "user",
+      required: true,
     },
-    status: {
+    products: [
+      {
+        product: { type: mongoose.ObjectId, ref: "product" },
+        quantity: { type: Number, default: 1 },
+      },
+    ],
+
+    subtotal: { type: Number, required: true },
+    total: { type: Number, required: true },
+    shipping: { type: Object, required: true },
+    payment_status: { type: String, required: true },
+    delivery_status: {
       type: String,
       default: "Not Processed",
       enum: [

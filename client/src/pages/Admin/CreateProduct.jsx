@@ -84,7 +84,7 @@ export const CreateProduct = () => {
     <Layout>
       <div className="flex item-center justify-center font-main text-[#343434] bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
         <AdminMenu />
-        <div className="container mx-auto ml-20 mt-2 h-[100vh] py-[10vh]">
+        <div className="container mx-auto ml-20 mt-2 min-h-[100vh] py-[10vh]">
           <h2 className="text-3xl mb-4 ">Create Product</h2>
           <div className="mt-3 text-[#343434]">
             <Select
@@ -178,10 +178,7 @@ export const CreateProduct = () => {
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="description"
-                className="block text-m font-bold"
-              >
+              <label htmlFor="description" className="block text-m font-bold">
                 Description
               </label>
               <textarea
@@ -232,10 +229,7 @@ export const CreateProduct = () => {
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="quantity"
-                className="block text-m font-bold mb-1"
-              >
+              <label htmlFor="quantity" className="block text-m font-bold mb-1">
                 Shipping
               </label>
               <Select

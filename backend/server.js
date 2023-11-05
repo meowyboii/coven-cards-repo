@@ -6,6 +6,7 @@ const categoryRoute = require("./routes/categoryRoute");
 const productRoute = require("./routes/productRoute");
 const stripeCheckoutRoute = require("./routes/stripeCheckoutRoute");
 const stripeWebhookRoute = require("./routes/strieWebhookRoute");
+const orderRoute = require("./routes/orderRoute");
 
 //configure env
 require("dotenv").config();
@@ -46,6 +47,7 @@ app.use("/api/v1/stripe", stripeCheckoutRoute);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/product", productRoute);
+app.use("/api/v1/order", orderRoute);
 
 app.listen(process.env.PORT, () => {
   console.log("Listening on port 4000");

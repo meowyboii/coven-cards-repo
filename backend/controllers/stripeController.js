@@ -1,6 +1,8 @@
 const Stripe = require("stripe");
 require("dotenv").config();
 const stripe = Stripe(process.env.STRIPE_KEY);
+const orderModel = require("../models/orderModel");
+
 let endpointSecret;
 endpointSecret =
   "whsec_2d57ad11a001a5388971f50af0005542683a58ef8410edd742b1405e8d472ba4";
@@ -131,6 +133,38 @@ const stripeController = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+//Get product
+
+// Create order function
+const createOrder = async (customer, data) => {
+  const cart = JSON.parse(customer.metadata.cart);
+
+  const products = cart.map((item) => {
+    return {
+      product: item.id,
+      quantity: item.quantity,
+    };
+  });
+
+  const newOrder = new orderModel({
+    buyer: customer.metadata.userId,
+    customerId: data.customer,
+    paymentIntentId: data.payment_intent,
+    products,
+    subtotal: data.amount_subtotal,
+    total: data.amount_total,
+    shipping: data.customer_details,
+    payment_status: data.payment_status,
+  });
+
+  try {
+    const savedOrder = await newOrder.save();
+    console.log("Processed Order:", savedOrder);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const stripeWebhookController = async (req, res) => {
   // This is your Stripe CLI webhook secret for testing your endpoint locally.
   const sig = req.headers["stripe-signature"];
@@ -158,8 +192,7 @@ const stripeWebhookController = async (req, res) => {
     stripe.customers
       .retrieve(data.customer)
       .then((customer) => {
-        console.log(customer);
-        console.log("data:", data);
+        createOrder(customer, data);
       })
       .catch((err) => console.log(err.message));
   }

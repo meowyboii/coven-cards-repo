@@ -18,6 +18,7 @@ import { Search } from "./pages/User/Search";
 import { Checkout } from "./pages/User/Checkout";
 import { CheckoutSuccess } from "./pages/User/CheckoutSuccess";
 import { ManageProduct } from "./pages/Admin/ManageProduct";
+import { ManageOrder } from "./pages/Admin/ManageOrder";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="admin/create-category" element={<CreateCategory />} />
           <Route path="admin/create-product" element={<CreateProduct />} />
           <Route path="admin/manage-product" element={<ManageProduct />} />
+          <Route path="admin/manage-order" element={<ManageOrder />} />
         </Route>
         <Route path="/download" element={<Download />} />
         <Route path="/merch" element={<Merch />} />
