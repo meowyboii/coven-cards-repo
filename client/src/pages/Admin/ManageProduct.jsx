@@ -9,7 +9,7 @@ import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
 
 const { Option } = Select;
 
-const modifiedProducts = new Set();
+let modifiedProducts = new Set();
 
 const CategorySelect = ({ product, categories, handleCategoryChange }) => {
   const [category, setCategory] = useState(product.category.name);
@@ -243,21 +243,21 @@ export const ManageProduct = () => {
   const tableCustomStyles = {
     headRow: {
       style: {
-        color:'#343434',
-        backgroundColor: '#e7eef0'
+        color: "#343434",
+        backgroundColor: "#e7eef0",
       },
     },
     rows: {
       style: {
         color: "#343434",
-        backgroundColor: "#ffffff"
+        backgroundColor: "#ffffff",
       },
       stripedStyle: {
         color: "#343434",
-        backgroundColor: "#ffffff"
-      }
-    }
-  }
+        backgroundColor: "#ffffff",
+      },
+    },
+  };
 
   return (
     <Layout>

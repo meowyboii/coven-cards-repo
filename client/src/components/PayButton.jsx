@@ -9,9 +9,22 @@ export const PayButton = () => {
   const [total, setTotal] = useState(0);
   const handleCheckout = async () => {
     try {
+      const stripeCart = cart.map(
+        ({
+          sale,
+          slug,
+          category,
+          shipping,
+          createdAt,
+          updatedAt,
+          __v,
+          ...rest
+        }) => rest
+      );
+      console.log(stripeCart);
       const response = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/stripe/create-checkout-session`,
-        { cart, userId: auth?.user.id }
+        { stripeCart, userId: auth?.user.id }
       );
       if (response.data.url) {
         console.log(response.data.url);
@@ -28,6 +41,7 @@ export const PayButton = () => {
     }
     return total;
   };
+
   useEffect(() => {
     setTotal(calculateTotal);
   }, [cart]);
