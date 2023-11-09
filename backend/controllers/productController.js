@@ -180,13 +180,11 @@ const updateProductController = async (req, res) => {
     const product = await productModel.findById(req.params.pid);
 
     if (!product) {
-      return res
-        .status(404)
-        .send({
-          success: false,
-          message: "Product not found",
-          id: req.params.pid,
-        });
+      return res.status(404).send({
+        success: false,
+        message: "Product not found",
+        id: req.params.pid,
+      });
     }
 
     // Update only the specified fields: price, category, and stock
@@ -200,6 +198,13 @@ const updateProductController = async (req, res) => {
 
     if (updateData.stock !== undefined) {
       product.stock = updateData.stock;
+    }
+
+    if (updateData.stock !== undefined) {
+      product.sale = updateData.sale;
+    }
+    if (updateData.stock !== undefined) {
+      product.saleRate = updateData.saleRate;
     }
 
     // Save the updated product
