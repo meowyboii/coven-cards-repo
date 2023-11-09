@@ -1,14 +1,16 @@
 import React from "react";
+import Snowfall from 'react-snowfall'
 import { Layout } from "../../components/Layout";
 import buttonImg from "../../assets/img/button clean.png";
-import bannerImg from "../../assets/img/home_playnow.png";
-import { Cart } from "./Cart";
+import bannerImg from "../../assets/img/dlpage.jpg";
+import cardImg from "../../assets/img/bg_game.png";
 
 export const Download = () => {
   const container = {
     backgroundImage: `url(${bannerImg})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
+    filter: "saturate(60%)",
   };
   return (
     <Layout>
@@ -38,27 +40,35 @@ export const Download = () => {
           </div>
           <div className="flex items-center w-[800px] h-[400px] bg-[#1E0523DF] p-10 relative rounded-3xl text-purple mt-[20vh] ml-[50vh] mr-[5vh] inline-block">
             <div className="card-header">
-              <h2 className="text font-maintoo text-[43px]">
+              <h2 className="text2 font-maintoo text-[43px]">
                 DOWNLOAD & INSTALLATION
               </h2>
             </div>
-            <ol className="list-decimal list-outside text-[24px] font-bold mx-[3vh] mt-[10vh] pt-10">
-              <li className="font-maintoo ">
+            <ol className="list-decimal list-outside text-[24px] mx-[3vh] mt-[10vh] pt-10 text-[#d7badb]">
+              <li className="font-main ">
                 {" "}
                 Click the download link for the Coven Cards Installer.
               </li>
               <br></br>
-              <li className="font-maintoo "> Launch the installer.</li>
+              <li className="font-main "> Launch the installer.</li>
               <br></br>
-              <li className="font-maintoo ">
+              <li className="font-main ">
                 {" "}
                 After installation, launch the 'CovenCards.exe' file.
               </li>
               <br></br>
-              <li className="font-maintoo "> Play and Enjoy!</li>
+              <li className="font-main "> Play and Enjoy!</li>
             </ol>
           </div>
         </div>
+          <Snowfall
+            color="#A484A9CB"
+            snowflakeCount={20}
+          />
+          <Snowfall
+            color="#f14ad0C2"
+            snowflakeCount={20}
+          />
       </section>
     </Layout>
   );
