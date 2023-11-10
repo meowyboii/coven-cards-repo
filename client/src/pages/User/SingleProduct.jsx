@@ -168,7 +168,13 @@ export const SingleProduct = () => {
             <h1 className="text2 text-3xl font-bold font-maintoo mb-6">
               {product.name}
             </h1>
-            <h2 className="text-2xl mb-4">{`$${product.price}.00`}</h2>
+            <>
+              {product.sale ? (
+                <h2 className="text-2xl mb-4">{`$${product.amountSale}`}</h2>
+              ) : (
+                <h2 className="text-2xl mb-4">{`$${product.price}.00`}</h2>
+              )}
+            </>
             <h3 className="text-m font-thin  mb-10">{`Available Stock: ${product.stock}`}</h3>
             <div className="w-[40vh] h-auto">
               <p className="text-lg mb-6">{product.description}</p>
