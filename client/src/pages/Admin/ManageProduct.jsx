@@ -19,7 +19,7 @@ const CategorySelect = ({ product, categories, handleCategoryChange }) => {
     const foundCategory = categories.find(
       (category) => category.name === newCategory
     );
-    handleCategoryChange(product, newCategory);
+    handleCategoryChange(product, foundCategory);
     modifiedProducts.add(product._id);
   };
   return (
@@ -75,6 +75,57 @@ const PriceCell = ({ product, handlePriceChange }) => {
   );
 };
 
+const SaleCell = ({ product, handleSaleChange }) => {
+  const [sale, setSale] = useState(product.sale);
+
+  const onSaleChange = (newSale) => {
+    setSale(newSale);
+    console.log("New Sale: ", newSale);
+    handleSaleChange(product, newSale);
+    modifiedProducts.add(product._id);
+  };
+
+  return (
+    <div>
+      {sale === true ? (
+        <button
+          className="p-2 bg-emerald-300 rounded-[4px]"
+          onClick={() => onSaleChange(!sale)}
+        >
+          Enabled
+        </button>
+      ) : (
+        <button
+          className="p-2 bg-red-200 rounded-[4px]"
+          onClick={() => onSaleChange(!sale)}
+        >
+          Disabled
+        </button>
+      )}
+    </div>
+  );
+};
+
+const SaleRateCell = ({ product, handleSaleRateChange }) => {
+  const [saleRate, setSaleRate] = useState(product.saleRate);
+
+  const onSaleRateChange = (newSaleRate) => {
+    newSaleRate = parseInt(newSaleRate);
+    setSaleRate(newSaleRate);
+    handleSaleRateChange(product, newSaleRate);
+    modifiedProducts.add(product._id);
+  };
+
+  return (
+    <input
+      type="number"
+      disabled={!product.sale}
+      value={saleRate}
+      onChange={(e) => onSaleRateChange(e.target.value)}
+    />
+  );
+};
+
 export const ManageProduct = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -104,6 +155,21 @@ export const ManageProduct = () => {
       name: "Price",
       cell: (row) => (
         <PriceCell product={row} handlePriceChange={handlePriceChange} />
+      ),
+    },
+    {
+      name: "Sale",
+      cell: (row) => (
+        <SaleCell product={row} handleSaleChange={handleSaleChange} />
+      ),
+    },
+    {
+      name: "Sale Rate(%)",
+      cell: (row) => (
+        <SaleRateCell
+          product={row}
+          handleSaleRateChange={handleSaleRateChange}
+        />
       ),
     },
     {
@@ -153,6 +219,8 @@ export const ManageProduct = () => {
       price: data.price,
       category: data.category,
       stock: data.stock,
+      sale: data.sale,
+      saleRate: data.saleRate,
     };
     try {
       console.log(modifiedObject);
@@ -184,6 +252,20 @@ export const ManageProduct = () => {
   const handlePriceChange = (product, newPrice) => {
     const updatedProducts = products.map((item) =>
       item._id === product._id ? { ...item, price: newPrice } : item
+    );
+    setProducts(updatedProducts);
+  };
+
+  const handleSaleChange = (product, newSale) => {
+    const updatedProducts = products.map((item) =>
+      item._id === product._id ? { ...item, sale: newSale } : item
+    );
+    setProducts(updatedProducts);
+  };
+
+  const handleSaleRateChange = (product, newSaleRate) => {
+    const updatedProducts = products.map((item) =>
+      item._id === product._id ? { ...item, saleRate: newSaleRate } : item
     );
     setProducts(updatedProducts);
   };

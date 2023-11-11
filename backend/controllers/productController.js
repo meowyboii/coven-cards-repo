@@ -68,8 +68,9 @@ const getProductController = async (req, res) => {
       .find({})
       .populate("category")
       .select("-photo")
+      .lean({ virtuals: true })
       .limit(12)
-      .sort({ createAt: -1 });
+      .sort({ createdAt: -1 });
     res.status(200).send({
       success: true,
       message: "All Products",
@@ -91,7 +92,8 @@ const getSingleProductController = async (req, res) => {
     const product = await productModel
       .findOne({ slug: req.params.slug })
       .select("-photo")
-      .populate("category");
+      .populate("category")
+      .lean({ virtuals: true });
     res.status(200).send({
       success: true,
       message: "Single Product Retrieved Successfully",
@@ -180,13 +182,11 @@ const updateProductController = async (req, res) => {
     const product = await productModel.findById(req.params.pid);
 
     if (!product) {
-      return res
-        .status(404)
-        .send({
-          success: false,
-          message: "Product not found",
-          id: req.params.pid,
-        });
+      return res.status(404).send({
+        success: false,
+        message: "Product not found",
+        id: req.params.pid,
+      });
     }
 
     // Update only the specified fields: price, category, and stock
@@ -200,6 +200,13 @@ const updateProductController = async (req, res) => {
 
     if (updateData.stock !== undefined) {
       product.stock = updateData.stock;
+    }
+
+    if (updateData.stock !== undefined) {
+      product.sale = updateData.sale;
+    }
+    if (updateData.stock !== undefined) {
+      product.saleRate = updateData.saleRate;
     }
 
     // Save the updated product
