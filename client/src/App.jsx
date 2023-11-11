@@ -29,11 +29,11 @@ function App() {
           <Route path="user" element={<Dashboard />} />
         </Route>
         <Route path="/dashboard" element={<AdminRoute />}>
-          <Route path="admin" element={<AdminDashboard />} />
-          <Route path="admin/create-category" element={<CreateCategory />} />
-          <Route path="admin/create-product" element={<CreateProduct />} />
-          <Route path="admin/manage-product" element={<ManageProduct />} />
-          <Route path="admin/manage-order" element={<ManageOrder />} />
+          <Route exact path="admin/home" element={<AdminDashboard />} />
+          <Route exact path="admin/create-category" element={<CreateCategory />} />
+          <Route exact path="admin/create-product" element={<CreateProduct />} />
+          <Route exact path="admin/manage-product" element={<ManageProduct />} />
+          <Route exact path="admin/manage-order" element={<ManageOrder />} />
         </Route>
         <Route path="/download" element={<Download />} />
         <Route path="/merch" element={<Merch />} />

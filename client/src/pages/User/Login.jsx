@@ -60,7 +60,7 @@ export const Login = () => {
   useEffect(() => {
     if (auth?.user) {
       if (auth?.user?.role === 1) {
-        navigate("/dashboard/admin/create-category");
+        navigate("/dashboard/admin/home");
       } else {
         navigate(location.state || "/");
       }
