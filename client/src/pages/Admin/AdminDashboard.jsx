@@ -11,6 +11,7 @@ export const AdminDashboard = () => {
   const [orders, setOrders] = useState([]);
   const [totalSale, setTotalSale] = useState(0);
   const [products, setProducts] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const columns = [
     {
@@ -93,6 +94,23 @@ export const AdminDashboard = () => {
       "Benchmark": 3000,
     },
   ];
+
+  const getAllUsers = async (req, res) => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/product/get-users`
+      );
+      if (data.success) {
+        setUsers(data?.users);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong while retrieving the users");
+    }
+  };
+  useEffect(() => {
+    getAllUsers();
+  }, []);
   
   const getAllProducts = async (req, res) => {
     try {
@@ -193,7 +211,7 @@ export const AdminDashboard = () => {
         <DataTable
             title="Products on Sale"
             columns={columns}
-            data={products}
+            data={users}
             pagination
             highlightOnHover
             striped
