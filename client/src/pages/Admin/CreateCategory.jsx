@@ -91,7 +91,7 @@ export const CreateCategory = () => {
 
   return (
     <Layout>
-      <div className="flex item-center justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
+      <div className="flex justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
         <AdminMenu />
         <div className="container mx-auto mt-2 ml-20 h-[100vh] py-[10vh]">
           <div className="w-1/3 mb-10">

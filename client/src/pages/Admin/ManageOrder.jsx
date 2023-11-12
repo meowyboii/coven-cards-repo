@@ -9,6 +9,7 @@ import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
 
 export const ManageOrder = () => {
   const [orders, setOrders] = useState([]);
+  const [deliveryStatus, setDeliveryStatus] = useState("");
 
   const tableCustomStyles = {
     headRow: {
@@ -46,14 +47,6 @@ export const ManageOrder = () => {
   useEffect(() => {
     getAllOrder();
   }, []);
-
-  const SalesTotal = () => {
-    let totalAmount;
-    for(let i = 0; i < orders.size; i++){
-      totalAmount += orders[i].total;
-    }
-    return totalAmount;
-  };
 
   const handleChange = (value) => {
     toast.success(`Updated Status to ${value}`);
@@ -140,7 +133,7 @@ export const ManageOrder = () => {
 
   return (
     <Layout>
-      <div className="flex item-center justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
+      <div className="flex justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
         <AdminMenu />
 
         <div className="w-[192.5vh] ml-10 mr-10 h-[100vh] py-[10vh]">

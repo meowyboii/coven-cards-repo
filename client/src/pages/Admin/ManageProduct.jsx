@@ -343,7 +343,7 @@ export const ManageProduct = () => {
 
   return (
     <Layout>
-      <div className="flex item-center justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
+      <div className="flex justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
         <AdminMenu />
 
         <div className="w-[192.5vh] ml-10 mr-10 h-[100vh] py-[10vh]">
