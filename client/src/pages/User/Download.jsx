@@ -4,6 +4,7 @@ import { Layout } from "../../components/Layout";
 import buttonImg from "../../assets/img/button clean.png";
 import bannerImg from "../../assets/img/dlpage.jpg";
 import cardImg from "../../assets/img/bg_game.png";
+import ScrollAnimation from "react-animate-on-scroll";
 
 export const Download = () => {
   const container = {
@@ -15,8 +16,9 @@ export const Download = () => {
   return (
     <Layout>
       <section style={container} className="relative h-screen p-10">
-        <div className="flex items-center justify-center  mt-10 inline-block">
-          <div className="left-[15vh] mt-[25vh] lg:w-[50vh] md:w-48 sm:w-40 w-1/2 glow">
+        <div className="flex items-center justify-center mt-[8vh] inline-block">
+        <ScrollAnimation animateIn="fadeInLeft">
+          <div className="left-[15vh] mt-[25vh] lg:w-[50vh] md:w-48 sm:w-40 w-1/2 glow2">
             <a
               href="coven-cards-installer-1.0.3.exe"
               download="coven-cards-installer-1.0.3.exe"
@@ -38,7 +40,9 @@ export const Download = () => {
               </button>
             </a>
           </div>
-          <div className="flex items-center w-[800px] h-[400px] bg-[#1E0523DF] p-10 relative rounded-3xl text-purple mt-[20vh] ml-[50vh] mr-[5vh] inline-block">
+          </ScrollAnimation>
+          <ScrollAnimation animateIn="fadeInRight">
+          <div className="flex items-center w-[800px] h-[400px] bg-[#1E0523DF] p-10 relative rounded-3xl text-purple mt-[20vh] ml-[50vh] mr-[5vh] inline-block float">
             <div className="card-header">
               <h2 className="text2 font-maintoo text-[43px]">
                 DOWNLOAD & INSTALLATION
@@ -60,6 +64,7 @@ export const Download = () => {
               <li className="font-main "> Play and Enjoy!</li>
             </ol>
           </div>
+          </ScrollAnimation>
         </div>
           <Snowfall
             color="#A484A9CB"

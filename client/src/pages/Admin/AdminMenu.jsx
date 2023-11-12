@@ -34,7 +34,7 @@ export const AdminMenu = () => {
           <ul className="space-y-5 font-main text-[#343434]">
             <li className="rounded">
               <NavLink
-                to={"/dashboard/admin/dashboard"}
+                to={"/dashboard/admin/home"}
                 style={({isActive})=>{return{background: isActive?'#92509C':'', color: isActive?'white':''}}}
                 className="block hover:bg-purplerest hover:text-white text-[#343434] px-2 py-1 rounded"
               >

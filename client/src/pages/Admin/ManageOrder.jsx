@@ -46,9 +46,14 @@ export const ManageOrder = () => {
   useEffect(() => {
     getAllOrder();
   }, []);
-  useEffect(() => {
-    console.log(orders);
-  }, [orders]);
+
+  const SalesTotal = () => {
+    let totalAmount;
+    for(let i = 0; i < orders.size; i++){
+      totalAmount += orders[i].total;
+    }
+    return totalAmount;
+  };
 
   const handleChange = (value) => {
     toast.success(`Updated Status to ${value}`);
