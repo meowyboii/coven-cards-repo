@@ -65,6 +65,17 @@ export const AdminMenu = () => {
             </li>
             <li className="rounded">
               <NavLink
+                to={"/dashboard/admin/uploadthing"}
+                style={({isActive})=>{return{background: isActive?'#92509C':'', color: isActive?'white':''}}}
+                className="block hover:bg-purplerest hover:text-white text-[#343434]  px-2 py-1 rounded"
+              >
+                <div className="flex items-center ml-[2vh] text-2xl">
+                <BiStoreAlt className="mr-[5vh]"/> Upload page testing
+                </div>
+              </NavLink>
+            </li>
+            <li className="rounded">
+              <NavLink
                 onClick={handleLogout}
                 to={"/login"}
                 style={({isActive})=>{return{background: isActive?'#92509C':'', color: isActive?'white':''}}}

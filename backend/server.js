@@ -7,6 +7,34 @@ const productRoute = require("./routes/productRoute");
 const stripeCheckoutRoute = require("./routes/stripeCheckoutRoute");
 const stripeWebhookRoute = require("./routes/strieWebhookRoute");
 const orderRoute = require("./routes/orderRoute");
+const multer = require('multer')
+const uploadApp = express();
+const port = 3001;
+
+// Set up file storage using multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Store uploaded files in the 'uploads' directory
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
+
+uploadApp.use(express.json());
+
+// Serve uploaded files statically
+uploadApp.use('/uploads', express.static('uploads'));
+
+uploadApp.post('/upload', upload.single('image'), (req, res) => {
+  res.json({ message: 'File uploaded successfully' });
+});
+
+uploadApp.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 
 //configure env
 require("dotenv").config();
