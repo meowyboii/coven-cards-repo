@@ -9,7 +9,6 @@ import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
 
 export const ManageOrder = () => {
   const [orders, setOrders] = useState([]);
-  const [deliveryStatus, setDeliveryStatus] = useState("");
 
   const tableCustomStyles = {
     headRow: {
