@@ -79,7 +79,7 @@ export const Cart = () => {
 
                           {product.name}
                         </td>
-                        <td className="px-4 py-2">${product.price}</td>
+                        <td className="px-4 py-2">${product.amountSale}</td>
 
                         <td className="px-4 py-2">
                           <button

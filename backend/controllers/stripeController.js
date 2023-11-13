@@ -28,7 +28,7 @@ const stripeController = async (req, res) => {
               id: product.id,
             },
           },
-          unit_amount: product.price * 100,
+          unit_amount: product.amountSale * 100,
         },
         quantity: product.quantity,
       };

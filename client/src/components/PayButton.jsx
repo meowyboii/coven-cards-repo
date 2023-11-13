@@ -37,7 +37,7 @@ export const PayButton = () => {
   const calculateTotal = () => {
     let total = 0;
     for (let i = 0; i < cart.length; i++) {
-      total += cart[i].price * cart[i].quantity;
+      total += cart[i].amountSale * cart[i].quantity;
     }
     return total;
   };

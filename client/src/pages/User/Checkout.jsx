@@ -83,7 +83,7 @@ export const Checkout = () => {
                         {product.name}
                       </td>
                       <td className="border-b border-gray-400 px-4 py-2">
-                        ${product.price}
+                        ${product.amountSale}
                       </td>
                       <td className="border-b border-gray-400 px-4 py-2">
                         <div className="flex justify-center items-center p-4 mb-4 ">
@@ -115,7 +115,7 @@ export const Checkout = () => {
                         </div>
                       </td>
                       <td className="border-b border-gray-400 px-4 py-2">
-                        ${product.quantity * product.price}
+                        ${product.quantity * product.amountSale}
                       </td>
                       <td className="border-b border-gray-400 px-4 py-2">
                         <button
