@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { AdminMenu } from "./AdminMenu";
-import { Card, Text, Metric, Flex, ProgressBar, SparkAreaChart, BadgeDelta, DonutChart, Legend } from "@tremor/react";
+import { Card, Text, Metric, Flex, ProgressBar, SparkAreaChart, Icon, DonutChart, Legend } from "@tremor/react";
+import { IoCashOutline } from "react-icons/io5";
+import { FiStar } from "react-icons/fi";
 import { Layout } from "../../components/LayoutAdmin";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -16,6 +18,7 @@ export const AdminDashboard = () => {
   const [saleProducts, setSaleProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [cats, setProdCount] = useState([]);
+  const [best, setBestCount] = useState([]);
   const [newArrivals, setNewArrivals] = useState([]);
   const [users, setUsers] = useState([]);
   const [userCount, setTotalUsers] = useState(0);
@@ -264,12 +267,18 @@ export const AdminDashboard = () => {
   }, []);
 
   const ProductCount = () => {
+    if (!categories) {
+      return;
+    }
+
     let cats = [];
     for(let i = 0; i < categories.length; i++){
       cats = [...cats, {name: categories[i].name, ctr: 0}];
     }
     for(let i = 0; i < products.length; i++){
-      const index = cats.findIndex(item => item['name'] === products[i].category.name);
+      const index = cats.findIndex(
+        (item) => item['name'] === products[i].category.name
+      );
       cats[index]['ctr'] = cats[index].ctr+1;
     }
     setProdCount(cats);
@@ -279,10 +288,42 @@ export const AdminDashboard = () => {
     ProductCount();
   }, [products, categories]);
 
+  const BestSellCount = () => {
+    if (!products) {
+      return;
+    }
+
+    let best = [];
+    for(let i = 0; i < products.length; i++){
+      best = [...best, {name: products[i].name, ctr: 0}];
+    }
+    for(let i = 0; i < orders.length; i++){
+      const index = best.findIndex(
+        (item) => item['products'] === orders[i].products.name
+      );
+      if (index !== -1) {
+        best[index].ctr = best[index].ctr + 1;
+      }
+    }
+    setBestCount(best);
+  };
+
+  useEffect(() => {
+    BestSellCount();
+  }, [orders, categories]);
+
   const colors = ["slate", "violet", "indigo", "rose", "cyan", "amber"].slice(0, categories.length);
 
-  const textFormatter = (number) => `${new Intl.NumberFormat("us").format(number).toString()} products`
-  const priceFormatter = (number) => `$ ${new Intl.NumberFormat("us").format(number).toString()}`
+  const textFormatter = (number) => {
+    const formattedNumber = new Intl.NumberFormat("us").format(number).toString();
+  
+    if (number === 1) {
+      return `${formattedNumber} product`;
+    } else {
+      return `${formattedNumber} products`;
+    }
+  };
+  const buyFormatter = (number) => `${new Intl.NumberFormat("us").format(number).toString()} bought`
 
   const tableCustomStyles = {
     headRow: {
@@ -296,7 +337,7 @@ export const AdminDashboard = () => {
       style: {
         color: "#343434",
         backgroundColor: "#ffffff",
-        width: "54.3vh",
+        width: "57.5vh",
       },
       stripedStyle: {
         color: "#343434",
@@ -312,38 +353,42 @@ export const AdminDashboard = () => {
         <div className="container mt-2 ml-20 py-[5vh]">
           <div>
             <h2 className="text-3xl mb-4 ">Dashboard</h2>
-        <div className="grid grid-cols-3 gap-2 mr-[19vh] ml-[9vh]">
+        <div className="grid grid-cols-3 gap-2 mr-[19vh]">
         <div className="col-span-3 p-2 grid grid-cols-1 md:grid-cols-3 gap-32 ml-5">
           
           <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
           <Flex justifyContent="between" alignItems="center">
+            <Icon icon={IoCashOutline} color="violet" variant="solid" tooltip="Sum of Daily Sales" size="xl" />
+            <div className="mt-[1vh]">
             <Text>Daily Sales</Text>
-          </Flex>
-          <Flex justifyContent="center" alignItems="center">
-            <Metric className="text-5xl">$  {dailySaleTotal}</Metric>
+            <Metric className="bounce text-5xl">₱  {dailySaleTotal}</Metric></div>
           </Flex>
           </Card>
 
           <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
             <Text>Yearly Sales</Text>
-            <Metric className="text-xl">$  {yearlyAmount}</Metric>
+            <Metric className="text-xl">₱  {yearlyAmount}</Metric>
             <Flex className="mt-4">
             <Text>{(yearlyAmount * 100)/100000}% of annual target</Text>
-            <Text>$ 100,000</Text>
+            <Text>₱ 100,000</Text>
             </Flex>
             <ProgressBar value={(yearlyAmount * 100)/100000} className="mt-2 bg-red" />
           </Card>
 
           <Card className="max-w-sm flex-col items-center h-[20vh] w-[35vh] bg-white p-10 rounded">
-            <Text>Overall Sales</Text>
-            <Flex justifyContent="center" alignItems="center">
-            <Metric className="text-5xl">$  {totalSale}</Metric>
+            
+            <Flex justifyContent="between" alignItems="center">
+              <Icon icon={ FiStar } color="violet" variant="solid" tooltip="Sum of Overall Sales" size="xl" />
+              <div className="mt-[1vh]">
+              <Text>Overall Sales</Text>
+              <Metric className="bounce text-5xl">₱  {totalSale}</Metric>
+              </div>
             </Flex>
           </Card>
         </div>
         <div className="flex justify-center mt-4"> 
         {/* 53vh */}
-        <div className="ml-[83.5vh]">
+        <div className="ml-[86.5vh]">
         <DataTable
             title="New Arrivals"
             columns={columns}
@@ -370,7 +415,7 @@ export const AdminDashboard = () => {
         </div>
         </div>
         <div className="col-span-3 p-2 grid grid-cols-1 md:grid-cols-3 gap-32 ml-5 mt-4">
-          <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-5">
+          <Card className="card-one max-w-sm h-[20vh] w-[35vh] bg-white rounded p-5">
           <Flex justifyContent="between" alignItems="center">
             <div className="mt-5">
             <Text>Products per Category</Text>
@@ -394,24 +439,25 @@ export const AdminDashboard = () => {
           <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
           <Text>User Count</Text>
           <Flex justifyContent="center" alignItems="center">
-          <Metric className = "text-6xl">{userCount}</Metric>
+          <Metric className = "bounce text-6xl">{userCount} users</Metric>
           </Flex>
           </Card>
 
-          <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-5">
+          <Card className="card-two max-w-sm h-[20vh] w-[35vh] bg-white rounded p-5">
           <Flex justifyContent="between" alignItems="center">
             <Text>Best Selling Products</Text>
             <DonutChart
             className="w-[20vh]"
-            data={cities}
-            category="sales"
+            data={best}
+            category="ctr"
             index="name"
             variant="pie"
-            valueFormatter={priceFormatter}
+            valueFormatter={buyFormatter}
             colors={["slate", "violet", "indigo", "rose", "cyan", "amber"]}
             />
             </Flex>
           </Card>
+
         </div>
         </div>
         </div>
