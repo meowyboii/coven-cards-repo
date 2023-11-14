@@ -37,13 +37,25 @@ export const Dashboard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(formData);
+      const formDataToSend = new FormData();
+
+      // Append form data fields to the FormData object
+      Object.keys(formData).forEach((key) => {
+        formDataToSend.append(key, formData[key]);
+        formDataToSend.append("photo:", photo);
+      });
+
       const res = await axios.put(
         `${process.env.REACT_APP_API}/api/v1/auth/update-user/${auth.user.id}`,
-        formData
+        formDataToSend
       );
 
       if (res.data.success) {
+        setAuth({
+          user: res.data.user,
+          token: res.data.token,
+        });
+        localStorage.setItem("auth", JSON.stringify(res.data));
         toast.success(res.data.message);
       } else {
         toast.error(res.data.message);

@@ -54,29 +54,13 @@ export const CreateProduct = () => {
 
       if (data?.success) {
         toast.success("Product Created Successfully");
-        // window.location.reload();
+        window.location.reload();
       } else {
         toast.error(data?.message);
       }
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
-    }
-
-    //Images
-    try {
-      //Images
-      const productImagesData = new FormData();
-      productImages.forEach((image, index) => {
-        productImagesData.append(`productImage${index}`, image);
-      });
-
-      const response = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/product/uploads`,
-        productImagesData
-      );
-    } catch (error) {
-      console.log(error);
     }
   };
 

@@ -169,9 +169,8 @@ const getAllUsersController = async (req, res) => {
 
 const updateUserController = async (req, res) => {
   const updateData = req.fields;
-  const { photo } = req.files;
+  const photo = req.files;
   try {
-    console.log(updateData, photo);
     const user = await userModel.findById(req.params.pid);
     if (!user) {
       return res.status(404).send({
@@ -205,10 +204,25 @@ const updateUserController = async (req, res) => {
     // Save the updated user
     const updatedUser = await user.save();
 
+    const token = await jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
     res.status(200).send({
       success: true,
       message: "User Updated Successfully",
-      user: updatedUser,
+      user: {
+        firstName: updatedUser.firstName,
+        lastName: updatedUser.lastName,
+        email: updatedUser.email,
+        phone: updatedUser.phone,
+        address: updatedUser.address,
+        dateOfBirth: updatedUser.dateOfBirth,
+        parentEmail: updatedUser.parentEmail,
+        parentContact: updatedUser.parentContact,
+        role: updatedUser.role,
+        id: updatedUser._id,
+      },
+      token,
     });
   } catch (error) {
     console.log(error);
