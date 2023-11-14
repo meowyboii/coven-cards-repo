@@ -46,7 +46,7 @@ export const CreateProduct = () => {
       productData.append("stock", stock);
       productData.append("photo", photo);
       productData.append("shipping", shipping);
-
+      console.log(productData);
       const { data } = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/product/create-product`,
         productData
@@ -54,7 +54,7 @@ export const CreateProduct = () => {
 
       if (data?.success) {
         toast.success("Product Created Successfully");
-        window.location.reload();
+        // window.location.reload();
       } else {
         toast.error(data?.message);
       }

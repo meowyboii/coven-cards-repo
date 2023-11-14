@@ -4,8 +4,11 @@ const {
   loginController,
   testController,
   getAllUsersController,
+  updateUserController,
+  userPhotoController,
 } = require("../controllers/authController.js");
 const { requireSignIn, isAdmin } = require("../middlewares/authMiddleware.js");
+const formidable = require("express-formidable");
 
 //router object
 const router = express.Router();
@@ -21,6 +24,17 @@ router.get("/test", requireSignIn, isAdmin, testController);
 
 //get users route
 router.get("/get-users", requireSignIn, isAdmin, getAllUsersController);
+
+//get photo route
+router.get("/user-photo/:pid", requireSignIn, userPhotoController);
+
+//update user route
+router.put(
+  "/update-user/:pid",
+  requireSignIn,
+  formidable(),
+  updateUserController
+);
 
 //protected user route auth
 router.get("/user-auth", requireSignIn, (req, res) => {

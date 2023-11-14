@@ -154,7 +154,8 @@ const getAllUsersController = async (req, res) => {
     const users = await userModel
       .find({ role: 0 })
       .sort({ createdAt: -1 })
-      .select("-password");
+      .select("-password")
+      .select("-photo");
     res.status(200).send({ success: true, message: "All Users List", users });
   } catch (error) {
     console.log(error);
@@ -166,9 +167,81 @@ const getAllUsersController = async (req, res) => {
   }
 };
 
+const updateUserController = async (req, res) => {
+  const updateData = req.fields;
+  const { photo } = req.files;
+  try {
+    console.log(updateData, photo);
+    const user = await userModel.findById(req.params.pid);
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "user not found",
+        id: req.params.pid,
+      });
+    }
+
+    // Update only the specified fields
+    if (updateData.firstName !== undefined) {
+      user.firstName = updateData.firstName;
+    }
+
+    if (updateData.lastName !== undefined) {
+      user.lastName = updateData.lastName;
+    }
+
+    if (updateData.address !== undefined) {
+      user.address = updateData.address;
+    }
+
+    if (updateData.dateOfBirth !== undefined) {
+      user.dateOfBirth = updateData.dateOfBirth;
+    }
+    if (photo !== undefined && photo.size < 1000000) {
+      user.photo.data = fs.readFileSync(photo.path);
+      user.photo.contentType = photo.type;
+    }
+
+    // Save the updated user
+    const updatedUser = await user.save();
+
+    res.status(200).send({
+      success: true,
+      message: "User Updated Successfully",
+      user: updatedUser,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error in updating the user",
+      error,
+    });
+  }
+};
+
+const userPhotoController = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.params.pid).select("photo");
+    if (user.photo.data) {
+      res.set("Content-type", user.photo.contentType);
+      return res.status(200).send(user.photo.data);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in getting the user photo",
+      error,
+    });
+  }
+};
+
 module.exports = {
   registerController,
   loginController,
   testController,
   getAllUsersController,
+  updateUserController,
+  userPhotoController,
 };

@@ -40,6 +40,10 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    photo: {
+      data: Buffer,
+      contentType: String,
+    },
   },
   { timestamps: true }
 );
