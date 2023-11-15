@@ -297,20 +297,32 @@ export const AdminDashboard = () => {
     for(let i = 0; i < products.length; i++){
       best = [...best, {name: products[i].name, ctr: 0}];
     }
+
     for(let i = 0; i < orders.length; i++){
-      const index = best.findIndex(
-        (item) => item['products'] === orders[i].products.name
-      );
-      if (index !== -1) {
-        best[index].ctr = best[index].ctr + 1;
+      const orderProducts = orders[i].products;
+      for (let j = 0; j < orderProducts.length; j++) {
+        const productName = orderProducts[j].name;
+        const quantity = orderProducts[j].quantity;
+  
+        const index = best.findIndex((item) => item['name'] === productName);
+  
+        if (index !== -1) {
+          best[index].ctr = best[index].ctr + quantity; // Increment by the quantity
+        } else {
+          console.log(`Product with productName ${productName} not found in best array.`);
+          console.log('Best array:', best);
+        }
       }
     }
+    console.log(orders);
+    console.log(products);
+    console.log(best);
     setBestCount(best);
   };
 
   useEffect(() => {
     BestSellCount();
-  }, [orders, categories]);
+  }, [orders, products]);
 
   const colors = ["slate", "violet", "indigo", "rose", "cyan", "amber"].slice(0, categories.length);
 
@@ -335,7 +347,7 @@ export const AdminDashboard = () => {
     },
     rows: {
       style: {
-        color: "#343434",
+        color: "#343434cd ",
         backgroundColor: "#ffffff",
         width: "57.5vh",
       },
@@ -360,19 +372,19 @@ export const AdminDashboard = () => {
           <Flex justifyContent="between" alignItems="center">
             <Icon icon={IoCashOutline} color="violet" variant="solid" tooltip="Sum of Daily Sales" size="xl" />
             <div className="mt-[1vh]">
-            <Text>Daily Sales</Text>
-            <Metric className="bounce text-5xl">₱  {dailySaleTotal}</Metric></div>
+            <Text className="text-lg">Daily Sales</Text>
+            <Metric className="bounce text-5xl">$  {dailySaleTotal}</Metric></div>
           </Flex>
           </Card>
 
           <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
-            <Text>Yearly Sales</Text>
-            <Metric className="text-xl">₱  {yearlyAmount}</Metric>
-            <Flex className="mt-4">
+            <Text className="text-lg">Yearly Sales</Text>
+            <Metric className="text-xl">$  {yearlyAmount}</Metric>
+            <Flex>
             <Text>{(yearlyAmount * 100)/100000}% of annual target</Text>
             <Text>₱ 100,000</Text>
             </Flex>
-            <ProgressBar value={(yearlyAmount * 100)/100000} className="mt-2 bg-red" />
+            <ProgressBar value={(yearlyAmount * 100)/100000} />
           </Card>
 
           <Card className="max-w-sm flex-col items-center h-[20vh] w-[35vh] bg-white p-10 rounded">
@@ -380,8 +392,8 @@ export const AdminDashboard = () => {
             <Flex justifyContent="between" alignItems="center">
               <Icon icon={ FiStar } color="violet" variant="solid" tooltip="Sum of Overall Sales" size="xl" />
               <div className="mt-[1vh]">
-              <Text>Overall Sales</Text>
-              <Metric className="bounce text-5xl">₱  {totalSale}</Metric>
+              <Text className="text-lg">Overall Sales</Text>
+              <Metric className="bounce text-5xl">$  {totalSale}</Metric>
               </div>
             </Flex>
           </Card>
@@ -418,12 +430,7 @@ export const AdminDashboard = () => {
           <Card className="card-one max-w-sm h-[20vh] w-[35vh] bg-white rounded p-5">
           <Flex justifyContent="between" alignItems="center">
             <div className="mt-5">
-            <Text>Products per Category</Text>
-            <Legend
-              className="mt-5 text-xs"
-              categories={["T-shirts", "Collectibles"]}
-              colors={colors}
-            />
+            <Text className="text-lg">Products per Category</Text>
             </div>
             <DonutChart
             className="w-[15vh]"
@@ -437,7 +444,7 @@ export const AdminDashboard = () => {
           </Card>
 
           <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
-          <Text>User Count</Text>
+          <Text className="text-lg">User Count</Text>
           <Flex justifyContent="center" alignItems="center">
           <Metric className = "bounce text-6xl">{userCount} users</Metric>
           </Flex>
@@ -445,7 +452,9 @@ export const AdminDashboard = () => {
 
           <Card className="card-two max-w-sm h-[20vh] w-[35vh] bg-white rounded p-5">
           <Flex justifyContent="between" alignItems="center">
-            <Text>Best Selling Products</Text>
+            <div className="mt-5">
+            <Text className="text-lg">Orders per Product</Text>
+            </div>
             <DonutChart
             className="w-[20vh]"
             data={best}
