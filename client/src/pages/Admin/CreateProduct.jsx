@@ -46,7 +46,7 @@ export const CreateProduct = () => {
       productData.append("stock", stock);
       productData.append("photo", photo);
       productData.append("shipping", shipping);
-
+      console.log(productData);
       const { data } = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/product/create-product`,
         productData
@@ -61,22 +61,6 @@ export const CreateProduct = () => {
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
-    }
-
-    //Images
-    try {
-      //Images
-      const productImagesData = new FormData();
-      productImages.forEach((image, index) => {
-        productImagesData.append(`productImage${index}`, image);
-      });
-
-      const response = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/product/uploads`,
-        productImagesData
-      );
-    } catch (error) {
-      console.log(error);
     }
   };
 

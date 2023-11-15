@@ -28,7 +28,7 @@ const stripeController = async (req, res) => {
               id: product.id,
             },
           },
-          unit_amount: product.price * 100,
+          unit_amount: product.amountSale * 100,
         },
         quantity: product.quantity,
       };
@@ -131,11 +131,10 @@ const stripeController = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-//Get product
 
 // Create order function
 const createOrder = async (customer, data) => {
-  const stripeCart = JSON.parse(JSON.stringify(customer.metadata.stripeCart));
+  const stripeCart = JSON.parse(customer.metadata.stripeCart);
   console.log(stripeCart);
   const products = stripeCart.map((item) => {
     return {

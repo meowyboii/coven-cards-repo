@@ -19,6 +19,24 @@ const getAllOrderController = async (req, res) => {
   }
 };
 
+const getUserOrderController = async (req, res) => {
+  try {
+    const orders = await orderModel
+      .find({ buyer: req.params.pid })
+      .sort({ createdAt: -1 });
+    res
+      .status(200)
+      .send({ success: true, message: "All User Orders List", orders });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in getting user orders",
+      error,
+    });
+  }
+};
+
 const updateOrderStatusController = async (req, res) => {
   try {
     const { delivery_status } = req.body;
@@ -43,4 +61,8 @@ const updateOrderStatusController = async (req, res) => {
   }
 };
 
-module.exports = { getAllOrderController, updateOrderStatusController };
+module.exports = {
+  getAllOrderController,
+  updateOrderStatusController,
+  getUserOrderController,
+};
