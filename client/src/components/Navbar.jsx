@@ -24,7 +24,7 @@ export const Navbar = () => {
 
   return (
     <div className="w-full absolute z-10 position">
-      <nav className="flex items-center justify-between">
+      <nav id="user" className="flex items-center justify-between">
         <ul className="flex items-center space-x-20 text-purple text-2xl font-bold">
           <NavLink
             to={"/"}
@@ -78,7 +78,7 @@ export const Navbar = () => {
                         <div className="py-1">
                           <NavLink
                             to={`/dashboard/${
-                              auth?.user?.role === 1 ? "admin" : "user"
+                              auth?.user?.role === 1 ? "admin/home" : "user"
                             }`}
                             className="block px-4 py-2 text-sm text-gray-700"
                           >

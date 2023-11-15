@@ -19,4 +19,28 @@ const getAllOrderController = async (req, res) => {
   }
 };
 
-module.exports = { getAllOrderController };
+const updateOrderStatusController = async (req, res) => {
+  try {
+    const { delivery_status } = req.body;
+    const { id } = req.params;
+    const order = await orderModel.findByIdAndUpdate(
+      id,
+      { delivery_status },
+      { new: true }
+    );
+    res.status(200).send({
+      success: true,
+      message: "Delivery Status Updated Successfully!",
+      order,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in updating order status",
+      error,
+    });
+  }
+};
+
+module.exports = { getAllOrderController, updateOrderStatusController };

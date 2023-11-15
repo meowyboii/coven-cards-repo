@@ -57,6 +57,17 @@ code {
   animation: neon 2s ease-in-out infinite alternate;
 }
 
+.glow2 {
+  z-index: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  border-radius: 10px;
+  animation: neon 2s ease-in-out infinite alternate, floatAnimation 6s ease-in-out infinite;
+}
+
 nav li {
   text-transform: uppercase;
   font-size: 20px;
@@ -79,7 +90,6 @@ nav ul li > a:hover {
   color: #7B0E90;
   text-shadow: 0px 0px 15px #a90788;
 }
-
 
 @keyframes neon {
   from {
@@ -107,27 +117,38 @@ nav ul li > a:hover {
 	text-transform: uppercase;
   font-weight: bold;
   /*font-size: 50px;*/
-	background: linear-gradient(to bottom, #92509C 25%, #360640 100%);
+	background: linear-gradient(to bottom, #b569c1 25%, #360640 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
   filter: drop-shadow(0px 0px 3px #580E67);  
+}
+
+.text2 {
+  position: absolute;
+  z-index: 2;
+  margin-top: 55px;
+	text-transform: uppercase;
+  font-weight: bold;
+	background: linear-gradient(to bottom, #df88ed 50%, #360640 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.text3 {
+  position: relative;
+  z-index: 2;
+	text-transform: uppercase;
+  font-weight: bold;
+	background: linear-gradient(to bottom, #df88ed 25%, #360640 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 .card-header{
   position: relative;
   bottom: 24vh;
   left: 20vh;
-  color: #1E0523;
   z-index: 10;
-  border-bottom: 5px solid #fff;
-}
-
-.text2{
-  font-weight: bold;
-	background: linear-gradient(to bottom, #92509C 50%, #360640 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-  filter: drop-shadow(0px 0px 3px #580E67);  
 }
 
 .ant-input-number-input {

@@ -47,14 +47,39 @@ export const ManageOrder = () => {
   useEffect(() => {
     getAllOrder();
   }, []);
-  useEffect(() => {
-    console.log(orders);
-  }, [orders]);
 
   const handleChange = (value) => {
     toast.success(`Updated Status to ${value}`);
   };
-
+  const handleUpdate = async (orderId, currentStatus) => {
+    let newStatus;
+    if (currentStatus === "Not Processed") {
+      newStatus = "Processing";
+    } else if (currentStatus === "Processing") {
+      newStatus = "Shipped";
+    } else if (currentStatus === "Shipped") {
+      newStatus = "Delivered";
+    } else {
+      newStatus = currentStatus;
+    }
+    console.log(orderId, currentStatus, newStatus);
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_API}/api/v1/order/update-order/${orderId}`,
+        { delivery_status: newStatus }
+      );
+      if (data?.success) {
+        console.log(data);
+        toast.success("Successfully updated delivery status");
+        getAllOrder();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Error in updating delivery status");
+    }
+  };
   const columns = [
     {
       name: "Buyer",
@@ -73,17 +98,20 @@ export const ManageOrder = () => {
     {
       name: "Delivery Status",
       cell: (row) => (
-        <Select
-          defaultValue={row.delivery_status}
-          style={{ width: 135 }}
-          onChange={handleChange}
-          options={[
-            { value: "Not Processed", label: "Not Processed" },
-            { value: "Shipped", label: "Shipped" },
-            { value: "Delivered", label: "Delivered" },
-            { value: "Cancelled", label: "Cancelled" },
-          ]}
-        />
+        <div>
+          {row.delivery_status === "Delivered" ? (
+            <div className="bg-emerald-300 p-2 rounded-[4px]">
+              {row.delivery_status}
+            </div>
+          ) : (
+            <button
+              className="bg-slate-300 p-2 rounded-[4px]"
+              onClick={() => handleUpdate(row._id, row.delivery_status)}
+            >
+              {row.delivery_status}
+            </button>
+          )}
+        </div>
       ),
       sortable: true,
       sortField: "delivery_status",
@@ -105,7 +133,7 @@ export const ManageOrder = () => {
 
   return (
     <Layout>
-      <div className="flex item-center justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
+      <div className="flex justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
         <AdminMenu />
 
         <div className="w-[192.5vh] ml-10 mr-10 h-[100vh] py-[10vh]">

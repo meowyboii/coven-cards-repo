@@ -9,22 +9,20 @@ endpointSecret =
 
 const stripeController = async (req, res) => {
   try {
+    console.log(typeof req.body.stripeCart);
     const customer = await stripe.customers.create({
       metadata: {
         userId: req.body.userId,
-        cart: JSON.stringify(req.body.cart),
+        stripeCart: JSON.stringify(req.body.stripeCart),
       },
     });
-
-    const line_items = await req.body.cart.map((product) => {
+    console.log("StripeCart: ", customer.metadata.stripeCart);
+    const line_items = await req.body.stripeCart.map((product) => {
       return {
         price_data: {
           currency: "usd",
           product_data: {
             name: product.name,
-            images: [
-              `http://localhost:${process.env.PORT}/api/v1/product/product-photo/${product._id}`,
-            ],
             description: product.description,
             metadata: {
               id: product.id,
@@ -137,9 +135,9 @@ const stripeController = async (req, res) => {
 
 // Create order function
 const createOrder = async (customer, data) => {
-  const cart = JSON.parse(customer.metadata.cart);
-
-  const products = cart.map((item) => {
+  const stripeCart = JSON.parse(JSON.stringify(customer.metadata.stripeCart));
+  console.log(stripeCart);
+  const products = stripeCart.map((item) => {
     return {
       product: item.id,
       quantity: item.quantity,
@@ -151,8 +149,8 @@ const createOrder = async (customer, data) => {
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
     products,
-    subtotal: data.amount_subtotal,
-    total: data.amount_total,
+    subtotal: data.amount_subtotal / 100,
+    total: data.amount_total / 100,
     shipping: data.customer_details,
     payment_status: data.payment_status,
   });

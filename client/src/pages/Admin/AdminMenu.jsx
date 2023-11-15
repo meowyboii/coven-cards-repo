@@ -3,6 +3,9 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import { BiLogOut } from 'react-icons/bi';
 import { BiStoreAlt } from 'react-icons/bi';
+import { BiLayer } from "react-icons/bi";
+import { BsArrowRightShort } from "react-icons/bs";
+import { MdFavoriteBorder } from 'react-icons/md';
 import { MdOutlineProductionQuantityLimits } from 'react-icons/md';
 import { AiOutlineAppstore } from 'react-icons/ai';
 import logoImg from "../../assets/img/__LOGO.png";
@@ -25,8 +28,26 @@ export const AdminMenu = () => {
             <img src={logoImg} alt="coven cards logo" />
           </div>
           <br></br>
-          <h2 className="font-main text-3xl mb-7 text-[#343434]">
-            Admin Menu
+          <h2 className="font-main text-2xl mb-7 text-[#343434]">
+            Home
+          </h2>
+          <ul className="space-y-5 font-main text-[#343434]">
+            <li className="rounded">
+              <NavLink
+                to={"/dashboard/admin/home"}
+                style={({isActive})=>{return{background: isActive?'#92509C':'', color: isActive?'white':''}}}
+                className="block hover:bg-purplerest hover:text-white text-[#343434] px-2 py-1 rounded"
+              >
+                <div className="flex items-center ml-[2vh] text-2xl">
+                  <AiOutlineAppstore className="mr-[5vh]"/> Dashboard
+                </div>
+              </NavLink>
+            </li>
+          </ul>
+          <br/>
+          <br/>
+          <h2 className="font-main text-2xl mb-7 text-[#343434]">
+            Store Details
           </h2>
 
           <ul className="space-y-5 font-main text-[#343434]">
@@ -37,7 +58,7 @@ export const AdminMenu = () => {
                 className="block hover:bg-purplerest hover:text-white text-[#343434] px-2 py-1 rounded"
               >
                 <div className="flex items-center ml-[2vh] text-2xl">
-                  <AiOutlineAppstore className="mr-[5vh]"/> Create Category
+                  <BiLayer className="mr-[5vh]"/> Create Category
                 </div>
               </NavLink>
             </li>
@@ -74,6 +95,20 @@ export const AdminMenu = () => {
                 </div>
               </NavLink>
             </li>
+            <li className="rounded">
+              <NavLink
+                to={"/dashboard/admin/manage-order"}
+                style={({isActive})=>{return{background: isActive?'#92509C':'', color: isActive?'white':''}}}
+                className="block hover:bg-purplerest hover:text-white text-[#343434]  px-2 py-1 rounded"
+              >
+                <div className="flex items-center ml-[2vh] text-2xl">
+                <MdFavoriteBorder className="mr-[5vh]"/> Manage Order
+                </div>
+              </NavLink>
+            </li>
+            <br/>
+            <br/>
+            <br/>
             <li className="rounded">
               <NavLink
                 onClick={handleLogout}

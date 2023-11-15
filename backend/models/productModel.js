@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
-// Create a photo schema
-const photoSchema = new mongoose.Schema({
-  filename: String,
-  description: String,
-  path: String,
-});
-const Photo = mongoose.model("Photo", photoSchema);
+// // Create a photo schema
+// const photoSchema = new mongoose.Schema({
+//   filename: String,
+//   description: String,
+//   path: String,
+// });
+// const Photo = mongoose.model("Photo", photoSchema);
 
 const productSchema = new mongoose.Schema(
   {
@@ -46,9 +46,21 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    saleRate: {
+      type: Number,
+      default: 0,
+    },
+    amountSale: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );
+productSchema.pre("save", function (next) {
+  this.amountSale = (this.price * (1 - this.saleRate / 100)).toFixed(2);
+  next();
+});
 
 const product = mongoose.model("product", productSchema);
 
