@@ -239,7 +239,7 @@ export const Dashboard = () => {
                 {photo ? (
                   <img
                     src={URL.createObjectURL(photo)}
-                    alt="product"
+                    alt="user"
                     className="h-full w-full object-cover rounded-full"
                   />
                 ) : auth.user.photo ? (
