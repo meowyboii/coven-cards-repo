@@ -9,14 +9,17 @@ endpointSecret =
 
 const stripeController = async (req, res) => {
   try {
-    console.log(typeof req.body.stripeCart);
+    const newCart = req.body.stripeCart.map((item) => ({
+      id: item._id,
+      quantity: item.quantity,
+    }));
     const customer = await stripe.customers.create({
       metadata: {
         userId: req.body.userId,
-        stripeCart: JSON.stringify(req.body.stripeCart),
+        stripeCart: JSON.stringify(newCart),
       },
     });
-    console.log("StripeCart: ", customer.metadata.stripeCart);
+    console.log("StripeCart: ", JSON.parse(customer.metadata.stripeCart));
     const line_items = await req.body.stripeCart.map((product) => {
       return {
         price_data: {

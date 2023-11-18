@@ -26,7 +26,7 @@ router.get("/test", requireSignIn, isAdmin, testController);
 router.get("/get-users", requireSignIn, isAdmin, getAllUsersController);
 
 //get photo route
-router.get("/user-photo/:pid", requireSignIn, userPhotoController);
+router.get("/user-photo/:pid", userPhotoController);
 
 //update user route
 router.put(

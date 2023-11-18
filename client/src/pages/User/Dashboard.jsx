@@ -6,6 +6,7 @@ import React from "react";
 import { LayoutMerch } from "../../components/LayoutMerch";
 import { useAuth } from "../../context/auth";
 import { Modal } from "antd";
+import profile from "../../assets/img/mystery_man.png";
 
 export const Dashboard = () => {
   const [orders, setOrders] = useState([]);
@@ -42,8 +43,8 @@ export const Dashboard = () => {
       // Append form data fields to the FormData object
       Object.keys(formData).forEach((key) => {
         formDataToSend.append(key, formData[key]);
-        formDataToSend.append("photo:", photo);
       });
+      formDataToSend.append("photo:", photo);
 
       const res = await axios.put(
         `${process.env.REACT_APP_API}/api/v1/auth/update-user/${auth.user.id}`,
@@ -235,11 +236,23 @@ export const Dashboard = () => {
             </div>
             <div className="justify-center items-center ml-40 ">
               <div className="bg-white rounded-full h-40 w-40">
-                {photo && (
+                {photo ? (
                   <img
                     src={URL.createObjectURL(photo)}
                     alt="product"
                     className="h-full w-full object-cover rounded-full"
+                  />
+                ) : auth.user.photo ? (
+                  <img
+                    src={`${process.env.REACT_APP_API}/api/v1/auth/user-photo/${auth.user.id}`}
+                    className="h-full w-full object-cover rounded-full"
+                    alt="user"
+                  />
+                ) : (
+                  <img
+                    src={profile}
+                    className="h-full w-full object-cover rounded-full"
+                    alt="no profile"
                   />
                 )}
               </div>

@@ -1,6 +1,7 @@
 const { hashPassword, comparePassword } = require("../helpers/authHelper");
 const userModel = require("../models/userModel");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
 
 //POST REGISTER
 const registerController = async (req, res) => {
@@ -129,6 +130,7 @@ const loginController = async (req, res) => {
         dateOfBirth: user.dateOfBirth,
         parentEmail: user.parentEmail,
         parentContact: user.parentContact,
+        photo: user.photo,
         role: user.role,
         id: user._id,
       },
@@ -196,9 +198,11 @@ const updateUserController = async (req, res) => {
     if (updateData.dateOfBirth !== undefined) {
       user.dateOfBirth = updateData.dateOfBirth;
     }
-    if (photo !== undefined && photo.size < 1000000) {
-      user.photo.data = fs.readFileSync(photo.path);
-      user.photo.contentType = photo.type;
+
+    if (photo !== undefined && photo["photo:"].size < 1000000) {
+      console.log("IM HEREE");
+      user.photo.data = fs.readFileSync(photo["photo:"].path);
+      user.photo.contentType = photo["photo:"].type;
     }
 
     // Save the updated user
@@ -217,9 +221,8 @@ const updateUserController = async (req, res) => {
         phone: updatedUser.phone,
         address: updatedUser.address,
         dateOfBirth: updatedUser.dateOfBirth,
-        parentEmail: updatedUser.parentEmail,
-        parentContact: updatedUser.parentContact,
         role: updatedUser.role,
+        photo: photo,
         id: updatedUser._id,
       },
       token,

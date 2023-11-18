@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import logoImg from "../assets/img/__LOGO.png";
 import { useAuth } from "../context/auth";
 import toast, { Toaster } from "react-hot-toast";
+import profile from "../assets/img/mystery_man.png";
 
 export const Navbar = () => {
   const [auth, setAuth] = useAuth();
@@ -28,7 +29,8 @@ export const Navbar = () => {
         <ul className="flex items-center space-x-20 text-purple text-2xl font-bold">
           <NavLink
             to={"/"}
-            className="rounded-lg px-3 py-2 text-slate-700  hover:text-slate-900 mx-10">
+            className="rounded-lg px-3 py-2 text-slate-700  hover:text-slate-900 mx-10"
+          >
             <img
               src={logoImg}
               className="img"
@@ -37,22 +39,13 @@ export const Navbar = () => {
             ></img>
           </NavLink>
           <li>
-            <NavLink
-              to={"/"}>
-            Home
-            </NavLink>
+            <NavLink to={"/"}>Home</NavLink>
           </li>
           <li>
-            <NavLink
-              to={"/download"}>
-              Download
-            </NavLink>
+            <NavLink to={"/download"}>Download</NavLink>
           </li>
           <li>
-            <NavLink
-              to={"/merch"}>
-              Merch
-            </NavLink>
+            <NavLink to={"/merch"}>Merch</NavLink>
           </li>
           <li className="flex items-center pl-[76vh]">
             {!auth.user ? (
@@ -65,12 +58,26 @@ export const Navbar = () => {
                   <div className="relative inline-block text-left">
                     <button
                       type="button"
-                      className="inline-flex justify-center w-full px-4 py-2 rounded-md focus:outline-none"
+                      className="inline-flex justify-center rounded-full hover:bg-gray-700 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-gray-100 focus:ring-indigo-500"
                       id="options-menu"
                       aria-haspopup="true"
                       aria-expanded="true"
                     >
-                      {auth?.user?.firstName}
+                      <div className="bg-[#e5e7eb] rounded-full h-16 w-16">
+                        {auth.user.photo ? (
+                          <img
+                            src={`${process.env.REACT_APP_API}/api/v1/auth/user-photo/${auth.user.id}`}
+                            className="h-full w-full object-cover rounded-full"
+                            alt="user"
+                          />
+                        ) : (
+                          <img
+                            src={profile}
+                            className="h-full w-full object-cover rounded-full"
+                            alt="no profile"
+                          />
+                        )}
+                      </div>
                     </button>
 
                     {isOpen && (
