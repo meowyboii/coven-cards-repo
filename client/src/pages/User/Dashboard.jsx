@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Snowfall from 'react-snowfall'
 import DataTable from "react-data-table-component";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -7,8 +8,16 @@ import { LayoutMerch } from "../../components/LayoutMerch";
 import { useAuth } from "../../context/auth";
 import { Modal } from "antd";
 import profile from "../../assets/img/mystery_man.png";
+import bannerImg from "../../assets/img/login_bg.png";
 
 export const Dashboard = () => {
+  const container = {
+    backgroundImage: `url(${bannerImg})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    filter: "saturate(80%)",
+  };
+
   const [orders, setOrders] = useState([]);
   const [auth, setAuth] = useAuth();
   const [visible, setVisible] = useState(false);
@@ -159,15 +168,56 @@ export const Dashboard = () => {
   ];
   return (
     <LayoutMerch>
-      <div className="bg-[#1E0523DF] p-10 text-purple mt-[15vh]">
-        <div>
+      <div className="h-screen" style={container}>
+        <div className="bg-[#1E0523B3] p-10 text-purple mt-[15vh] shadow-2xl">
           <form onSubmit={handleSubmit}>
-            <h1 className="text-3xl text-center font-bold font-maintoo mb-4 mt-16 mb-10">
+          <div className="flex justify-center items-center">
+            <div className="p-10 text-center">
+            <h1 className="text-3xl text3">
               {auth.user.firstName}'s Profile
             </h1>
-            <br></br>
-            <div className="flex justify-center mx-[45vh]">
-              <div className="mx-10 w-[50vh]">
+                <div className="bg-white rounded-full h-40 w-40 ml-[12vh]">
+                  {photo ? (
+                    <img
+                      src={URL.createObjectURL(photo)}
+                      alt="user"
+                      className="h-full w-full object-cover rounded-full"
+                    />
+                  ) : auth.user.photo ? (
+                    <img
+                      src={`${process.env.REACT_APP_API}/api/v1/auth/user-photo/${auth.user.id}`}
+                      className="h-full w-full object-cover rounded-full"
+                      alt="user"
+                    />
+                  ) : (
+                    <img
+                      src={profile}
+                      className="h-full w-full object-cover rounded-full"
+                      alt="no profile"
+                    />
+                  )}
+                </div>
+                <div className="my-10 mt-10">
+                  <label className="px-4 py-2 text-white rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler my-2 cursor-pointer ">
+                    {photo ? photo.name : "Upload Photo"}
+                    <input
+                      type="file"
+                      name="photo"
+                      accept="image/*"
+                      onChange={(e) => setPhoto(e.target.files[0])}
+                      hidden
+                    />
+                  </label>
+                </div>
+                <div className="font-main text-regular">
+                  <h3>File size: maximum 1 MB</h3>
+                  <h3>File extension: .JPEG, .PNG</h3>
+                </div>
+              </div>
+
+
+            <div className="flex ml-[10vh] mt-10 mb-10">
+              <div className="w-[40vh] ml-[10vh]">
                 <div className="mb-4">
                   <label
                     htmlFor="firstName"
@@ -241,55 +291,18 @@ export const Dashboard = () => {
 
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-purple text-white text-lg rounded hover:bg-purpler mt-6 place-self-end"
+                  className="px-4 py-2 text-white text-lg rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler mt-6 place-self-end"
                 >
                   Save
                 </button>
               </div>
-              <div className="justify-center items-center ml-40 ">
-                <div className="bg-white rounded-full h-40 w-40">
-                  {photo ? (
-                    <img
-                      src={URL.createObjectURL(photo)}
-                      alt="user"
-                      className="h-full w-full object-cover rounded-full"
-                    />
-                  ) : auth.user.photo ? (
-                    <img
-                      src={`${process.env.REACT_APP_API}/api/v1/auth/user-photo/${auth.user.id}`}
-                      className="h-full w-full object-cover rounded-full"
-                      alt="user"
-                    />
-                  ) : (
-                    <img
-                      src={profile}
-                      className="h-full w-full object-cover rounded-full"
-                      alt="no profile"
-                    />
-                  )}
-                </div>
-                <div className="my-10 ">
-                  <label className="px-4 py-2 bg-purple text-white rounded hover:bg-purpler my-2 cursor-pointer ">
-                    {photo ? photo.name : "Upload Photo"}
-                    <input
-                      type="file"
-                      name="photo"
-                      accept="image/*"
-                      onChange={(e) => setPhoto(e.target.files[0])}
-                      hidden
-                    />
-                  </label>
-                </div>
-                <div>
-                  <h3>File size: maximum 1 MB</h3>
-                  <h3>File extension: .JPEG, .PNG</h3>
-                </div>
-              </div>
+          
+            </div>
             </div>
           </form>
         </div>
         <div className="flex justify-center items-center mt-10">
-          <div className="w-[97vh] mx-10 p-10">
+          <div className="w-[100vh] mx-10 p-10">
             <DataTable
               title="Order History"
               columns={columns}
@@ -302,6 +315,10 @@ export const Dashboard = () => {
           </div>
         </div>
       </div>
+      <Snowfall
+            color="#e977d3c2"
+            snowflakeCount={20}
+          />
     </LayoutMerch>
   );
 };

@@ -199,29 +199,6 @@ nav ul li > a:hover {
     animation: floatAnimation 6s ease-in-out infinite;
   }
 
-  .progress {
-    animation: prog 2s ease-in-out infinite alternate;
-  }
-  
-  @keyframes prog {
-    from {
-      box-shadow: 0 0 1px 0px #eff6ff,
-        0 0 0 #eff6ff,
-        0 0 1px #60a5fa,
-        0 0 2px #1d4ed8,
-        0 0 5px #1d4ed8,
-        0 0 6px #1d4ed8;
-    }
-    to {
-      box-shadow: 0 0 2px 0px #eff6ff,
-        0 0 1px #eff6ff,
-        0 0 1px #60a5fa,
-        0 0 2px #1d4ed8,
-        0 0 6px #1d4ed8,
-        0 0 7px #1d4ed8;
-    }
-  }
-
   .card-one {
     background-color: #994aa9;
     background-image: linear-gradient(240deg,#b164c0 0%,rgb(223, 232, 255) 100%);

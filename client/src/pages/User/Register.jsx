@@ -74,7 +74,7 @@ export const Register = () => {
   return (
     <Layout>
       <div
-        className="flex items-center justify-center h-screen p-10"
+        className="flex items-center justify-center h-screen"
         style={container}
       >
         <img
@@ -82,13 +82,13 @@ export const Register = () => {
           alt="coven cards logo"
           className="absolute w-1/5 z-10 top-[18vh]"
         />
-        <div className="bg-[#1E0523DF] p-10  rounded-3xl text-purple mt-[15vh]">
+        <div className="bg-[#1E0523DF] p-6 w-[90vh] rounded-3xl text-purple mt-[15vh]">
           <form onSubmit={handleSubmit}>
-            <h1 className="text-3xl text-center font-bold font-maintoo mb-4 mt-16 mb-10">
+            <h1 className="text-3xl text-center font-bold font-maintoo mb-4 mt-16">
               Create your Coven Cards Account
             </h1>
             <br></br>
-            <div className="inline-flex justify-center">
+            <div className="inline-flex justify-center ml-[12vh]">
               <div className="mr-5">
                 <div className="mb-4">
                   <label
@@ -103,7 +103,7 @@ export const Register = () => {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                    className="font-main w-[25vh] px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                     required
                   />
                 </div>
@@ -120,7 +120,7 @@ export const Register = () => {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleChange}
-                    className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                    className="font-main w-[25vh] px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                     required
                   />
                 </div>
@@ -138,7 +138,7 @@ export const Register = () => {
                     placeholder="sample@gmail.com"
                     value={formData.email}
                     onChange={handleChange}
-                    className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                    className="font-main w-[25vh] px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                     required
                   />
                 </div>
@@ -155,7 +155,7 @@ export const Register = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                    className="font-main w-[25vh] px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                     required
                   />
                 </div>
@@ -174,7 +174,7 @@ export const Register = () => {
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
-                    className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                    className="font-main w-[30vh] px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                     required
                   />
                 </div>
@@ -192,7 +192,7 @@ export const Register = () => {
                     // max={current}
                     value={formData.dateOfBirth}
                     onChange={handleChange}
-                    className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                    className="font-main w-[30vh] px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                     required
                   />
                 </div>
@@ -211,7 +211,7 @@ export const Register = () => {
                       placeholder="sample@gmail.com"
                       value={formData.parentEmail}
                       onChange={handleChange}
-                      className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                      className="font-main w-[30vh] px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                       disabled={belowEighteen}
                     />
                   </div>
@@ -230,12 +230,15 @@ export const Register = () => {
                       name="parentContact"
                       value={formData.parentContact}
                       onChange={handleChange}
-                      className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                      className="font-main w-[30vh] px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
                       disabled={belowEighteen}
                     />
                   </div>
                 </div>
-                <button type="submit" className="font-bold py-2 px-4 rounded">
+              </div>
+            </div>
+            <div className="flex items-center justify-center mt-[3vh]">
+            <button type="submit" className="font-bold py-2 px-4 rounded">
                   <div className="flex justify-center items-center w-[28vh]">
                     <img src={buttonImg} alt="login button" />
                     <p className=" text absolute text-[35px] text-purple mt-8">
@@ -245,7 +248,8 @@ export const Register = () => {
                 </button>
                 <br></br>
                 <br></br>
-                <div className="flex items-center text-center justify-center">
+            </div>
+            <div className="flex items-center text-center justify-center mb-2">
                   <div className="font-main text-[15px] font-main">
                     Already have an accout?
                   </div>
@@ -257,8 +261,6 @@ export const Register = () => {
                     Click here!
                   </Link>
                 </div>
-              </div>
-            </div>
           </form>
         </div>
         <Toaster />
