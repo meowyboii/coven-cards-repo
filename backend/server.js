@@ -23,13 +23,21 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+// Use cors middleware to allow cross-origin requests
+uploadApp.use(cors());
+
 uploadApp.use(express.json());
 
 // Serve uploaded files statically
 uploadApp.use('/uploads', express.static('uploads'));
 
-uploadApp.post('/upload', upload.single('image'), (req, res) => {
-  res.json({ message: 'File uploaded successfully' });
+uploadApp.post('/upload', upload.array('file1', 10), (req, res) => {
+  try {
+    res.json({ message: 'File uploaded successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 uploadApp.listen(port, () => {

@@ -86,7 +86,7 @@ export const AdminMenu = () => {
             </li>
             <li className="rounded">
               <NavLink
-                to={"/dashboard/admin/uploadthing"}
+                to={"/dashboard/admin/upload-thing"}
                 style={({isActive})=>{return{background: isActive?'#92509C':'', color: isActive?'white':''}}}
                 className="block hover:bg-purplerest hover:text-white text-[#343434]  px-2 py-1 rounded"
               >

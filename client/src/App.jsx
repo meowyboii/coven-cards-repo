@@ -19,7 +19,7 @@ import { Checkout } from "./pages/User/Checkout";
 import { CheckoutSuccess } from "./pages/User/CheckoutSuccess";
 import { ManageProduct } from "./pages/Admin/ManageProduct";
 import { ManageOrder } from "./pages/Admin/ManageOrder";
-import { UploadThing } from "./pages/Admin/UploadThing";
+import UploadThing from "./pages/Admin/UploadThing";
 
 function App() {
   return (

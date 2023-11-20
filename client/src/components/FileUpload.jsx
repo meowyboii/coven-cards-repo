@@ -2,15 +2,19 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function FileUpload() {
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFiles = e.target.files;
+    setFiles([...files, ...Array.from(selectedFiles)]);
   };
 
   const handleUpload = () => {
     const formData = new FormData();
-    formData.append('image', file);
+
+    files.forEach((file, index) => {
+      formData.append(`file${index + 1}`, file);
+    });
 
     axios
       .post('http://localhost:3001/upload', formData, {
@@ -29,8 +33,8 @@ function FileUpload() {
   return (
     <div>
       <h1>File Upload</h1>
-      <input type="file" accept="image/*" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload Image</button>
+      <input type="file" onChange={handleFileChange} multiple />
+      <button onClick={handleUpload}>Upload Files</button>
     </div>
   );
 }
