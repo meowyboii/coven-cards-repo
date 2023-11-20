@@ -7,17 +7,20 @@ const productRoute = require("./routes/productRoute");
 const stripeCheckoutRoute = require("./routes/stripeCheckoutRoute");
 const stripeWebhookRoute = require("./routes/strieWebhookRoute");
 const orderRoute = require("./routes/orderRoute");
-const multer = require('multer');
+const multer = require("multer");
 const uploadApp = express();
-const sanitize = require('sanitize-filename');
-const path = require('path');
-const fs = require('fs');
+const sanitize = require("sanitize-filename");
+const path = require("path");
+const fs = require("fs");
 const port = 3001;
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const folderName = req.body.folderName || "defaultFolder";
-    const destinationPath = path.join(__dirname, `../client/src/assets/img/products/${folderName}/`);
+    const destinationPath = path.join(
+      __dirname,
+      `../client/src/assets/img/products/${folderName}/`
+    );
 
     // Create the folder if it doesn't exist
     if (!fs.existsSync(destinationPath)) {
@@ -40,11 +43,14 @@ uploadApp.use(express.json()); // Parse JSON bodies
 
 uploadApp.use("../client/src/assets/img/products/", express.static("uploads"));
 
-uploadApp.post("/upload", upload.fields([{ name: 'files' }]), (req, res) => {
+uploadApp.post("/upload", upload.fields([{ name: "files" }]), (req, res) => {
   try {
     console.log("Request Body:", req.body); // Log the entire request body for inspection
     const folderName = req.body.folderName || "defaultFolder";
-    const destinationPath = path.join(__dirname, `../client/src/assets/img/products/${folderName}/`);
+    const destinationPath = path.join(
+      __dirname,
+      `../client/src/assets/img/products/${folderName}/`
+    );
 
     // Create the folder if it doesn't exist
     if (!fs.existsSync(destinationPath)) {
@@ -52,7 +58,7 @@ uploadApp.post("/upload", upload.fields([{ name: 'files' }]), (req, res) => {
     }
 
     // Move each file to the destination folder
-    req.files['files'].forEach((file) => {
+    req.files["files"].forEach((file) => {
       const filePath = path.join(destinationPath, file.originalname);
       fs.renameSync(file.path, filePath);
     });
@@ -61,7 +67,9 @@ uploadApp.post("/upload", upload.fields([{ name: 'files' }]), (req, res) => {
     res.json({ message: "Files uploaded successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error", details: error.message });
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", details: error.message });
   }
 });
 
@@ -118,15 +126,20 @@ app.get("/", (req, res) => {
   res.json({ mssg: "Welcome to the app" });
 });
 
-uploadApp.get('/photos', (req, res) => {
-  const folderName = req.query.folderName || 'defaultFolder';
-  const folderPath = path.join(__dirname, `uploads/${folderName}`);
+uploadApp.get("/photos", (req, res) => {
+  const folderName = req.query.folderName || "defaultFolder";
+  const folderPath = path.join(
+    __dirname,
+    `../client/src/assets/img/products/${folderName}`
+  );
 
   // Read the files in the folder
   fs.readdir(folderPath, (err, files) => {
     if (err) {
-      console.error('Error reading folder:', err);
-      res.status(500).json({ error: 'Internal Server Error', details: err.message });
+      console.error("Error reading folder:", err);
+      res
+        .status(500)
+        .json({ error: "Internal Server Error", details: err.message });
     } else {
       res.json(files);
     }

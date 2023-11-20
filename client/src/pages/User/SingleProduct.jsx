@@ -14,7 +14,6 @@ export const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [photos, setPhotos] = useState([]);
-  let alternativeImage1, alternativeImage2;
 
   const inputNumberStyle = {
     backgroundColor: "#2E1832",
@@ -29,6 +28,7 @@ export const SingleProduct = () => {
       );
       if (data.success) {
         setProduct(data?.product);
+        getPhotos(data?.product);
       }
     } catch (error) {
       console.log(error);
@@ -42,16 +42,20 @@ export const SingleProduct = () => {
     }
   }, [params?.slug]);
 
+  const getPhotos = async (product) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/photos?folderName=${product.name}`
+      );
+      setPhotos(response.data);
+    } catch (error) {
+      console.log("Something went wrong or no photos retrieved", error);
+    }
+  };
+
   useEffect(() => {
-    // Make an API request to fetch the list of photos in the specified folder
-    axios.get(`http://localhost:3001/photos?folderName=${product.name}`)
-      .then(response => {
-        setPhotos(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching photos:', error);
-      });
-  }, [product]);
+    console.log(photos);
+  }, [photos]);
 
   const handleTabClick = (index) => {
     setActiveImageIndex(index);
@@ -88,23 +92,39 @@ export const SingleProduct = () => {
         <div className="flex justify-end text-white h-full">
           {/* Image Tabs */}
           <div className="flex justify-center items-center pl-16 flex-col w-1/4 ">
+            <button
+              className={`${
+                activeImageIndex === 0
+                  ? "border-2 border-purpler "
+                  : " text-gray-600"
+              } px-3 py-3 my-2  bg-gradient-to-b from-[#00000050] to-[#1E0523] rounded-lg w-[13vh] h-[13vh] `}
+              onClick={() => handleTabClick(0)}
+            >
+              <div className="h-[10vh]">
+                <img
+                  src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
+                  alt={`${product.name} 0`}
+                  className="h-full w-full object-cover transition-transform transform scale-100 hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+            </button>
             {photos.map((image, index) => (
               <button
                 key={index}
                 className={`${
-                  activeImageIndex === index
+                  activeImageIndex === index + 1
                     ? "border-2 border-purpler "
                     : " text-gray-600"
                 } px-3 py-3 my-2  bg-gradient-to-b from-[#00000050] to-[#1E0523] rounded-lg w-[13vh] h-[13vh] `}
-                onClick={() => handleTabClick(index)}
+                onClick={() => handleTabClick(index + 1)}
               >
-                <div className="m-0 p-0">
-                  {/* <img
-                    src={products.images[index]}
-                    alt={`${products.name}-mini`}
+                <div className="m-0 p-0 h-[10vh]">
+                  <img
+                    key={index + 1}
+                    src={require(`../../assets/img/products/${product.name}/${image}`)}
+                    alt={`Photo ${index + 1}`}
                     className="h-full w-full object-cover transition-transform transform scale-100 hover:scale-110 transition-transform duration-500"
-                  /> */}
-                  <img key={index} src={`http://localhost:3001/uploads/${product.name}/${image}`} alt={`Photo ${index}`} className="h-full w-full object-cover transition-transform transform scale-100 hover:scale-110 transition-transform duration-500" />
+                  />
                 </div>
               </button>
             ))}
@@ -112,11 +132,21 @@ export const SingleProduct = () => {
 
           {/* Product Images */}
           <div className="flex justify-center items-center h-[70vh] w-2/4 mx-[15vh] p-10 mt-16 mb-20 border-2 border-[#78146235] bg-gradient-to-b from-[#1E0523] to-[#00000050] rounded-lg">
-            <img
-              src={photos[activeImageIndex]}
-              alt={product.name}
-              className="max-w-full object-cover"
-            />
+            {activeImageIndex === 0 ? (
+              <img
+                src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
+                alt={product.name}
+                className="max-w-full object-cover"
+              />
+            ) : (
+              <img
+                src={require(`../../assets/img/products/${product.name}/${
+                  photos[activeImageIndex - 1]
+                }`)}
+                alt={product.name}
+                className="max-w-full object-cover"
+              />
+            )}
           </div>
 
           {/* Product Description */}

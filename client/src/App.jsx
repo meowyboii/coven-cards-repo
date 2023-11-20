@@ -30,7 +30,7 @@ function App() {
           <Route path="user" element={<Dashboard />} />
         </Route>
         <Route path="/dashboard" element={<AdminRoute />}>
-          <Route path="admin" element={<AdminDashboard />} />
+          <Route path="admin/home" element={<AdminDashboard />} />
           <Route path="admin/create-category" element={<CreateCategory />} />
           <Route path="admin/create-product" element={<CreateProduct />} />
           <Route path="admin/manage-product" element={<ManageProduct />} />
