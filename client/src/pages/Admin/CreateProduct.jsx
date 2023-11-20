@@ -16,6 +16,8 @@ export const CreateProduct = () => {
   const [shipping, setShipping] = useState("");
   const [photo, setPhoto] = useState("");
   const [productImages, setProductImages] = useState([]);
+  const [files, setFiles] = useState([]);
+  const [folderName, setFolderName] = useState("");
 
   const getAllCategory = async (req, res) => {
     try {
@@ -37,6 +39,7 @@ export const CreateProduct = () => {
 
   const handleCreate = async (e) => {
     e.preventDefault();
+    handleUpload();
     try {
       const productData = new FormData();
       productData.append("name", name);
@@ -62,6 +65,40 @@ export const CreateProduct = () => {
       console.log(error);
       toast.error("Something went wrong");
     }
+  };
+
+  const handleFileChange = (e) => {
+    setFiles([]);
+    const selectedFiles = e.target.files;
+    const newFiles = Array.from(selectedFiles).slice(0, 3);
+    setFiles((prevFiles) => [...prevFiles, ...Array.from(newFiles)]);
+  };
+
+  const handleUpload = () => {
+    const formData = new FormData();
+
+    files.forEach((file, index) => {
+      formData.append("files", file);
+    });
+
+    formData.append("folderName", name || "defaultFolder");
+
+    axios
+      .post("http://localhost:3001/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        alert(response.data.message);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    // Clear the files and folderName state after upload
+    setFiles([]);
+    setFolderName("");
   };
 
   return (
@@ -229,6 +266,32 @@ export const CreateProduct = () => {
                 <Option value="1">Yes</Option>
                 <Option value="0">No</Option>
               </Select>
+            </div>
+            <div>
+              <h1>File Upload</h1>
+              <label className="px-4 py-2 bg-purple text-white rounded hover:bg-purpler my-2 cursor-pointer ">
+                {files.length >0? `${files.length} uploaded` : "Upload Photos"}
+                <input
+                  type="file"
+                  name="photos"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  multiple
+                  require
+                  hidden
+                />
+              </label>
+              <div className="mt-10 flex">
+                {files.map((photo) => (
+                  <div className="text-center mx-2">
+                    <img
+                      src={URL.createObjectURL(photo)}
+                      alt="product"
+                      className="h-[200px]"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="mt-4">
               <button

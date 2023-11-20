@@ -7,29 +7,13 @@ import buttonImg from "../../assets/img/button clean.png";
 import { useCart } from "../../context/cart";
 import { InputNumber, ConfigProvider, theme } from "antd";
 
-// Import Images
-// import img1 from "../../assets/img/sc1.png";
-import img2 from "../../assets/img/sc2.png";
-import img3 from "../../assets/img/sc3.png";
-import cap1 from "../../assets/img/CC-Cap1.png";
-import cap2 from "../../assets/img/CC-Cap2.png";
-import hoodie2 from "../../assets/img/CC-Hoodie2.png";
-import hoodie3 from "../../assets/img/CC-Hoodie3.png";
-import mug1 from "../../assets/img/CC-Mug1.png";
-import mug2 from "../../assets/img/CC-Mug3.png";
-import shirt1 from "../../assets/img/CC-Shirt1.png";
-import shirt2 from "../../assets/img/CC-Shirt2.png";
-import dtgshirt1 from "../../assets/img/DTG-Shirt1.png";
-import dtgshirt2 from "../../assets/img/DTG-Shirt2.png";
-import poster1 from "../../assets/img/poster1.png";
-import poster2 from "../../assets/img/poster2.png";
 export const SingleProduct = () => {
   const params = useParams();
   const [product, setProduct] = useState([]);
   const [cart, setCart] = useCart();
   const [quantity, setQuantity] = useState(1);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  let alternativeImage1, alternativeImage2;
+  const [photos, setPhotos] = useState([]);
 
   const inputNumberStyle = {
     backgroundColor: "#2E1832",
@@ -44,6 +28,7 @@ export const SingleProduct = () => {
       );
       if (data.success) {
         setProduct(data?.product);
+        getPhotos(data?.product);
       }
     } catch (error) {
       console.log(error);
@@ -57,46 +42,20 @@ export const SingleProduct = () => {
     }
   }, [params?.slug]);
 
-  const setAlternativeImages = () => {
-    switch (product.name) {
-      case "Coven Cards Poster #1":
-        alternativeImage1 = poster1;
-        alternativeImage2 = poster2;
-        break;
-      case "Dorothea the Great T-Shirt":
-        alternativeImage1 = dtgshirt1;
-        alternativeImage2 = dtgshirt2;
-        break;
-      case "Coven Cards Mug":
-        alternativeImage1 = mug1;
-        alternativeImage2 = mug2;
-        break;
-      case "Coven Cards Cap":
-        alternativeImage1 = cap1;
-        alternativeImage2 = cap2;
-        break;
-      case "Coven Cards Hoodie":
-        alternativeImage1 = hoodie2;
-        alternativeImage2 = hoodie3;
-        break;
-      default:
-        alternativeImage1 = img2;
-        alternativeImage2 = img3;
+  const getPhotos = async (product) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/photos?folderName=${product.name}`
+      );
+      setPhotos(response.data);
+    } catch (error) {
+      console.log("Something went wrong or no photos retrieved", error);
     }
   };
-  setAlternativeImages();
-  // Replace this with your product data or fetch it from an API
-  const products = {
-    name: "Sample Product",
-    images: [
-      `${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`,
-      alternativeImage1,
-      alternativeImage2,
-      // Add more image URLs here
-    ],
-    description: "Product description goes here.",
-    // Add other product details as needed
-  };
+
+  useEffect(() => {
+    console.log(photos);
+  }, [photos]);
 
   const handleTabClick = (index) => {
     setActiveImageIndex(index);
@@ -133,20 +92,37 @@ export const SingleProduct = () => {
         <div className="flex justify-end text-white h-full">
           {/* Image Tabs */}
           <div className="flex justify-center items-center pl-16 flex-col w-1/4 ">
-            {products.images.map((image, index) => (
+            <button
+              className={`${
+                activeImageIndex === 0
+                  ? "border-2 border-purpler "
+                  : " text-gray-600"
+              } px-3 py-3 my-2  bg-gradient-to-b from-[#00000050] to-[#1E0523] rounded-lg w-[13vh] h-[13vh] `}
+              onClick={() => handleTabClick(0)}
+            >
+              <div className="h-[10vh]">
+                <img
+                  src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
+                  alt={`${product.name} 0`}
+                  className="h-full w-full object-cover transition-transform transform scale-100 hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+            </button>
+            {photos.map((image, index) => (
               <button
                 key={index}
                 className={`${
-                  activeImageIndex === index
+                  activeImageIndex === index + 1
                     ? "border-2 border-purpler "
                     : " text-gray-600"
                 } px-3 py-3 my-2  bg-gradient-to-b from-[#00000050] to-[#1E0523] rounded-lg w-[13vh] h-[13vh] `}
-                onClick={() => handleTabClick(index)}
+                onClick={() => handleTabClick(index + 1)}
               >
-                <div className="m-0 p-0">
+                <div className="m-0 p-0 h-[10vh]">
                   <img
-                    src={products.images[index]}
-                    alt={`${products.name}-mini`}
+                    key={index + 1}
+                    src={require(`../../assets/img/products/${product.name}/${image}`)}
+                    alt={`Photo ${index + 1}`}
                     className="h-full w-full object-cover transition-transform transform scale-100 hover:scale-110 transition-transform duration-500"
                   />
                 </div>
@@ -156,11 +132,21 @@ export const SingleProduct = () => {
 
           {/* Product Images */}
           <div className="flex justify-center items-center h-[70vh] w-2/4 mx-[15vh] p-10 mt-16 mb-20 border-2 border-[#78146235] bg-gradient-to-b from-[#1E0523] to-[#00000050] rounded-lg">
-            <img
-              src={products.images[activeImageIndex]}
-              alt={products.name}
-              className="max-w-full object-cover"
-            />
+            {activeImageIndex === 0 ? (
+              <img
+                src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
+                alt={product.name}
+                className="max-w-full object-cover"
+              />
+            ) : (
+              <img
+                src={require(`../../assets/img/products/${product.name}/${
+                  photos[activeImageIndex - 1]
+                }`)}
+                alt={product.name}
+                className="max-w-full object-cover"
+              />
+            )}
           </div>
 
           {/* Product Description */}

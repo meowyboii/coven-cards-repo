@@ -19,6 +19,7 @@ import { Checkout } from "./pages/User/Checkout";
 import { CheckoutSuccess } from "./pages/User/CheckoutSuccess";
 import { ManageProduct } from "./pages/Admin/ManageProduct";
 import { ManageOrder } from "./pages/Admin/ManageOrder";
+import UploadThing from "./pages/Admin/UploadThing";
 
 function App() {
   return (
@@ -29,11 +30,12 @@ function App() {
           <Route path="user" element={<Dashboard />} />
         </Route>
         <Route path="/dashboard" element={<AdminRoute />}>
-          <Route exact path="admin/home" element={<AdminDashboard />} />
-          <Route exact path="admin/create-category" element={<CreateCategory />} />
-          <Route exact path="admin/create-product" element={<CreateProduct />} />
-          <Route exact path="admin/manage-product" element={<ManageProduct />} />
-          <Route exact path="admin/manage-order" element={<ManageOrder />} />
+          <Route path="admin/home" element={<AdminDashboard />} />
+          <Route path="admin/create-category" element={<CreateCategory />} />
+          <Route path="admin/create-product" element={<CreateProduct />} />
+          <Route path="admin/manage-product" element={<ManageProduct />} />
+          <Route path="admin/manage-order" element={<ManageOrder />} />
+          <Route path="admin/upload-thing" element={<UploadThing />} />
         </Route>
         <Route path="/download" element={<Download />} />
         <Route path="/merch" element={<Merch />} />
