@@ -12,7 +12,6 @@ const UploadThing = () => {
           <div className="w-1/3 mb-10">
             <h2 className="text-3xl mb-4">Upload Thing</h2>
             <div>
-              <h1>Upload Thing Page</h1>
               <FileUpload />
             </div>
           </div>

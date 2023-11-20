@@ -7,36 +7,61 @@ const productRoute = require("./routes/productRoute");
 const stripeCheckoutRoute = require("./routes/stripeCheckoutRoute");
 const stripeWebhookRoute = require("./routes/strieWebhookRoute");
 const orderRoute = require("./routes/orderRoute");
-const multer = require('multer')
+const multer = require('multer');
 const uploadApp = express();
+const sanitize = require('sanitize-filename');
+const path = require('path');
+const fs = require('fs');
 const port = 3001;
 
-// Set up file storage using multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Store uploaded files in the 'uploads' directory
+    const folderName = req.body.folderName || "defaultFolder";
+    const destinationPath = path.join(__dirname, `../client/src/assets/img/products/${folderName}/`);
+
+    // Create the folder if it doesn't exist
+    if (!fs.existsSync(destinationPath)) {
+      fs.mkdirSync(destinationPath, { recursive: true });
+    }
+
+    console.log("Destination Path:", destinationPath);
+    cb(null, destinationPath);
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
+    const sanitizedFilename = sanitize(file.originalname);
+    cb(null, sanitizedFilename);
+  },
 });
 
 const upload = multer({ storage: storage });
 
-// Use cors middleware to allow cross-origin requests
 uploadApp.use(cors());
+uploadApp.use(express.json()); // Parse JSON bodies
 
-uploadApp.use(express.json());
+uploadApp.use("../client/src/assets/img/products/", express.static("uploads"));
 
-// Serve uploaded files statically
-uploadApp.use('/uploads', express.static('uploads'));
-
-uploadApp.post('/upload', upload.array('file1', 10), (req, res) => {
+uploadApp.post("/upload", upload.fields([{ name: 'files' }]), (req, res) => {
   try {
-    res.json({ message: 'File uploaded successfully' });
+    console.log("Request Body:", req.body); // Log the entire request body for inspection
+    const folderName = req.body.folderName || "defaultFolder";
+    const destinationPath = path.join(__dirname, `../client/src/assets/img/products/${folderName}/`);
+
+    // Create the folder if it doesn't exist
+    if (!fs.existsSync(destinationPath)) {
+      fs.mkdirSync(destinationPath, { recursive: true });
+    }
+
+    // Move each file to the destination folder
+    req.files['files'].forEach((file) => {
+      const filePath = path.join(destinationPath, file.originalname);
+      fs.renameSync(file.path, filePath);
+    });
+
+    console.log("Destination Path:", destinationPath);
+    res.json({ message: "Files uploaded successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: "Internal Server Error", details: error.message });
   }
 });
 
@@ -88,6 +113,22 @@ app.use("/api/v1/order", orderRoute);
 app.listen(process.env.PORT, () => {
   console.log("Listening on port 4000");
 });
+
 app.get("/", (req, res) => {
   res.json({ mssg: "Welcome to the app" });
+});
+
+uploadApp.get('/photos', (req, res) => {
+  const folderName = req.query.folderName || 'defaultFolder';
+  const folderPath = path.join(__dirname, `uploads/${folderName}`);
+
+  // Read the files in the folder
+  fs.readdir(folderPath, (err, files) => {
+    if (err) {
+      console.error('Error reading folder:', err);
+      res.status(500).json({ error: 'Internal Server Error', details: err.message });
+    } else {
+      res.json(files);
+    }
+  });
 });
