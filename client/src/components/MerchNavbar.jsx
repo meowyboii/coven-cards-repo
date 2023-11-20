@@ -6,6 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { SearchInput } from "./SearchInput";
 import { Cart } from "../pages/User/Cart";
+import profile from "../assets/img/mystery_man.png";
 
 export const MerchNavbar = () => {
   const [auth, setAuth] = useAuth();
@@ -106,12 +107,26 @@ export const MerchNavbar = () => {
                   <div className="relative inline-block text-left">
                     <button
                       type="button"
-                      className="inline-flex justify-center w-full px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-gray-100 focus:ring-indigo-500"
+                      className="inline-flex justify-center rounded-full hover:bg-gray-700 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-gray-100 focus:ring-indigo-500"
                       id="options-menu"
                       aria-haspopup="true"
                       aria-expanded="true"
                     >
-                      {auth?.user?.firstName}
+                      <div className="bg-[#e5e7eb] rounded-full h-16 w-16">
+                        {auth.user.photo ? (
+                          <img
+                            src={`${process.env.REACT_APP_API}/api/v1/auth/user-photo/${auth.user.id}`}
+                            className="h-full w-full object-cover rounded-full"
+                            alt="user"
+                          />
+                        ) : (
+                          <img
+                            src={profile}
+                            className="h-full w-full object-cover rounded-full"
+                            alt="no profile"
+                          />
+                        )}
+                      </div>
                     </button>
 
                     {isOpen && (

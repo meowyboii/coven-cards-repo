@@ -3,13 +3,10 @@ import { AdminMenu } from "./AdminMenu";
 import DataTable from "react-data-table-component";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Select } from "antd";
 import { Layout } from "../../components/LayoutAdmin";
-import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
-
+import { MdCancelPresentation } from "react-icons/md";
 export const ManageOrder = () => {
   const [orders, setOrders] = useState([]);
-  const [deliveryStatus, setDeliveryStatus] = useState("");
 
   const tableCustomStyles = {
     headRow: {
@@ -48,9 +45,6 @@ export const ManageOrder = () => {
     getAllOrder();
   }, []);
 
-  const handleChange = (value) => {
-    toast.success(`Updated Status to ${value}`);
-  };
   const handleUpdate = async (orderId, currentStatus) => {
     let newStatus;
     if (currentStatus === "Not Processed") {
@@ -80,6 +74,16 @@ export const ManageOrder = () => {
       toast.error("Error in updating delivery status");
     }
   };
+
+  const getDate = (updatedAt) => {
+    const dateObject = new Date(updatedAt);
+    const year = dateObject.getFullYear();
+    const month = String(dateObject.getMonth() + 1).padStart(2, "0"); // Adding 1 because January is 0
+    const day = String(dateObject.getDate()).padStart(2, "0");
+    const formattedDate = `${month}-${day}-${year}`;
+    return formattedDate;
+  };
+
   const columns = [
     {
       name: "Buyer",
@@ -98,37 +102,44 @@ export const ManageOrder = () => {
     {
       name: "Delivery Status",
       cell: (row) => (
-        <div>
-          {row.delivery_status === "Delivered" ? (
-            <div className="bg-emerald-300 p-2 rounded-[4px]">
-              {row.delivery_status}
-            </div>
-          ) : (
-            <button
-              className="bg-slate-300 p-2 rounded-[4px]"
-              onClick={() => handleUpdate(row._id, row.delivery_status)}
-            >
-              {row.delivery_status}
-            </button>
-          )}
+        <div className="flex justify-center">
+          <div className="mx-1">
+            {row.delivery_status === "Delivered" ? (
+              <div className="bg-emerald-300 p-2 rounded-[4px]">
+                {row.delivery_status}
+              </div>
+            ) : row.delivery_status === "Cancelled" ? (
+              <div className="bg-red-300 p-2 rounded-[4px]">
+                {row.delivery_status}
+              </div>
+            ) : (
+              <button
+                className="bg-slate-300 p-2 rounded-[4px]"
+                onClick={() => handleUpdate(row._id, row.delivery_status)}
+              >
+                {row.delivery_status}
+              </button>
+            )}
+          </div>
+          <div className="mx-1">
+            {row.delivery_status !== "Cancelled" &&
+            row.delivery_status !== "Delivered" ? (
+              <button
+                className="bg-slate-300 p-2 rounded-[4px]"
+                onClick={() => handleUpdate(row._id, "Cancelled")}
+              >
+                Cancel
+              </button>
+            ) : null}
+          </div>
         </div>
       ),
-      sortable: true,
-      sortField: "delivery_status",
     },
-    // {
-    //   name: "Remove",
-    //   selector: (row) => (
-    //     <button
-    //       onClick={() => {
-    //         handleDeleteProduct(row._id);
-    //         console.log(row._id);
-    //       }}
-    //     >
-    //       <AiFillDelete className="text-2xl ml-2 text-[#bd2b2b] " />
-    //     </button>
-    //   ),
-    // },
+    {
+      name: "Date Modified",
+      selector: (row) => getDate(row.updatedAt),
+      sortable: true,
+    },
   ];
 
   return (
