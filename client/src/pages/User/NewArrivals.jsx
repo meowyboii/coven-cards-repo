@@ -1,30 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { LayoutMerch } from "../../components/LayoutMerch";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-export const SingleCategory = () => {
-  const [category, setCategory] = useState([]);
-  const params = useParams();
-
-  const getCategory = async (req, res) => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/category/single-category/${[
-          params.slug,
-        ]}`
-      );
-      if (data.success) {
-        setCategory(data?.category);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong while retrieving the category");
-    }
-  };
-
+export const NewArrivals = () => {
   const [products, setProducts] = useState([]);
+  const currentDate = new Date();
 
   const getAllProducts = async (req, res) => {
     try {
@@ -44,21 +26,25 @@ export const SingleCategory = () => {
     getAllProducts();
   }, []);
 
-  useEffect(() => {
-    if (params?.slug) {
-      getCategory();
-    }
-  }, [params?.slug]);
-
   const filteredProducts = products.filter((product) => {
-    return product.category.name === category.name;
+    // Assuming product.createdAt is the property indicating the creation date
+    const createdAt = new Date(product.createdAt);
+
+    // Calculate the difference in milliseconds
+    const timeDifference = currentDate - createdAt;
+
+    // Calculate the difference in days
+    const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+
+    // Return true if the product was created within the last 7 days
+    return daysDifference < 7;
   });
 
   return (
     <LayoutMerch>
       <div className="min-h-[80vh] pt-20 justify content-center items-center ">
         <h2 className="text-4xl font-bold mb-14 text-[#f1e9f1] text-center uppercase">
-          {category.name}
+          NEW ARRIVALS
         </h2>
         <div className="grid grid-cols-4 gap-8 text-white px-40 ">
           {filteredProducts.map((product) => (

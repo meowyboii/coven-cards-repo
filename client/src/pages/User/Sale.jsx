@@ -1,29 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { LayoutMerch } from "../../components/LayoutMerch";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-export const SingleCategory = () => {
-  const [category, setCategory] = useState([]);
-  const params = useParams();
-
-  const getCategory = async (req, res) => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/category/single-category/${[
-          params.slug,
-        ]}`
-      );
-      if (data.success) {
-        setCategory(data?.category);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong while retrieving the category");
-    }
-  };
-
+export const Sale = () => {
   const [products, setProducts] = useState([]);
 
   const getAllProducts = async (req, res) => {
@@ -44,21 +25,15 @@ export const SingleCategory = () => {
     getAllProducts();
   }, []);
 
-  useEffect(() => {
-    if (params?.slug) {
-      getCategory();
-    }
-  }, [params?.slug]);
-
   const filteredProducts = products.filter((product) => {
-    return product.category.name === category.name;
+    return product.sale === true;
   });
 
   return (
     <LayoutMerch>
       <div className="min-h-[80vh] pt-20 justify content-center items-center ">
         <h2 className="text-4xl font-bold mb-14 text-[#f1e9f1] text-center uppercase">
-          {category.name}
+          SALE PRODUCTS
         </h2>
         <div className="grid grid-cols-4 gap-8 text-white px-40 ">
           {filteredProducts.map((product) => (

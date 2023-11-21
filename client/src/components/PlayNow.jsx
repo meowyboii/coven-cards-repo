@@ -13,7 +13,10 @@ export const PlayNow = () => {
     backgroundPosition: "center",
   };
   return (
-    <section style={container} className="relative h-[100vh] p-10">
+    <section
+      style={container}
+      className="relative h-[100vh] p-10 overflow-hidden"
+    >
       <div className="h-1/3 flex items-center justify-between mt-40 mb-0">
         <ScrollAnimation animateIn="fadeInLeft">
           <div
@@ -24,16 +27,16 @@ export const PlayNow = () => {
           </div>
         </ScrollAnimation>
         <ScrollAnimation animateIn="fadeInUp">
-          <div className="h-[100vh] justify-between place-items-end mt-[27vh]">
+          <div className="h-[100vh] justify-between place-items-end mt-[27vh] ">
             <img src={witch} className=" w-full h-full object-cover" />
           </div>
         </ScrollAnimation>
         <ScrollAnimation animateIn="fadeInRight">
           <div
-            className={`${styles.sectionTitle} m-10 text-right font-bold text-purplerest`}
+            className={`${styles.sectionTitle} m-10 text-right font-bold text-purplerest `}
           >
             Dabble in the
-            <p className="text-purpler">Divisive</p>
+            <p className="text-purpler ">Divisive</p>
           </div>
         </ScrollAnimation>
       </div>

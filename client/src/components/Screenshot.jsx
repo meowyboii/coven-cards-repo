@@ -9,13 +9,13 @@ export const Screenshot = () => {
   return (
     <section className="relative h-screen bg-gradient-to-b from-[#0e0014] to-black">
       <div className="flex justify-items-center align-items-center">
-        <Link to={"/merch"}>
+        <Link to={"/merch/sale"}>
           <img
             src={banner1}
             className="rounded-3xl h-[900px] opacity-60 mt-10 ml-[20px] transition-transform transform scale-90 hover:scale-95 duration-700"
           />
         </Link>
-        <Link to={"/merch"}>
+        <Link to={"/merch/new-arrivals"}>
           <img
             src={banner2}
             className="rounded-3xl h-[900px] opacity-60 mt-10 ml-[20px] transition-transform transform scale-90 hover:scale-95 duration-700"

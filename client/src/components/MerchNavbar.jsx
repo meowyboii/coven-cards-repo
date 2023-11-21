@@ -73,16 +73,20 @@ export const MerchNavbar = () => {
             >
               <NavLink to={"/merch"}>Merch▼</NavLink>
               {isDropdownOpen && (
-                <div className="absolute top-10 left-0 bg-white border border-gray-300 shadow-lg py-2 px-4 rounded-md w-auto font-normal">
+                <div className="absolute top-10 left-0 bg-white border border-gray-300 shadow-lg py-2 px-4 rounded-md w-[25vh] font-normal">
                   <ul>
+                    <li>
+                      <NavLink to={"/merch/sale"}>Sale</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to={"/merch/new-arrivals"}>New Arrivals</NavLink>
+                    </li>
                     {categories.map((c) => (
-                      <>
-                        <li>
-                          <NavLink to={`/merch/category/${c.slug}`}>
-                            {c.name}
-                          </NavLink>
-                        </li>
-                      </>
+                      <li>
+                        <NavLink to={`/merch/category/${c.slug}`}>
+                          {c.name}
+                        </NavLink>
+                      </li>
                     ))}
                   </ul>
                 </div>

@@ -19,6 +19,8 @@ import { Checkout } from "./pages/User/Checkout";
 import { CheckoutSuccess } from "./pages/User/CheckoutSuccess";
 import { ManageProduct } from "./pages/Admin/ManageProduct";
 import { ManageOrder } from "./pages/Admin/ManageOrder";
+import { Sale } from "./pages/User/Sale";
+import { NewArrivals } from "./pages/User/NewArrivals";
 import UploadThing from "./pages/Admin/UploadThing";
 
 function App() {
@@ -39,6 +41,8 @@ function App() {
         </Route>
         <Route path="/download" element={<Download />} />
         <Route path="/merch" element={<Merch />} />
+        <Route path="/merch/sale" element={<Sale />} />
+        <Route path="/merch/new-arrivals" element={<NewArrivals />} />
         <Route path="/merch/product/:slug" element={<SingleProduct />} />
         <Route path="/merch/category/:slug" element={<SingleCategory />} />
         <Route path="/login" element={<Login />} />

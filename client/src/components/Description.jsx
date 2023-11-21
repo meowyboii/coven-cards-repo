@@ -8,7 +8,7 @@ import trailerVideo from "../assets/videos/Trailer.mp4";
 
 export const Description = () => {
   return (
-    <div className="bg-black h-screen px-10">
+    <div className="bg-black h-screen px-10 overflow-hidden">
       <ScrollAnimation animateIn="fadeIn">
         <div className="flex items-center justify-center mt-0 float">
           <img src={titleImg} alt="master the mystery" className="w-1/2" />
