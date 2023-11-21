@@ -13,9 +13,10 @@ import bannerImg from "../../assets/img/login_bg.png";
 export const Dashboard = () => {
   const container = {
     backgroundImage: `url(${bannerImg})`,
-    backgroundSize: "cover",
+    backgroundSize: "100% 100%",
     backgroundPosition: "center",
     filter: "saturate(80%)",
+    marginBottom: "15vh",
   };
 
   const [orders, setOrders] = useState([]);
@@ -168,7 +169,7 @@ export const Dashboard = () => {
   ];
   return (
     <LayoutMerch>
-      <div className="h-screen" style={container}>
+      <div className="h-screen pb-[100px]" style={container}>
         <div className="bg-[#1E0523B3] p-10 text-purple mt-[15vh] shadow-2xl">
           <form onSubmit={handleSubmit}>
           <div className="flex justify-center items-center">
@@ -301,8 +302,8 @@ export const Dashboard = () => {
             </div>
           </form>
         </div>
-        <div className="flex justify-center items-center mt-10">
-          <div className="w-[100vh] mx-10 p-10">
+        <div className="flex justify-center items-center mx-[41vh] p-5 mt-7 mb-20 border-2 border-[#78146235] bg-gradient-to-b from-[#1E0523] to-[#00000050] rounded-lg">
+          <div className="w-[100vh] m-5 p-5">
             <DataTable
               title="Order History"
               columns={columns}

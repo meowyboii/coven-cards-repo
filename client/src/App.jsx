@@ -21,7 +21,6 @@ import { ManageProduct } from "./pages/Admin/ManageProduct";
 import { ManageOrder } from "./pages/Admin/ManageOrder";
 import { Sale } from "./pages/User/Sale";
 import { NewArrivals } from "./pages/User/NewArrivals";
-import UploadThing from "./pages/Admin/UploadThing";
 
 function App() {
   return (
@@ -37,7 +36,6 @@ function App() {
           <Route path="admin/create-product" element={<CreateProduct />} />
           <Route path="admin/manage-product" element={<ManageProduct />} />
           <Route path="admin/manage-order" element={<ManageOrder />} />
-          <Route path="admin/upload-thing" element={<UploadThing />} />
         </Route>
         <Route path="/download" element={<Download />} />
         <Route path="/merch" element={<Merch />} />
