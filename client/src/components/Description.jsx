@@ -27,7 +27,6 @@ export const Description = () => {
                 style: {
                   fontSize: "40",
                   filter: "drop-shadow(0px 0px 2px #580E67)",
-                  filter: "drop-shadow(0px 0px 5px #580E67)",
                 },
               }}
               textPathProps={{ fill: "#A484A9" }}

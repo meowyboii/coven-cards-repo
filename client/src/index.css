@@ -88,7 +88,17 @@ nav ul li > a:hover {
 
 .active, nav ul li a:hover {
   color: #7B0E90;
+}
+
+nav.active, nav ul li a:hover {
+  color: #7B0E90;
   text-shadow: 0px 0px 15px #a90788;
+}
+
+a.leenk:hover {
+  color: #7B0E90;
+  text-shadow: 0px 0px 15px #a90788;
+  transition: color 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
 @keyframes neon {
@@ -108,6 +118,11 @@ nav ul li > a:hover {
       0 0 30px #781462,
       0 0 35px #781462;
   }
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out; /* Adjust the duration and easing as needed */
 }
 
 .text {
@@ -197,6 +212,22 @@ nav ul li > a:hover {
 
   .float{
     animation: floatAnimation 6s ease-in-out infinite;
+  }
+
+  .float2{
+    animation: floatscroll 4s ease-in-out infinite;
+  }
+
+  @keyframes floatscroll {
+    0% {
+      transform: translatey(0px);
+    }
+    50% {
+      transform: translatey(-20px);
+    }
+    100% {
+      transform: translatey(0px);
+    }
   }
 
   .card-one {

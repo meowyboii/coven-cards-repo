@@ -12,12 +12,14 @@ export const Screenshot = () => {
         <Link to={"/merch/sale"}>
           <img
             src={banner1}
+            alt="Merch on sale"
             className="rounded-3xl h-[900px] opacity-60 mt-10 ml-[20px] transition-transform transform scale-90 hover:scale-95 duration-700"
           />
         </Link>
         <Link to={"/merch/new-arrivals"}>
           <img
             src={banner2}
+            alt="New arrival merch"
             className="rounded-3xl h-[900px] opacity-60 mt-10 ml-[20px] transition-transform transform scale-90 hover:scale-95 duration-700"
           />
         </Link>

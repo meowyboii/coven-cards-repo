@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Snowfall from "react-snowfall";
 import { Layout } from "../../components/Layout";
 import buttonImg from "../../assets/img/button clean.png";
 import bannerImg from "../../assets/img/dlpage.jpg";
-import cardImg from "../../assets/img/bg_game.png";
 import ScrollAnimation from "react-animate-on-scroll";
 
 export const Download = () => {
@@ -13,6 +12,11 @@ export const Download = () => {
     backgroundPosition: "center",
     filter: "saturate(60%)",
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Layout>
       <section

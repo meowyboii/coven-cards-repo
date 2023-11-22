@@ -28,7 +28,7 @@ export const PlayNow = () => {
         </ScrollAnimation>
         <ScrollAnimation animateIn="fadeInUp">
           <div className="h-[100vh] justify-between place-items-end mt-[27vh] ">
-            <img src={witch} className=" w-full h-full object-cover" />
+            <img src={witch} alt="Dorothea the Great" className=" w-full h-full object-cover" />
           </div>
         </ScrollAnimation>
         <ScrollAnimation animateIn="fadeInRight">

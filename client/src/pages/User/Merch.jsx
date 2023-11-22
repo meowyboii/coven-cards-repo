@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Products } from "./Products";
 import { LayoutMerch } from "../../components/LayoutMerch";
 import banner from "../../assets/img/merch_banner.png";
 import { Link } from "react-router-dom";
+import ScrollButton from "../../components/ScrollButton"; 
 
 export const Merch = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <LayoutMerch>
       <div>
         <Link to={"/merch/product/Coven-Cards-Collection-2"}>
-          <img src={banner}></img>
+          <img src={banner} alt="Coven Cards Deck is here"></img>
         </Link>
       </div>
       {/*<div className="flex justify-items-center align-items-center">
@@ -18,6 +24,7 @@ export const Merch = () => {
       <div className="px-5 w-full h-full h-auto bg-gradient-to-b from-black to-[#0e0014]">
         <Products />
       </div>
+      <ScrollButton /> 
     </LayoutMerch>
   );
 };

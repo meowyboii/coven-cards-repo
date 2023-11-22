@@ -28,6 +28,7 @@ export const Cart = () => {
       toast.error("Error in removing product");
     }
   };
+
   return (
     <div>
       <div
@@ -54,7 +55,7 @@ export const Cart = () => {
           <div className="flex justify-end mr-4 cursor-pointer  ">
             <AiFillCloseCircle
               onClick={togglePanel}
-              className="text-3xl hover:text-purpler"
+              className="text-3xl transition ease-in-out delay-100 text-purple hover:text-purpler"
             >
               X
             </AiFillCloseCircle>
@@ -62,12 +63,12 @@ export const Cart = () => {
 
           {cart?.length > 0 ? (
             <>
-              <table className="table-auto border-collapse text-lg">
+              <table className="table-auto border-collapse text-lg font-main">
                 <div>Added Products:</div>
-                <tbody>
+                <tbody className="text-purplerest">
                   {cart?.map((product, index) => (
                     <>
-                      <tr key={product.id}>
+                      <tr key={product.id} className="transition ease-in-out delay-100 hover:bg-[#ebdfeb]">
                         <td className="flex justify-left items-center py-2">
                           <div className="flex justify-center items-center shadow-md h-[8vh] w-[8vh] mr-6">
                             <img
@@ -83,7 +84,7 @@ export const Cart = () => {
 
                         <td className="px-4 py-2">
                           <button
-                            className="px-4 py-2 bg-purple text-white rounded hover:bg-purpler my-2 mx-2 text-sm"
+                            className="px-4 py-2 text-white rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler my-2 mx-2 text-sm"
                             onClick={() => removeFromCart(product._id)}
                           >
                             Remove
@@ -94,7 +95,7 @@ export const Cart = () => {
                   ))}
                 </tbody>
               </table>
-              <button className="px-4 py-2 bg-purple text-white text-lg rounded hover:bg-purpler mt-6 place-self-end">
+              <button className="px-4 py-2 text-white font-main text-lg rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler mt-6 place-self-end">
                 <Link to="/merch/checkout" className="place-self-end">
                   View Cart
                 </Link>
@@ -102,8 +103,8 @@ export const Cart = () => {
             </>
           ) : (
             <div className="flex flex-col justify-center items-center">
-              <h2 className="text-center mb-6">Your cart is empty!</h2>
-              <img src={emptycart} className="h-[10vh] w-auto" />
+              <h2 className="text-center font-main font bold mb-6 mt-4">Your cart is empty!</h2>
+              <img src={emptycart} className="h-[10vh] w-auto saturate-50" />
             </div>
           )}
         </div>

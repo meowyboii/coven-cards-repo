@@ -4,7 +4,6 @@ import { useAuth } from "../../context/auth";
 import { BiLogOut } from 'react-icons/bi';
 import { BiStoreAlt } from 'react-icons/bi';
 import { BiLayer } from "react-icons/bi";
-import { BsArrowRightShort } from "react-icons/bs";
 import { MdFavoriteBorder } from 'react-icons/md';
 import { MdOutlineProductionQuantityLimits } from 'react-icons/md';
 import { AiOutlineAppstore } from 'react-icons/ai';
