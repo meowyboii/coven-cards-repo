@@ -49,7 +49,7 @@ export const PayButton = () => {
     <div>
       <h2 className="text-2xl">Total: ${total}</h2>
       <button
-        className="px-4 py-2 bg-purple text-white text-2xl rounded hover:bg-purpler mt-6 place-self-end"
+        className="px-4 py-2 text-white text-2xl rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler mt-6 place-self-end"
         onClick={() => handleCheckout()}
       >
         Checkout

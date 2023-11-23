@@ -169,8 +169,8 @@ export const Dashboard = () => {
   ];
   return (
     <LayoutMerch>
-      <div className="h-screen pb-[100px]" style={container}>
-        <div className="bg-[#1E0523B3] p-10 text-purple mt-[15vh] shadow-2xl">
+      <div className="min-h-screen pb-[100px]" style={container}>
+        <div className="bg-[#360640cd] p-10 text-purple mt-[15vh] shadow-2xl">
           <form onSubmit={handleSubmit}>
           <div className="flex justify-center items-center">
             <div className="p-10 text-center">
@@ -297,12 +297,11 @@ export const Dashboard = () => {
                   Save
                 </button>
               </div>
-          
             </div>
             </div>
           </form>
         </div>
-        <div className="flex justify-center items-center mx-[41vh] p-5 mt-7 mb-20 border-2 border-[#78146235] bg-gradient-to-b from-[#1E0523] to-[#00000050] rounded-lg">
+        <div className="flex justify-center items-center min-w-[50vh] p-2 mb-15 border-2 border-[#78146235] bg-gradient-to-b from-[#1E0523cd] to-[#00000050]">
           <div className="w-[100vh] m-5 p-5">
             <DataTable
               title="Order History"
