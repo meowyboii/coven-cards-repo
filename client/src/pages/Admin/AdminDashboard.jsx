@@ -129,72 +129,6 @@ export const AdminDashboard = () => {
     SalesTotal();
   }, [orders]);
 
-  const chartdata = [
-    //for overall, needs data
-    {
-      month: "Jan 21",
-      Performance: 4000,
-      Benchmark: 3000,
-    },
-    {
-      month: "Feb 21",
-      Performance: 3000,
-      Benchmark: 2000,
-    },
-    {
-      month: "Mar 21",
-      Performance: 2000,
-      Benchmark: 1700,
-    },
-    {
-      month: "Apr 21",
-      Performance: 2780,
-      Benchmark: 2500,
-    },
-    {
-      month: "May 21",
-      Performance: 1890,
-      Benchmark: 1890,
-    },
-    {
-      month: "Jun 21",
-      Performance: 2390,
-      Benchmark: 2000,
-    },
-    {
-      month: "Jul 21",
-      Performance: 3490,
-      Benchmark: 3000,
-    },
-  ];
-
-  const cities = [
-    {
-      name: "New York",
-      sales: 9800,
-    },
-    {
-      name: "London",
-      sales: 4567,
-    },
-    {
-      name: "Hong Kong",
-      sales: 3908,
-    },
-    {
-      name: "San Francisco",
-      sales: 2400,
-    },
-    {
-      name: "Singapore",
-      sales: 1908,
-    },
-    {
-      name: "Zurich",
-      sales: 1398,
-    },
-  ];
-
   const getAllUsers = async (req, res) => {
     try {
       const { data } = await axios.get(
@@ -253,7 +187,7 @@ export const AdminDashboard = () => {
         const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
 
         // Return true if the product was created within the last 7 days
-        return daysDifference < 7;
+        return daysDifference < 14;
       })
     );
   }, [products]);
@@ -429,8 +363,7 @@ export const AdminDashboard = () => {
                 </Card>
               </div>
               <div className="flex justify-center mt-4">
-                {/* 53vh */}
-                <div className="ml-[86.5vh]">
+                <div className="ml-[86.5vh] w-[57.5vh]">
                   <DataTable
                     title="New Arrivals"
                     columns={columns}
@@ -444,7 +377,7 @@ export const AdminDashboard = () => {
                   />
                 </div>
 
-                <div className="ml-10">
+                <div className="ml-10 w-[57.5vh]">
                   <DataTable
                     title="Products on Sale"
                     columns={columns}
