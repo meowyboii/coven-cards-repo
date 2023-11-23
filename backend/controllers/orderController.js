@@ -7,7 +7,7 @@ const getAllOrderController = async (req, res) => {
       .find({})
       .sort({ createdAt: -1 })
       .populate("buyer")
-      .populate("products.product");
+      .populate("products");
     res.status(200).send({ success: true, message: "All Orders List", orders });
   } catch (error) {
     console.log(error);

@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { AdminMenu } from "./AdminMenu";
-import { Card, Text, Metric, Flex, ProgressBar, SparkAreaChart, Icon, DonutChart, Legend } from "@tremor/react";
+import {
+  Card,
+  Text,
+  Metric,
+  Flex,
+  ProgressBar,
+  SparkAreaChart,
+  Icon,
+  DonutChart,
+  Legend,
+} from "@tremor/react";
 import { IoCashOutline } from "react-icons/io5";
 import { FiStar } from "react-icons/fi";
 import { Layout } from "../../components/LayoutAdmin";
@@ -34,7 +44,7 @@ export const AdminDashboard = () => {
       name: "Product",
       selector: (row) => row.name,
     },
-  ]
+  ];
 
   const getAllOrder = async (req, res) => {
     try {
@@ -56,7 +66,7 @@ export const AdminDashboard = () => {
 
   // const DailyTotal = () => {
   //   let dailyAmount = 0;
-    
+
   //   for(let i = 0; i < orders.length; i++){
   //     if(new Date(orders[i].createdAt)===currentDate.getTime()){
   //       dailyAmount += orders[i].total;
@@ -67,7 +77,6 @@ export const AdminDashboard = () => {
   //   }
   //   setDailySale(dailyAmount);
   // };
-
 
   const getDailySaleTotal = () => {
     let totalAmount = 0;
@@ -97,8 +106,8 @@ export const AdminDashboard = () => {
 
   const YearlyTotal = () => {
     let yearlyAmount = 0;
-    for(let i = 0; i < orders.length; i++){
-      if (!(order => order.createdAt.getFullYear() === currentYear)){
+    for (let i = 0; i < orders.length; i++) {
+      if (!((order) => order.createdAt.getFullYear() === currentYear)) {
         break;
       }
       yearlyAmount += orders[i].total;
@@ -108,7 +117,7 @@ export const AdminDashboard = () => {
 
   const SalesTotal = () => {
     let totalAmount = 0;
-    for(let i = 0; i < orders.length; i++){
+    for (let i = 0; i < orders.length; i++) {
       totalAmount += orders[i].total;
     }
     setTotalSale(totalAmount);
@@ -120,41 +129,42 @@ export const AdminDashboard = () => {
     SalesTotal();
   }, [orders]);
 
-  const chartdata = [ //for overall, needs data
+  const chartdata = [
+    //for overall, needs data
     {
       month: "Jan 21",
       Performance: 4000,
-      "Benchmark": 3000,
+      Benchmark: 3000,
     },
     {
       month: "Feb 21",
       Performance: 3000,
-      "Benchmark": 2000,
+      Benchmark: 2000,
     },
     {
       month: "Mar 21",
       Performance: 2000,
-      "Benchmark": 1700,
+      Benchmark: 1700,
     },
     {
       month: "Apr 21",
       Performance: 2780,
-      "Benchmark": 2500,
+      Benchmark: 2500,
     },
     {
       month: "May 21",
       Performance: 1890,
-      "Benchmark": 1890,
+      Benchmark: 1890,
     },
     {
       month: "Jun 21",
       Performance: 2390,
-      "Benchmark": 2000,
+      Benchmark: 2000,
     },
     {
       month: "Jul 21",
       Performance: 3490,
-      "Benchmark": 3000,
+      Benchmark: 3000,
     },
   ];
 
@@ -210,7 +220,7 @@ export const AdminDashboard = () => {
   useEffect(() => {
     UsersTotal();
   }, [users]);
-  
+
   const getAllProducts = async (req, res) => {
     try {
       const { data } = await axios.get(
@@ -272,14 +282,14 @@ export const AdminDashboard = () => {
     }
 
     let cats = [];
-    for(let i = 0; i < categories.length; i++){
-      cats = [...cats, {name: categories[i].name, ctr: 0}];
+    for (let i = 0; i < categories.length; i++) {
+      cats = [...cats, { name: categories[i].name, ctr: 0 }];
     }
-    for(let i = 0; i < products.length; i++){
+    for (let i = 0; i < products.length; i++) {
       const index = cats.findIndex(
-        (item) => item['name'] === products[i].category.name
+        (item) => item["name"] === products[i].category.name
       );
-      cats[index]['ctr'] = cats[index].ctr+1;
+      cats[index]["ctr"] = cats[index].ctr + 1;
     }
     setProdCount(cats);
   };
@@ -294,28 +304,27 @@ export const AdminDashboard = () => {
     }
 
     let best = [];
-    for(let i = 0; i < products.length; i++){
-      best = [...best, {name: products[i].name, ctr: 0}];
+    for (let i = 0; i < products.length; i++) {
+      best = [...best, { id: products[i]._id, name: products[i].name, ctr: 0 }];
     }
 
-    for(let i = 0; i < orders.length; i++){
-      const orderProducts = orders[i].products;
+    for (let i = 0; i < orders.length; i++) {
+      let orderProducts = [];
+      orderProducts = orders[i].products;
       for (let j = 0; j < orderProducts.length; j++) {
-        const productName = orderProducts[j].name;
+        const productId = orderProducts[j].product;
         const quantity = orderProducts[j].quantity;
-  
-        const index = best.findIndex((item) => item['name'] === productName);
-  
+
+        const index = best.findIndex((item) => item["id"] === productId);
+
         if (index !== -1) {
           best[index].ctr = best[index].ctr + quantity; // Increment by the quantity
         } else {
-          console.log(`Product with productName ${productName} not found in best array.`);
-          console.log('Best array:', best);
+          console.log(`Product with id ${productId} not found in best array.`);
         }
       }
+      // console.log("ORDER PRODUCTS ", i + 1, ": ", orderProducts);
     }
-    console.log(orders);
-    console.log(products);
     console.log(best);
     setBestCount(best);
   };
@@ -324,18 +333,24 @@ export const AdminDashboard = () => {
     BestSellCount();
   }, [orders, products]);
 
-  const colors = ["slate", "violet", "indigo", "rose", "cyan", "amber"].slice(0, categories.length);
+  const colors = ["slate", "violet", "indigo", "rose", "cyan", "amber"].slice(
+    0,
+    categories.length
+  );
 
   const textFormatter = (number) => {
-    const formattedNumber = new Intl.NumberFormat("us").format(number).toString();
-  
+    const formattedNumber = new Intl.NumberFormat("us")
+      .format(number)
+      .toString();
+
     if (number === 1) {
       return `${formattedNumber} product`;
     } else {
       return `${formattedNumber} products`;
     }
   };
-  const buyFormatter = (number) => `${new Intl.NumberFormat("us").format(number).toString()} bought`
+  const buyFormatter = (number) =>
+    `${new Intl.NumberFormat("us").format(number).toString()} bought`;
 
   const tableCustomStyles = {
     headRow: {
@@ -360,118 +375,150 @@ export const AdminDashboard = () => {
 
   return (
     <Layout>
-    <div className="flex justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB] min-h-screen">
+      <div className="flex justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB] min-h-screen">
         <AdminMenu />
         <div className="container mt-2 ml-20 py-[5vh]">
           <div>
             <h2 className="text-3xl mb-4 ">Dashboard</h2>
-        <div className="grid grid-cols-3 gap-2 mr-[19vh]">
-        <div className="col-span-3 p-2 grid grid-cols-1 md:grid-cols-3 gap-32 ml-5">
-          
-          <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
-          <Flex justifyContent="between" alignItems="center">
-            <Icon icon={IoCashOutline} color="violet" variant="solid" tooltip="Sum of Daily Sales" size="xl" />
-            <div className="mt-[1vh]">
-            <Text className="text-lg">Daily Sales</Text>
-            <Metric className="bounce text-5xl">$  {dailySaleTotal}</Metric></div>
-          </Flex>
-          </Card>
+            <div className="grid grid-cols-3 gap-2 mr-[19vh]">
+              <div className="col-span-3 p-2 grid grid-cols-1 md:grid-cols-3 gap-32 ml-5">
+                <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
+                  <Flex justifyContent="between" alignItems="center">
+                    <Icon
+                      icon={IoCashOutline}
+                      color="violet"
+                      variant="solid"
+                      tooltip="Sum of Daily Sales"
+                      size="xl"
+                    />
+                    <div className="mt-[1vh]">
+                      <Text className="text-lg">Daily Sales</Text>
+                      <Metric className="bounce text-5xl">
+                        $ {dailySaleTotal}
+                      </Metric>
+                    </div>
+                  </Flex>
+                </Card>
 
-          <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
-            <Text className="text-lg">Yearly Sales</Text>
-            <Metric className="text-xl">$  {yearlyAmount}</Metric>
-            <Flex>
-            <Text>{(yearlyAmount * 100)/100000}% of annual target</Text>
-            <Text>₱ 100,000</Text>
-            </Flex>
-            <ProgressBar value={(yearlyAmount * 100)/100000} />
-          </Card>
+                <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
+                  <Text className="text-lg">Yearly Sales</Text>
+                  <Metric className="text-xl">$ {yearlyAmount}</Metric>
+                  <Flex>
+                    <Text>
+                      {(yearlyAmount * 100) / 100000}% of annual target
+                    </Text>
+                    <Text>₱ 100,000</Text>
+                  </Flex>
+                  <ProgressBar value={(yearlyAmount * 100) / 100000} />
+                </Card>
 
-          <Card className="max-w-sm flex-col items-center h-[20vh] w-[35vh] bg-white p-10 rounded">
-            
-            <Flex justifyContent="between" alignItems="center">
-              <Icon icon={ FiStar } color="violet" variant="solid" tooltip="Sum of Overall Sales" size="xl" />
-              <div className="mt-[1vh]">
-              <Text className="text-lg">Overall Sales</Text>
-              <Metric className="bounce text-5xl">$  {totalSale}</Metric>
+                <Card className="max-w-sm flex-col items-center h-[20vh] w-[35vh] bg-white p-10 rounded">
+                  <Flex justifyContent="between" alignItems="center">
+                    <Icon
+                      icon={FiStar}
+                      color="violet"
+                      variant="solid"
+                      tooltip="Sum of Overall Sales"
+                      size="xl"
+                    />
+                    <div className="mt-[1vh]">
+                      <Text className="text-lg">Overall Sales</Text>
+                      <Metric className="bounce text-5xl">$ {totalSale}</Metric>
+                    </div>
+                  </Flex>
+                </Card>
               </div>
-            </Flex>
-          </Card>
-        </div>
-        <div className="flex justify-center mt-4"> 
-        {/* 53vh */}
-        <div className="ml-[86.5vh]">
-        <DataTable
-            title="New Arrivals"
-            columns={columns}
-            data={newArrivals}
-            scrollable scrollHeight="20vh"
-            pagination
-            highlightOnHover
-            striped
-            customStyles={tableCustomStyles}
-        />
-        </div>
+              <div className="flex justify-center mt-4">
+                {/* 53vh */}
+                <div className="ml-[86.5vh]">
+                  <DataTable
+                    title="New Arrivals"
+                    columns={columns}
+                    data={newArrivals}
+                    scrollable
+                    scrollHeight="20vh"
+                    pagination
+                    highlightOnHover
+                    striped
+                    customStyles={tableCustomStyles}
+                  />
+                </div>
 
-        <div className="ml-10">
-        <DataTable
-            title="Products on Sale"
-            columns={columns}
-            data={saleProducts}
-            scrollable scrollHeight="20vh"
-            pagination
-            highlightOnHover
-            striped
-            customStyles={tableCustomStyles}
-        />
-        </div>
-        </div>
-        <div className="col-span-3 p-2 grid grid-cols-1 md:grid-cols-3 gap-32 ml-5 mt-4">
-          <Card className="card-one max-w-sm h-[20vh] w-[35vh] bg-white rounded p-5">
-          <Flex justifyContent="between" alignItems="center">
-            <div className="mt-5">
-            <Text className="text-lg">Products per Category</Text>
+                <div className="ml-10">
+                  <DataTable
+                    title="Products on Sale"
+                    columns={columns}
+                    data={saleProducts}
+                    scrollable
+                    scrollHeight="20vh"
+                    pagination
+                    highlightOnHover
+                    striped
+                    customStyles={tableCustomStyles}
+                  />
+                </div>
+              </div>
+              <div className="col-span-3 p-2 grid grid-cols-1 md:grid-cols-3 gap-32 ml-5 mt-4">
+                <Card className="card-one max-w-sm h-[20vh] w-[35vh] bg-white rounded p-5">
+                  <Flex justifyContent="between" alignItems="center">
+                    <div className="mt-5">
+                      <Text className="text-lg">Products per Category</Text>
+                    </div>
+                    <DonutChart
+                      className="w-[15vh]"
+                      data={cats}
+                      category="ctr"
+                      index="name"
+                      valueFormatter={textFormatter}
+                      colors={[
+                        "slate",
+                        "violet",
+                        "indigo",
+                        "rose",
+                        "cyan",
+                        "amber",
+                      ]}
+                    />
+                  </Flex>
+                </Card>
+
+                <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
+                  <Text className="text-lg">User Count</Text>
+                  <Flex justifyContent="center" alignItems="center">
+                    <Metric className="bounce text-6xl">
+                      {userCount} users
+                    </Metric>
+                  </Flex>
+                </Card>
+
+                <Card className="card-two max-w-sm h-[20vh] w-[35vh] bg-white rounded p-5">
+                  <Flex justifyContent="between" alignItems="center">
+                    <div className="mt-5">
+                      <Text className="text-lg">Orders per Product</Text>
+                    </div>
+                    <DonutChart
+                      className="w-[20vh]"
+                      data={best}
+                      category="ctr"
+                      index="name"
+                      variant="pie"
+                      valueFormatter={buyFormatter}
+                      colors={[
+                        "slate",
+                        "violet",
+                        "indigo",
+                        "rose",
+                        "cyan",
+                        "amber",
+                      ]}
+                    />
+                  </Flex>
+                </Card>
+              </div>
             </div>
-            <DonutChart
-            className="w-[15vh]"
-            data={cats}
-            category="ctr"
-            index="name"
-            valueFormatter={textFormatter}
-            colors={["slate", "violet", "indigo", "rose", "cyan", "amber"]}
-            />
-            </Flex>
-          </Card>
-
-          <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
-          <Text className="text-lg">User Count</Text>
-          <Flex justifyContent="center" alignItems="center">
-          <Metric className = "bounce text-6xl">{userCount} users</Metric>
-          </Flex>
-          </Card>
-
-          <Card className="card-two max-w-sm h-[20vh] w-[35vh] bg-white rounded p-5">
-          <Flex justifyContent="between" alignItems="center">
-            <div className="mt-5">
-            <Text className="text-lg">Orders per Product</Text>
-            </div>
-            <DonutChart
-            className="w-[20vh]"
-            data={best}
-            category="ctr"
-            index="name"
-            variant="pie"
-            valueFormatter={buyFormatter}
-            colors={["slate", "violet", "indigo", "rose", "cyan", "amber"]}
-            />
-            </Flex>
-          </Card>
-
+          </div>
         </div>
-        </div>
-        </div>
-        </div>
-    </div>
+      </div>
     </Layout>
   );
-}
+};

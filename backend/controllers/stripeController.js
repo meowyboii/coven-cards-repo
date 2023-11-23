@@ -28,7 +28,7 @@ const stripeController = async (req, res) => {
             name: product.name,
             description: product.description,
             metadata: {
-              id: product.id,
+              id: product._id,
             },
           },
           unit_amount: product.amountSale * 100,
