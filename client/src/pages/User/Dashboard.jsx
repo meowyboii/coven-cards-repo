@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Snowfall from 'react-snowfall'
+import Snowfall from "react-snowfall";
 import DataTable from "react-data-table-component";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -172,12 +172,12 @@ export const Dashboard = () => {
       <div className="min-h-screen pb-[100px]" style={container}>
         <div className="bg-[#360640cd] p-10 text-purple mt-[15vh] shadow-2xl">
           <form onSubmit={handleSubmit}>
-          <div className="flex justify-center items-center">
-            <div className="p-10 text-center">
-            <h1 className="text-3xl text3">
-              {auth.user.firstName}'s Profile
-            </h1>
-                <div className="bg-white rounded-full h-40 w-40 ml-[12vh]">
+            <div className="flex justify-center items-center">
+              <div className="p-10 text-center flex flex-col justify-center items-center">
+                <h1 className="text-3xl text3">
+                  {auth.user.firstName}'s Profile
+                </h1>
+                <div className="bg-white rounded-full h-40 w-40">
                   {photo ? (
                     <img
                       src={URL.createObjectURL(photo)}
@@ -200,7 +200,7 @@ export const Dashboard = () => {
                 </div>
                 <div className="my-10 mt-10">
                   <label className="px-4 py-2 text-white rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler my-2 cursor-pointer ">
-                    {photo ? photo.name : "Upload Photo"}
+                    Upload Photo
                     <input
                       type="file"
                       name="photo"
@@ -216,88 +216,87 @@ export const Dashboard = () => {
                 </div>
               </div>
 
+              <div className="flex ml-[10vh] mt-10 mb-10">
+                <div className="w-[40vh] ml-[10vh]">
+                  <div className="mb-4">
+                    <label
+                      htmlFor="firstName"
+                      className="block font-medium font-main mb-2"
+                    >
+                      First Name
+                    </label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                      required
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label
+                      htmlFor="lastName"
+                      className="block font-medium font-main mb-2"
+                    >
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                      required
+                    />
+                  </div>
 
-            <div className="flex ml-[10vh] mt-10 mb-10">
-              <div className="w-[40vh] ml-[10vh]">
-                <div className="mb-4">
-                  <label
-                    htmlFor="firstName"
-                    className="block font-medium font-main mb-2"
-                  >
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="lastName"
-                    className="block font-medium font-main mb-2"
-                  >
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
-                    required
-                  />
-                </div>
+                  <div className="mb-4">
+                    <label
+                      htmlFor="address"
+                      className="block font-medium font-main mb-2"
+                    >
+                      Address
+                    </label>
+                    <input
+                      type="text"
+                      id="address"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                      required
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label
+                      htmlFor="dateOfBirth"
+                      className="block font-medium font-main mb-2"
+                    >
+                      Date of Birth
+                    </label>
+                    <input
+                      type="date"
+                      id="dateOfBirth"
+                      name="dateOfBirth"
+                      // max={current}
+                      value={formData.dateOfBirth}
+                      onChange={handleChange}
+                      className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
+                      required
+                    />
+                  </div>
 
-                <div className="mb-4">
-                  <label
-                    htmlFor="address"
-                    className="block font-medium font-main mb-2"
+                  <button
+                    type="submit"
+                    className="px-4 py-2 text-white text-lg rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler mt-6 place-self-end"
                   >
-                    Address
-                  </label>
-                  <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleChange}
-                    className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
-                    required
-                  />
+                    Save
+                  </button>
                 </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="dateOfBirth"
-                    className="block font-medium font-main mb-2"
-                  >
-                    Date of Birth
-                  </label>
-                  <input
-                    type="date"
-                    id="dateOfBirth"
-                    name="dateOfBirth"
-                    // max={current}
-                    value={formData.dateOfBirth}
-                    onChange={handleChange}
-                    className="font-main w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black"
-                    required
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="px-4 py-2 text-white text-lg rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler mt-6 place-self-end"
-                >
-                  Save
-                </button>
               </div>
-            </div>
             </div>
           </form>
         </div>
@@ -315,10 +314,7 @@ export const Dashboard = () => {
           </div>
         </div>
       </div>
-      <Snowfall
-            color="#e977d3c2"
-            snowflakeCount={20}
-          />
+      <Snowfall color="#e977d3c2" snowflakeCount={20} />
     </LayoutMerch>
   );
 };

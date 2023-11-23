@@ -1,6 +1,6 @@
 // import React, { useEffect, useState } from "react";
 import { LayoutMerch } from "../../components/LayoutMerch";
-import Snowfall from 'react-snowfall'
+import Snowfall from "react-snowfall";
 import { useCart } from "../../context/cart";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
@@ -61,10 +61,18 @@ export const Checkout = () => {
             <table className="table-auto font-main text-purple bg-gradient-to-b from-[#0E0014cd] to-[#340449cd] rounded-lg w-3/4">
               <thead>
                 <tr className="bg-[#340449cd]">
-                  <th className="border-r border-[#000000] rounded-tl-md px-4 py-2 ">Product</th>
-                  <th className="border-r border-[#000000] px-4 py-2 ">Unit Price</th>
-                  <th className="border-r border-[#000000] px-4 py-2 min-w-[18vh]">Quantity</th>
-                  <th className="border-r border-[#000000] px-4 py-2 ">Total Price</th>
+                  <th className="border-r border-[#000000] rounded-tl-md px-4 py-2 ">
+                    Product
+                  </th>
+                  <th className="border-r border-[#000000] px-4 py-2 ">
+                    Unit Price
+                  </th>
+                  <th className="border-r border-[#000000] px-4 py-2 min-w-[18vh]">
+                    Quantity
+                  </th>
+                  <th className="border-r border-[#000000] px-4 py-2 ">
+                    Total Price
+                  </th>
                   <th className="rounded-tr-md px-4 py-2 ">Actions</th>
                 </tr>
               </thead>
@@ -80,16 +88,15 @@ export const Checkout = () => {
                             className="max-h-full object-cover"
                           />
                         </div>
-
-                        {product.name}
+                        <div>{product.name}</div>
                       </td>
                       <td className="border-b border-[#000000] px-4 py-2">
-                        ${product.amountSale}
+                        ${product.amountSale.toFixed(2)}
                       </td>
                       <td className="border-b border-[#000000] px-4 py-2">
-                        <div className="flex justify-center items-center p-4 mb-4 ">
+                        <div className="flex justify-center items-center p-4 mb-4">
                           <button
-                            className="border p-1"
+                            className="border px-1 border-purple scale-90 hover:scale-100"
                             onClick={() => {
                               const updatedCart = [...cart];
                               updatedCart[index].quantity--;
@@ -99,11 +106,9 @@ export const Checkout = () => {
                           >
                             -
                           </button>
-                          <span className="px-4 border py-1">
-                            {product.quantity}
-                          </span>
+                          <span className="px-2 py-1">{product.quantity}</span>
                           <button
-                            className="border  p-1"
+                            className="border px-1 border-purple scale-90 hover:scale-100"
                             onClick={() => {
                               const updatedCart = [...cart];
                               updatedCart[index].quantity++;
@@ -149,11 +154,7 @@ export const Checkout = () => {
         )}
       </div>
 
-      <Snowfall
-            color="#e977d3c2"
-            snowflakeCount={30}
-      />
-
+      <Snowfall color="#e977d3c2" snowflakeCount={30} />
     </LayoutMerch>
   );
 };

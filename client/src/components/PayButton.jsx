@@ -47,7 +47,7 @@ export const PayButton = () => {
   }, [cart]);
   return (
     <div>
-      <h2 className="text-2xl">Total: ${total}</h2>
+      <h2 className="text-2xl">Total: ${total.toFixed(2)}</h2>
       <button
         className="px-4 py-2 text-white text-2xl rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler mt-6 place-self-end"
         onClick={() => handleCheckout()}

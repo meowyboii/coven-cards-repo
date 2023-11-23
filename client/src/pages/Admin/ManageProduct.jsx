@@ -3,12 +3,11 @@ import { AdminMenu } from "./AdminMenu";
 import DataTable from "react-data-table-component";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Select } from "antd";
+import { Select, Modal } from "antd";
 import { Layout } from "../../components/LayoutAdmin";
 import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
 
 const { Option } = Select;
-
 let modifiedProducts = new Set();
 
 const CategorySelect = ({ product, categories, handleCategoryChange }) => {
@@ -129,6 +128,8 @@ const SaleRateCell = ({ product, handleSaleRateChange }) => {
 export const ManageProduct = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(0);
 
   const columns = [
     {
@@ -175,14 +176,40 @@ export const ManageProduct = () => {
     {
       name: "Remove",
       selector: (row) => (
-        <button
-          onClick={() => {
-            handleDeleteProduct(row._id);
-            console.log(row._id);
-          }}
-        >
-          <AiFillDelete className="text-2xl ml-2 text-[#bd2b2b] " />
-        </button>
+        <>
+          <button
+            onClick={() => {
+              setDeleteId(row._id);
+              setIsModalOpen(true);
+            }}
+          >
+            <AiFillDelete className="text-2xl ml-2 text-[#bd2b2b] " />
+          </button>
+          <>
+            <Modal
+              title="Confirm Deletion"
+              open={isModalOpen}
+              footer={null}
+              onCancel={() => setIsModalOpen(false)}
+            >
+              <p>Are you sure you want to delete the product?</p>
+              <div>
+                <button
+                  className="px-4 py-2 text-white rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler my-2 mx-2 text-sm"
+                  onClick={() => handleDeleteProduct(deleteId)}
+                >
+                  Confirm
+                </button>
+                <button
+                  className="px-4 py-2 text-white rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler my-2 mx-2 text-sm"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </Modal>
+          </>
+        </>
       ),
     },
   ];
@@ -278,6 +305,7 @@ export const ManageProduct = () => {
   };
 
   const handleDeleteProduct = async (productId) => {
+    console.log(productId);
     try {
       const response = await axios.delete(
         `${process.env.REACT_APP_API}/api/v1/product/delete-product/${productId}`
