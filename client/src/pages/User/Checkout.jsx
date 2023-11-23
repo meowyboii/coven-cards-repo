@@ -1,5 +1,6 @@
 // import React, { useEffect, useState } from "react";
 import { LayoutMerch } from "../../components/LayoutMerch";
+import Snowfall from 'react-snowfall'
 import { useCart } from "../../context/cart";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
@@ -45,10 +46,10 @@ export const Checkout = () => {
   return (
     <LayoutMerch>
       <div className="py-20 items-center flex-col flex justify-center text-white text-center bg-gradient-to-b from-black to-[#0e0014]">
-        <h2 className="text-2xl font-semibold text-white mb-4">{`Hello ${
+        <h2 className="text-3xl font-semibold text3 mb-4">{`Hello ${
           auth?.token && auth?.user?.firstName
         }!`}</h2>
-        <h3 className="text-2xl font-base text-white mb-4">
+        <h3 className="text-2xl text-purple font-base font-main mb-10">
           {cart?.length
             ? `You have ${cart.length} item(s) in your cart ${
                 auth?.token ? "" : "please login to checkout"
@@ -57,21 +58,21 @@ export const Checkout = () => {
         </h3>
         {cart?.length > 0 && (
           <>
-            <table className="table-auto border-collapse w-3/4">
+            <table className="table-auto font-main text-purple bg-gradient-to-b from-[#0E0014cd] to-[#340449cd] rounded-lg w-3/4">
               <thead>
-                <tr>
-                  <th className="border px-4 py-2 ">Product</th>
-                  <th className="border px-4 py-2 ">Unit Price</th>
-                  <th className="border px-4 py-2 min-w-[18vh]">Quantity</th>
-                  <th className="border px-4 py-2 ">Total Price</th>
-                  <th className="border px-4 py-2 ">Actions</th>
+                <tr className="bg-[#340449cd]">
+                  <th className="border-r border-[#000000] rounded-tl-md px-4 py-2 ">Product</th>
+                  <th className="border-r border-[#000000] px-4 py-2 ">Unit Price</th>
+                  <th className="border-r border-[#000000] px-4 py-2 min-w-[18vh]">Quantity</th>
+                  <th className="border-r border-[#000000] px-4 py-2 ">Total Price</th>
+                  <th className="rounded-tr-md px-4 py-2 ">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {cart?.map((product, index) => (
                   <>
                     <tr key={product.id}>
-                      <td className="flex justify-center items-center border-b border-gray-400 py-2">
+                      <td className="flex justify-center items-center border-b border-[#000000] py-2">
                         <div className="shadow-md h-[20vh] mr-6">
                           <img
                             src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
@@ -82,10 +83,10 @@ export const Checkout = () => {
 
                         {product.name}
                       </td>
-                      <td className="border-b border-gray-400 px-4 py-2">
+                      <td className="border-b border-[#000000] px-4 py-2">
                         ${product.amountSale}
                       </td>
-                      <td className="border-b border-gray-400 px-4 py-2">
+                      <td className="border-b border-[#000000] px-4 py-2">
                         <div className="flex justify-center items-center p-4 mb-4 ">
                           <button
                             className="border p-1"
@@ -114,12 +115,12 @@ export const Checkout = () => {
                           </button>
                         </div>
                       </td>
-                      <td className="border-b border-gray-400 px-4 py-2">
+                      <td className="border-b border-[#000000] px-4 py-2">
                         ${product.quantity * product.amountSale}
                       </td>
-                      <td className="border-b border-gray-400 px-4 py-2">
+                      <td className="border-b border-[#000000] px-4 py-2">
                         <button
-                          className="px-4 py-2 bg-purple text-white rounded hover:bg-purpler my-2 mx-2"
+                          className="px-4 py-2 text-white rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler my-2 mx-2"
                           onClick={() => removeFromCart(product._id)}
                         >
                           Remove
@@ -131,10 +132,10 @@ export const Checkout = () => {
               </tbody>
             </table>
 
-            <div className="mt-6">
+            <div className="mt-10 font-main text-purple">
               {!auth.user ? (
                 <>
-                  <button className="px-4 py-2 bg-purple text-white text-2xl rounded hover:bg-purpler mt-6 place-self-end">
+                  <button className="px-4 py-2 text-white text-2xl rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler mt-6 place-self-end">
                     <Link to={"/login"}>Log in</Link>
                   </button>
                 </>
@@ -147,6 +148,12 @@ export const Checkout = () => {
           </>
         )}
       </div>
+
+      <Snowfall
+            color="#e977d3c2"
+            snowflakeCount={30}
+      />
+
     </LayoutMerch>
   );
 };
