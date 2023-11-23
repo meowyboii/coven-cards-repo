@@ -199,7 +199,7 @@ const updateUserController = async (req, res) => {
       user.dateOfBirth = updateData.dateOfBirth;
     }
 
-    if (photo !== undefined && photo["photo:"].size < 1000000) {
+    if (photo !== undefined && photo["photo:"]?.size < 1000000) {
       console.log("IM HEREE");
       user.photo.data = fs.readFileSync(photo["photo:"].path);
       user.photo.contentType = photo["photo:"].type;

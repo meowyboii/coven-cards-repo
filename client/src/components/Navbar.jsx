@@ -89,10 +89,10 @@ export const Navbar = () => {
                             }`}
                             className="block px-4 py-2 text-sm text-gray-700"
                           >
-                            Dashboard
+                            Profile
                           </NavLink>
                           <NavLink
-                            to="/orderhistory"
+                            to="/order-history"
                             className="block px-4 py-2 text-sm text-gray-700"
                           >
                             Order History

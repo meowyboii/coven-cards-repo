@@ -27,8 +27,12 @@ export const PlayNow = () => {
           </div>
         </ScrollAnimation>
         <ScrollAnimation animateIn="fadeInUp">
-          <div className="h-[100vh] justify-between place-items-end mt-[27vh] ">
-            <img src={witch} alt="Dorothea the Great" className=" w-full h-full object-cover" />
+          <div className="h-[105vh] justify-between place-items-end mt-[27vh]">
+            <img
+              src={witch}
+              alt="Dorothea the Great"
+              className=" w-full h-full object-cover float2"
+            />
           </div>
         </ScrollAnimation>
         <ScrollAnimation animateIn="fadeInRight">
@@ -41,7 +45,7 @@ export const PlayNow = () => {
         </ScrollAnimation>
       </div>
       <ScrollAnimation animateIn="bounceIn">
-        <div className="flex justify-center items-center z-10 glow w-1/4 left-[75vh] top-40">
+        <div className="flex justify-center items-center z-10 glow w-1/4 left-[75vh] top-40 ">
           <button>
             <div className="flex justify-center items-center ">
               <img src={buttonImg} className="button" alt="play-now button" />

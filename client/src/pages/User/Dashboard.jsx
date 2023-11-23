@@ -169,8 +169,8 @@ export const Dashboard = () => {
   ];
   return (
     <LayoutMerch>
-      <div className="min-h-screen pb-[100px]" style={container}>
-        <div className="bg-[#360640cd] p-10 text-purple mt-[15vh] shadow-2xl">
+      <div className="min-h-screen pt-[1px]" style={container}>
+        <div className="bg-[#360640cd] p-10 text-purple mt-[8vh] shadow-2xl">
           <form onSubmit={handleSubmit}>
             <div className="flex justify-center items-center">
               <div className="p-10 text-center flex flex-col justify-center items-center">
@@ -299,19 +299,6 @@ export const Dashboard = () => {
               </div>
             </div>
           </form>
-        </div>
-        <div className="flex justify-center items-center min-w-[50vh] p-2 mb-15 border-2 border-[#78146235] bg-gradient-to-b from-[#1E0523cd] to-[#00000050]">
-          <div className="w-[100vh] m-5 p-5">
-            <DataTable
-              title="Order History"
-              columns={columns}
-              data={orders}
-              pagination
-              highlightOnHover
-              striped
-              customStyles={tableCustomStyles}
-            />
-          </div>
         </div>
       </div>
       <Snowfall color="#e977d3c2" snowflakeCount={20} />

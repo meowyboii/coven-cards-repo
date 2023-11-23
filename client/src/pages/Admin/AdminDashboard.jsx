@@ -187,7 +187,7 @@ export const AdminDashboard = () => {
         const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
 
         // Return true if the product was created within the last 7 days
-        return daysDifference < 14;
+        return daysDifference < 7;
       })
     );
   }, [products]);

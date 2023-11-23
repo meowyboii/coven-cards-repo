@@ -142,10 +142,10 @@ export const MerchNavbar = () => {
                             }`}
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                           >
-                            Dashboard
+                            Profile
                           </NavLink>
                           <NavLink
-                            to="/orderhistory"
+                            to="/order-history"
                             className="block px-4 py-2 text-sm text-gray-700"
                           >
                             Order History

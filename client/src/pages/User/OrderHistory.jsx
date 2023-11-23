@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Snowfall from 'react-snowfall'
+import Snowfall from "react-snowfall";
 import DataTable from "react-data-table-component";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -8,7 +8,6 @@ import { LayoutMerch } from "../../components/LayoutMerch";
 import { useAuth } from "../../context/auth";
 import { Modal } from "antd";
 import bannerImg from "../../assets/img/login_bg.png";
-
 
 export const OrderHistory = () => {
   const container = {
@@ -38,10 +37,13 @@ export const OrderHistory = () => {
   const tableCustomStyles = {
     header: {
       style: {
-        fontSize: "60px",
+        fontSize: "40px",
         height: "10vh",
         color: "#e7a5f2",
         backgroundColor: "#1e1e1f",
+        textTransform: "uppercase",
+        fontWeight: "bold",
+        textAlign: "center",
       },
     },
     headRow: {
@@ -56,7 +58,7 @@ export const OrderHistory = () => {
       style: {
         color: "#e7a5f2",
         backgroundColor: "#1e1e1f",
-        fontSize: "20px",
+        fontSize: "18px",
         height: "7vh",
       },
       stripedStyle: {
@@ -66,10 +68,10 @@ export const OrderHistory = () => {
       highlightOnHoverStyle: {
         color: "#dfa9e8",
         backgroundColor: "#333333",
-        transitionDuration: '0.15s',
-        transitionProperty: 'background-color',
-        outlineStyle: 'solid',
-        outlineWidth: '1px',
+        transitionDuration: "0.15s",
+        transitionProperty: "background-color",
+        outlineStyle: "solid",
+        outlineWidth: "1px",
         outlineColor: "#593c5e",
         borderBottomColor: "#593c5e",
       },
@@ -84,12 +86,12 @@ export const OrderHistory = () => {
       pageButtonStyle: {
         backgroundColor: "'transparent'",
         fill: "#e7a5f2",
-        '&:disabled': {
-          cursor: 'unset',
+        "&:disabled": {
+          cursor: "unset",
           color: "#303030",
           fill: "#303030",
         },
-    }
+      },
     },
   };
 
@@ -157,7 +159,7 @@ export const OrderHistory = () => {
     },
     {
       name: "Total Amount",
-      selector: (row) => `$${row.total}`,
+      selector: (row) => `$${row.total?.toFixed(2)}`,
     },
     {
       name: "Delivery Status",
