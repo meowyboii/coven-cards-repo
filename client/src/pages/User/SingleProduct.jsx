@@ -157,9 +157,13 @@ export const SingleProduct = () => {
 
             <>
               {product.sale ? (
-                <h2 className="text-2xl font-maintoo font-bold mb-4">{`$${product.amountSale}`}</h2>
+                <h2 className="text-2xl font-maintoo font-bold mb-4">{`$${product.amountSale?.toFixed(
+                  2
+                )}`}</h2>
               ) : (
-                <h2 className="text-2xl font-main mb-4">{`$${product.price}.00`}</h2>
+                <h2 className="text-2xl font-main mb-4">{`$${product.price?.toFixed(
+                  2
+                )}`}</h2>
               )}
             </>
             <h3 className="text-m font-thin  mb-10">{`Available Stock: ${product.stock}`}</h3>

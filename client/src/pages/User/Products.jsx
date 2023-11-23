@@ -65,8 +65,12 @@ export const Products = () => {
               <h3 className="text-xl font-semibold">{product.name}</h3>
 
               <div className="flex content-center mt-2">
-                <p className="text-lg text-red-200 mr-2">{`$${product.amountSale}`}</p>
-                <p className="ml-2 text-lg opacity-80 line-through">{`$${product.price}.00`}</p>
+                <p className="text-lg text-red-200 mr-2">{`$${product.amountSale.toFixed(
+                  2
+                )}`}</p>
+                <p className="ml-2 text-lg opacity-80 line-through">{`$${product.price.toFixed(
+                  2
+                )}`}</p>
               </div>
             </Link>
           ))}
@@ -91,10 +95,14 @@ export const Products = () => {
                 {product.sale ? (
                   <div className="flex content-center mt-2">
                     <p className="text-lg text-red-200 mr-2">{`$${product.amountSale}`}</p>
-                    <p className="ml-2 text-lg opacity-80 line-through">{`$${product.price}.00`}</p>
+                    <p className="ml-2 text-lg opacity-80 line-through">{`$${product.price.toFixed(
+                      2
+                    )}`}</p>
                   </div>
                 ) : (
-                  <p className="text-lg mt-2">{`$${product.price}.00`}</p>
+                  <p className="text-lg mt-2">{`$${product.price.toFixed(
+                    2
+                  )}`}</p>
                 )}
               </>
             </Link>
@@ -119,11 +127,17 @@ export const Products = () => {
               <>
                 {product.sale ? (
                   <div className="flex content-center mt-2">
-                    <p className="text-lg text-red-200 mr-2">{`$${product.amountSale}`}</p>
-                    <p className="ml-2 text-lg opacity-80 line-through">{`$${product.price}.00`}</p>
+                    <p className="text-lg text-red-200 mr-2">{`$${product.amountSale.toFixed(
+                      2
+                    )}`}</p>
+                    <p className="ml-2 text-lg opacity-80 line-through">{`$${product.price.toFixed(
+                      2
+                    )}`}</p>
                   </div>
                 ) : (
-                  <p className="text-lg mt-2">{`$${product.price}.00`}</p>
+                  <p className="text-lg mt-2">{`$${product.price.toFixed(
+                    2
+                  )}`}</p>
                 )}
               </>
             </Link>

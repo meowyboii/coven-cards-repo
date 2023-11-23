@@ -68,7 +68,10 @@ export const Cart = () => {
                 <tbody className="text-purplerest">
                   {cart?.map((product, index) => (
                     <>
-                      <tr key={product.id} className="transition ease-in-out delay-100 hover:bg-[#ebdfeb]">
+                      <tr
+                        key={product.id}
+                        className="transition ease-in-out delay-100 hover:bg-[#ebdfeb]"
+                      >
                         <td className="flex justify-left items-center py-2">
                           <div className="flex justify-center items-center shadow-md h-[8vh] w-[8vh] mr-6">
                             <img
@@ -80,7 +83,9 @@ export const Cart = () => {
 
                           {product.name}
                         </td>
-                        <td className="px-4 py-2">${product.amountSale}</td>
+                        <td className="px-4 py-2">
+                          ${product.amountSale.toFixed(2)}
+                        </td>
 
                         <td className="px-4 py-2">
                           <button
@@ -103,7 +108,9 @@ export const Cart = () => {
             </>
           ) : (
             <div className="flex flex-col justify-center items-center">
-              <h2 className="text-center font-main font bold mb-6 mt-4">Your cart is empty!</h2>
+              <h2 className="text-center font-main font bold mb-6 mt-4">
+                Your cart is empty!
+              </h2>
               <img src={emptycart} className="h-[10vh] w-auto saturate-50" />
             </div>
           )}
