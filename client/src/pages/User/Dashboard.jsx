@@ -16,7 +16,6 @@ export const Dashboard = () => {
     backgroundSize: "100% 100%",
     backgroundPosition: "center",
     filter: "saturate(80%)",
-    marginBottom: "15vh",
   };
 
   const [orders, setOrders] = useState([]);
@@ -193,7 +192,7 @@ export const Dashboard = () => {
                   ) : (
                     <img
                       src={profile}
-                      className="h-full w-full object-cover rounded-full"
+                      className="h-full w-full object-cover rounded-full z-2"
                       alt="no profile"
                     />
                   )}
