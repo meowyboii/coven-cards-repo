@@ -21,6 +21,7 @@ import { ManageProduct } from "./pages/Admin/ManageProduct";
 import { ManageOrder } from "./pages/Admin/ManageOrder";
 import { Sale } from "./pages/User/Sale";
 import { NewArrivals } from "./pages/User/NewArrivals";
+import { OrderHistory } from "./pages/User/OrderHistory";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
         <Route path="/merch/search/:keyword" element={<Search />} />
         <Route path="/merch/checkout" element={<Checkout />} />
         <Route path="/merch/checkout-success" element={<CheckoutSuccess />} />
+        <Route path="/order-history" element={<OrderHistory />} />
       </Routes>
     </div>
   );

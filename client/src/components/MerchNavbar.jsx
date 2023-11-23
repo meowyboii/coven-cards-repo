@@ -145,6 +145,12 @@ export const MerchNavbar = () => {
                             Dashboard
                           </NavLink>
                           <NavLink
+                            to="/orderhistory"
+                            className="block px-4 py-2 text-sm text-gray-700"
+                          >
+                            Order History
+                          </NavLink>
+                          <NavLink
                             onClick={handleLogout}
                             to="/login"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"

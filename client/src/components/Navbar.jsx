@@ -92,6 +92,12 @@ export const Navbar = () => {
                             Dashboard
                           </NavLink>
                           <NavLink
+                            to="/orderhistory"
+                            className="block px-4 py-2 text-sm text-gray-700"
+                          >
+                            Order History
+                          </NavLink>
+                          <NavLink
                             onClick={handleLogout}
                             to="/login"
                             className="block px-4 py-2 text-sm text-gray-700"
