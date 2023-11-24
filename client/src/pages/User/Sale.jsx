@@ -49,8 +49,12 @@ export const Sale = () => {
               <>
                 {product.sale ? (
                   <div className="flex content-center mt-2">
-                    <p className="text-lg text-red-200 mr-2">{`$${product.amountSale}`}</p>
-                    <p className="ml-2 text-lg opacity-80 line-through">{`$${product.price}.00`}</p>
+                    <p className="text-lg text-red-200 mr-2">{`$${product.amountSale?.toFixed(
+                      2
+                    )}`}</p>
+                    <p className="ml-2 text-lg opacity-80 line-through">{`$${product.price?.toFixed(
+                      2
+                    )}`}</p>
                   </div>
                 ) : (
                   <p className="text-lg mt-2">{`$${product.price}.00`}</p>
