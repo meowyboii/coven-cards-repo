@@ -51,7 +51,7 @@ export const Cart = () => {
         backdropClicked={togglePanel}
       >
         {/* Content for your sliding panel */}
-        <div className="bg-[#f1e9f1] p-8 min-h-[30vh]">
+        <div className="bg-[#e9e0f0] p-8 min-h-[30vh]">
           <div className="flex justify-end mr-4 cursor-pointer  ">
             <AiFillCloseCircle
               onClick={togglePanel}

@@ -23,7 +23,12 @@ const getUserOrderController = async (req, res) => {
   try {
     const orders = await orderModel
       .find({ buyer: req.params.pid })
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 })
+      .populate({
+        path: "products.product",
+        model: "product",
+        select: "name amountSale _id",
+      });
     res
       .status(200)
       .send({ success: true, message: "All User Orders List", orders });

@@ -20,19 +20,6 @@ export const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
   const [auth, setAuth] = useAuth();
   const [visible, setVisible] = useState(false);
-  const [photo, setPhoto] = useState("");
-
-  const changeDateFormat = (date) => {
-    const newDate = new Date(date);
-    return newDate.toISOString().split("T")[0];
-  };
-
-  const [formData, setFormData] = useState({
-    firstName: auth.user.firstName,
-    lastName: auth.user.lastName,
-    address: auth.user.address,
-    dateOfBirth: changeDateFormat(auth.user.dateOfBirth),
-  });
 
   const tableCustomStyles = {
     header: {
@@ -106,11 +93,43 @@ export const OrderHistory = () => {
             {row.shipping.address.city}, {row.shipping.address.country}
           </h3>
           <h3>Payment Status: {row.payment_status}</h3>
-          <h3>Delivery Status: {row.delivery_status}</h3>
-          <h3>Date Modified: {getDate(row.updatedAt)}</h3>
+          <h3 className="mb-4">Delivery Status: {row.delivery_status}</h3>
+          <h2>Products: </h2>
+          {row.products.map((item) => (
+            <>
+              <tr
+                key={item.id}
+                className="transition ease-in-out delay-100 hover:bg-[#ebdfeb]"
+              >
+                <td className="flex justify-left items-center py-2">
+                  <div className="flex justify-center items-center shadow-md h-[8vh] w-[8vh] mr-6">
+                    <img
+                      src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${item.product._id}`}
+                      alt={item.product.name}
+                      className="max-h-full object-cover"
+                    />
+                  </div>
+
+                  {item.product.name}
+                </td>
+                <td className="px-4 py-2">
+                  ${item.product.amountSale?.toFixed(2)}
+                </td>
+                <td className="px-4 py-2">{item.quantity}</td>
+              </tr>
+            </>
+          ))}
+          <h3 className="mt-4">Total Amount Paid: ${row.total.toFixed(2)}</h3>
         </div>
       ),
       onCancel: () => setVisible(false),
+      style: { width: "80%" },
+      okButtonProps: {
+        style: {
+          backgroundColor: "#ff0000", // Change button background color
+          color: "#ffffff", // Change button text color
+        },
+      },
     });
   };
 
@@ -130,6 +149,7 @@ export const OrderHistory = () => {
       );
       if (data.success) {
         setOrders(data?.orders);
+        console.log(data?.orders);
       }
     } catch (error) {
       console.log(error);

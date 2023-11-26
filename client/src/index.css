@@ -1,21 +1,19 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500&display=swap');
-
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500&display=swap");
 
 body {
   margin: 0;
   background-color: #000000;
-  font-family: -apple-system, BlinkMacSystemFont, 'Fraunces', 'Fredoka',
-    serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Fraunces", "Fredoka", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -29,20 +27,12 @@ code {
 
 @keyframes neon2 {
   from {
-    box-shadow: 0 0 2px 0px #A484A9,
-      0 0 0 #A484A9,
-      0 0 5px #A484A9,
-      0 0 10px #92509C,
-      0 0 15px #92509C,
-      0 0 20px #92509C;
+    box-shadow: 0 0 2px 0px #a484a9, 0 0 0 #a484a9, 0 0 5px #a484a9,
+      0 0 10px #92509c, 0 0 15px #92509c, 0 0 20px #92509c;
   }
   to {
-    box-shadow: 0 0 2px 0px #A484A9,
-      0 0 10px #A484A9,
-      0 0 15px #A484A9,
-      0 0 20px #92509C,
-      0 0 30px #92509C,
-      0 0 35px #92509C;
+    box-shadow: 0 0 2px 0px #a484a9, 0 0 10px #a484a9, 0 0 15px #a484a9,
+      0 0 20px #92509c, 0 0 30px #92509c, 0 0 35px #92509c;
   }
 }
 
@@ -65,58 +55,53 @@ code {
   align-items: center;
   background-color: #000;
   border-radius: 10px;
-  animation: neon 2s ease-in-out infinite alternate, floatAnimation 6s ease-in-out infinite;
+  animation: neon 2s ease-in-out infinite alternate,
+    floatAnimation 6s ease-in-out infinite;
 }
 
 nav li {
   text-transform: uppercase;
   font-size: 20px;
   font-weight: bold;
-  text-shadow: 0px 0px 15px #92509C;
+  text-shadow: 0px 0px 15px #92509c;
 }
 
 nav ul li a {
-  position:relative;
+  position: relative;
   z-index: 1;
 }
 
 nav ul li > a:hover {
-  color: #7B0E90;
+  color: #7b0e90;
   text-shadow: 0px 0px 15px #a90788;
   transition: color 0.5s ease-in-out, filter 0.5s ease-in-out;
 }
 
-.active, nav ul li a:hover {
-  color: #7B0E90;
+.active,
+nav ul li a:hover {
+  color: #7b0e90;
 }
 
-nav.active, nav ul li a:hover {
-  color: #7B0E90;
+nav.active,
+nav ul li a:hover {
+  color: #7b0e90;
   text-shadow: 0px 0px 15px #a90788;
 }
 
 a.leenk:hover {
-  color: #7B0E90;
+  color: #7b0e90;
   text-shadow: 0px 0px 15px #a90788;
   transition: color 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
 @keyframes neon {
   from {
-    box-shadow: 0 0 2px 0px #A484A9,
-      0 0 0 #A484A9,
-      0 0 5px #92509C,
-      0 0 10px #781462,
-      0 0 15px #781462,
-      0 0 20px #781462;
+    box-shadow: 0 0 2px 0px #a484a9, 0 0 0 #a484a9, 0 0 5px #92509c,
+      0 0 10px #781462, 0 0 15px #781462, 0 0 20px #781462;
   }
   to {
-    box-shadow: 0 0 2px 0px #A484A9,
-      0 0 10px #A484A9,
-      0 0 15px #92509C,
-      0 0 20px #781462,
-      0 0 30px #781462,
-      0 0 35px #781462;
+    box-shadow: 0 0 2px 0px #a484a9, 0 0 10px #a484a9, 0 0 15px #92509c,
+      0 0 20px #781462, 0 0 30px #781462, 0 0 35px #781462;
   }
 }
 
@@ -129,37 +114,37 @@ a.leenk:hover {
   position: absolute;
   z-index: 2;
   margin-top: 50px;
-	text-transform: uppercase;
+  text-transform: uppercase;
   font-weight: bold;
   /*font-size: 50px;*/
-	background: linear-gradient(to bottom, #b569c1 25%, #360640 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-  filter: drop-shadow(0px 0px 3px #580E67);  
+  background: linear-gradient(to bottom, #b569c1 25%, #360640 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0px 0px 3px #580e67);
 }
 
 .text2 {
   position: absolute;
   z-index: 2;
   margin-top: 55px;
-	text-transform: uppercase;
+  text-transform: uppercase;
   font-weight: bold;
-	background: linear-gradient(to bottom, #df88ed 50%, #360640 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+  background: linear-gradient(to bottom, #df88ed 50%, #360640 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .text3 {
   position: relative;
   z-index: 2;
-	text-transform: uppercase;
+  text-transform: uppercase;
   font-weight: bold;
-	background: linear-gradient(to bottom, #df88ed 25%, #360640 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+  background: linear-gradient(to bottom, #df88ed 25%, #360640 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.card-header{
+.card-header {
   position: relative;
   bottom: 24vh;
   left: 20vh;
@@ -167,96 +152,104 @@ a.leenk:hover {
 }
 
 .ant-input-number-input {
-    color: #360640; /* Change this to your desired text color */
-  }
-  .custom-input-number .ant-input-number-handler {
-    background-color: red; /* Change the handle background color to red */
-    border-color: blue; /* Change the handle border color to blue */
-    color: white; /* Change the text color of the handle */
-  }
+  color: #360640; /* Change this to your desired text color */
+}
+.custom-input-number .ant-input-number-handler {
+  background-color: red; /* Change the handle background color to red */
+  border-color: blue; /* Change the handle border color to blue */
+  color: white; /* Change the text color of the handle */
+}
 
-  .fade-in {
-    animation: fadeIn ease 3s;
-    -webkit-animation: fadeIn ease 3s;
-    -moz-animation: fadeIn ease 3s;
-    -o-animation: fadeIn ease 3s;
-    -ms-animation: fadeIn ease 3s;
-  }
-  
-  @keyframes fadeIn{
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
-  }
-  .animate__animated.animate__bounce {
-    --animate-duration: 1.8s;
-  }
+.fade-in {
+  animation: fadeIn ease 3s;
+  -webkit-animation: fadeIn ease 3s;
+  -moz-animation: fadeIn ease 3s;
+  -o-animation: fadeIn ease 3s;
+  -ms-animation: fadeIn ease 3s;
+}
 
-  @keyframes floatAnimation {
-    0% {
-      box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
-      transform: translatey(0px);
-    }
-    50% {
-      box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
-      transform: translatey(-20px);
-    }
-    100% {
-      box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
-      transform: translatey(0px);
-    }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
+  100% {
+    opacity: 1;
+  }
+}
+.animate__animated.animate__bounce {
+  --animate-duration: 1.8s;
+}
 
-  .float{
-    animation: floatAnimation 6s ease-in-out infinite;
+@keyframes floatAnimation {
+  0% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    transform: translatey(0px);
   }
+  50% {
+    box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
+    transform: translatey(-20px);
+  }
+  100% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    transform: translatey(0px);
+  }
+}
 
-  .float2{
-    animation: floatscroll 4s ease-in-out infinite;
-  }
+.float {
+  animation: floatAnimation 6s ease-in-out infinite;
+}
 
-  @keyframes floatscroll {
-    0% {
-      transform: translatey(0px);
-    }
-    50% {
-      transform: translatey(-20px);
-    }
-    100% {
-      transform: translatey(0px);
-    }
-  }
+.float2 {
+  animation: floatscroll 4s ease-in-out infinite;
+}
 
-  .card-one {
-    background-color: #994aa9;
-    background-image: linear-gradient(240deg,#b164c0 0%,rgb(223, 232, 255) 100%);
+@keyframes floatscroll {
+  0% {
+    transform: translatey(0px);
   }
+  50% {
+    transform: translatey(-20px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
+}
 
-  .card-two {
-    background-color: #d368b3;
-    background-image: linear-gradient(240deg, #da5eb5 0%, rgb(227, 216, 235) 100%);
-  }
+.card-one {
+  background-color: #994aa9;
+  background-image: linear-gradient(
+    240deg,
+    #b164c0 0%,
+    rgb(223, 232, 255) 100%
+  );
+}
 
-  .bounce:hover {
-    transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
-    animation: gelatine 0.5s 1;
-  }
+.card-two {
+  background-color: #d368b3;
+  background-image: linear-gradient(
+    240deg,
+    #da5eb5 0%,
+    rgb(227, 216, 235) 100%
+  );
+}
 
-  @keyframes gelatine {
-    0%,
-    100% {
-      transform: scale(1, 1);
-    }
-    25% {
-      transform: scale(0.9, 1.1);
-    }
-    50% {
-      transform: scale(1.1, 0.9);
-    }
-    75% {
-      transform: scale(0.95, 1.05);
-    }
+.bounce:hover {
+  transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+  animation: gelatine 0.5s 1;
+}
+
+@keyframes gelatine {
+  0%,
+  100% {
+    transform: scale(1, 1);
   }
+  25% {
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    transform: scale(0.95, 1.05);
+  }
+}

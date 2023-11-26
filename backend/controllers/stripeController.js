@@ -2,6 +2,7 @@ const Stripe = require("stripe");
 require("dotenv").config();
 const stripe = Stripe(process.env.STRIPE_KEY);
 const orderModel = require("../models/orderModel");
+const productModel = require("../models/productModel");
 
 let endpointSecret;
 endpointSecret =
@@ -135,6 +136,27 @@ const stripeController = async (req, res) => {
   }
 };
 
+//Update Stock
+const updateStock = async (pid, quantity) => {
+  try {
+    const product = await productModel.findById(pid);
+
+    if (!product) {
+      console.log("Product not found");
+      return; // Exit the function if the product isn't found
+    }
+
+    if (quantity !== undefined) {
+      product.stock = product.stock - quantity;
+    }
+    // Save the updated product
+    const updatedProduct = await product.save();
+    console.log(updatedProduct);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // Create order function
 const createOrder = async (customer, data) => {
   const stripeCart = JSON.parse(customer.metadata.stripeCart);
@@ -160,6 +182,11 @@ const createOrder = async (customer, data) => {
   try {
     const savedOrder = await newOrder.save();
     console.log("Processed Order:", savedOrder);
+
+    //Update stock
+    products.map((item) => {
+      updateStock(item.product, item.quantity);
+    });
   } catch (err) {
     console.log(err);
   }
