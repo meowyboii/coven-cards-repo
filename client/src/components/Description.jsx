@@ -16,10 +16,10 @@ export const Description = () => {
             <ReactCurvedText
               width="500"
               height="450"
-              cx="575"
-              cy="429"
-              rx="426"
-              ry="470"
+              cx="570"
+              cy="410"
+              rx="420"
+              ry="445"
               startOffset="-10"
               reversed={true}
               text="MASTER THE MYSTERY"
