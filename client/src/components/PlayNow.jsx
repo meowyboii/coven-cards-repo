@@ -31,7 +31,7 @@ export const PlayNow = () => {
             <img
               src={witch}
               alt="Dorothea the Great"
-              className=" w-full h-full object-cover float2"
+              className=" w-full h-full object-cover"
             />
           </div>
         </ScrollAnimation>
@@ -45,9 +45,9 @@ export const PlayNow = () => {
         </ScrollAnimation>
       </div>
       <ScrollAnimation animateIn="bounceIn">
-        <div className="flex justify-center items-center z-10 glow w-1/4 left-[75vh] top-40 ">
+        <div className="flex justify-center items-center z-10 glow w-1/4 left-[72vh] top-40 ">
           <button>
-            <div className="flex justify-center items-center ">
+            <div className="flex justify-center items-center">
               <img src={buttonImg} className="button" alt="play-now button" />
               <h2 className="text text-[55px] pb-3">
                 <Link to={"/download"}>PLAY NOW</Link>

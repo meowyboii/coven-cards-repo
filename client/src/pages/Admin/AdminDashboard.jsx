@@ -341,7 +341,7 @@ export const AdminDashboard = () => {
                     <Text>
                       {(yearlyAmount * 100) / 100000}% of annual target
                     </Text>
-                    <Text>₱ 100,000</Text>
+                    <Text>$ 100,000</Text>
                   </Flex>
                   <ProgressBar value={(yearlyAmount * 100) / 100000} />
                 </Card>
