@@ -123,7 +123,11 @@ export const OrderHistory = () => {
         </div>
       ),
       onCancel: () => setVisible(false),
-      style: { width: "80%" },
+      styles: { 
+        width: "80%",
+        backgroundColor: "#1e1e1f",
+        
+      },
       okButtonProps: {
         style: {
           backgroundColor: "#ff0000", // Change button background color
