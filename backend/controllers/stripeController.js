@@ -3,10 +3,26 @@ require("dotenv").config();
 const stripe = Stripe(process.env.STRIPE_KEY);
 const orderModel = require("../models/orderModel");
 const productModel = require("../models/productModel");
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require("twilio")(accountSid, authToken);
 
 let endpointSecret;
 endpointSecret =
   "whsec_2d57ad11a001a5388971f50af0005542683a58ef8410edd742b1405e8d472ba4";
+
+const sendMessage = async (phone, day) => {
+  console.log("PHONE: ", phone);
+  try {
+    const result = await client.messages.create({
+      body: `Your order has been placed. It will arrive in approximately ${day} day(s).`,
+      from: "+14702357627",
+      to: phone || "+639354325937",
+    });
+  } catch (error) {
+    console.error("Error sending SMS:", error);
+  }
+};
 
 const stripeController = async (req, res) => {
   try {
@@ -187,6 +203,11 @@ const createOrder = async (customer, data) => {
     products.map((item) => {
       updateStock(item.product, item.quantity);
     });
+    let shippingDays = "5-7";
+    if (data.shipping_cost !== 0) {
+      shippingDays = "1";
+    }
+    sendMessage(data.customer_details.phone, shippingDays);
   } catch (err) {
     console.log(err);
   }
@@ -224,17 +245,6 @@ const stripeWebhookController = async (req, res) => {
       .catch((err) => console.log(err.message));
   }
 
-  // switch (event.type) {
-  //   case "payment_intent.succeeded":
-  //     const paymentIntentSucceeded = event.data.object;
-  //     // Then define and call a function to handle the event payment_intent.succeeded
-  //     break;
-  //   // ... handle other event types
-  //   default:
-  //     console.log(`Unhandled event type ${event.type}`);
-  // }
-
-  // Return a 200 response to acknowledge receipt of the event
   res.send().end();
 };
 module.exports = { stripeController, stripeWebhookController };

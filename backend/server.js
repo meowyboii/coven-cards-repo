@@ -7,6 +7,7 @@ const productRoute = require("./routes/productRoute");
 const stripeCheckoutRoute = require("./routes/stripeCheckoutRoute");
 const stripeWebhookRoute = require("./routes/strieWebhookRoute");
 const orderRoute = require("./routes/orderRoute");
+const emailRoute = require("./routes/emailRoute");
 const multer = require("multer");
 const uploadApp = express();
 const sanitize = require("sanitize-filename");
@@ -117,6 +118,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/product", productRoute);
 app.use("/api/v1/order", orderRoute);
+app.use("/api/v1/message", emailRoute);
 
 app.listen(process.env.PORT, () => {
   console.log("Listening on port 4000");

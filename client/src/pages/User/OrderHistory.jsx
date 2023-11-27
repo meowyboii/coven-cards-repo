@@ -98,13 +98,13 @@ export const OrderHistory = () => {
           {row.products.map((item) => (
             <>
               <tr
-                key={item.id}
+                key={item?._id}
                 className="transition ease-in-out delay-100 hover:bg-[#ebdfeb]"
               >
                 <td className="flex justify-left items-center py-2">
                   <div className="flex justify-center items-center shadow-md h-[8vh] w-[8vh] mr-6">
                     <img
-                      src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${item.product._id}`}
+                      src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${item.product?._id}`}
                       alt={item.product.name}
                       className="max-h-full object-cover"
                     />
