@@ -20,11 +20,13 @@ export const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
   const [auth, setAuth] = useAuth();
   const [visible, setVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currRow, setCurrRow] = useState({});
 
   const tableCustomStyles = {
     header: {
       style: {
-        fontSize: "40px",
+        fontSize: "35px",
         height: "10vh",
         color: "#e7a5f2",
         backgroundColor: "#1e1e1f",
@@ -37,7 +39,7 @@ export const OrderHistory = () => {
       style: {
         color: "#e7a5f2",
         backgroundColor: "#303030",
-        fontSize: "25px",
+        fontSize: "23px",
         height: "7vh",
       },
     },
@@ -45,7 +47,7 @@ export const OrderHistory = () => {
       style: {
         color: "#e7a5f2",
         backgroundColor: "#1e1e1f",
-        fontSize: "18px",
+        fontSize: "17px",
         height: "7vh",
       },
       stripedStyle: {
@@ -82,6 +84,30 @@ export const OrderHistory = () => {
     },
   };
 
+  const handleCancelOrder = (row) => {
+    setCurrRow(row);
+    setIsModalOpen(true);
+  };
+  const handleUpdate = async () => {
+    console.log(currRow);
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_API}/api/v1/order/update-order/${currRow._id}`,
+        { delivery_status: "Cancelled" }
+      );
+      if (data?.success) {
+        toast.success("Successfully cancelled order");
+        getAllOrder();
+        setIsModalOpen(false);
+        setCurrRow({});
+      } else {
+        toast.error(data?.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Error in cancelling order");
+    }
+  };
   const displayDetails = (row) => {
     Modal.info({
       title: "Order Details",
@@ -98,7 +124,7 @@ export const OrderHistory = () => {
           {row.products.map((item) => (
             <>
               <tr
-                key={item?._id}
+                key={item?.id}
                 className="transition ease-in-out delay-100 hover:bg-[#ebdfeb]"
               >
                 <td className="flex justify-left items-center py-2">
@@ -145,7 +171,7 @@ export const OrderHistory = () => {
   const getAllOrder = async (req, res) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/order/get-user-order/${auth.user.id}`
+        `${process.env.REACT_APP_API}/api/v1/order/get-user-order/${auth.user?.id}`
       );
       if (data.success) {
         setOrders(data?.orders);
@@ -185,13 +211,67 @@ export const OrderHistory = () => {
       name: "Delivery Status",
       selector: (row) => row.delivery_status,
     },
+    {
+      name: "Action",
+      cell: (row) => (
+        <>
+          {row.delivery_status !== "Cancelled" &&
+          row.delivery_status !== "Shipped" &&
+          row.delivery_status !== "Delivered" ? (
+            <>
+              <button
+                className="px-4 py-2 bg-purple text-white rounded hover:bg-purpler"
+                onClick={() => handleCancelOrder(row)}
+              >
+                Cancel Order
+              </button>
+              <>
+                <Modal
+                  title="Confirm Order Cancellation"
+                  open={isModalOpen}
+                  footer={null}
+                  onCancel={() => setIsModalOpen(false)}
+                  maskStyle={{ backgroundColor: "#00000040" }}
+                  className="custom-modal"
+                >
+                  <p>Are you sure you want to cancel your order?</p>
+                  <div>
+                    <button
+                      className="px-4 py-2 text-white rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler my-2 mx-2 text-sm"
+                      onClick={() => handleUpdate()}
+                    >
+                      Confirm
+                    </button>
+                    <button
+                      className="px-4 py-2 text-white rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler my-2 mx-2 text-sm"
+                      onClick={() => setIsModalOpen(false)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </Modal>
+              </>
+            </>
+          ) : (
+            <div
+              className="px-4 py-2 bg-purple text-white rounded opacity-60"
+              onClick={() =>
+                toast.error("You cannot cancel this order anymore")
+              }
+            >
+              Cancel Order
+            </div>
+          )}
+        </>
+      ),
+    },
   ];
 
   return (
     <LayoutMerch>
-      <div className="min-h-screen" style={container}>
-        <div className="flex justify-center h-[100vh] min-w-[50vh] p-2 mb-15 border-2 border-[#78146235] bg-gradient-to-b from-[#1E0523cd] to-[#00000050]">
-          <div className="w-[125vh] m-5 p-5">
+      <div style={container}>
+        <div className=" flex justify-center h-[110vh] min-w-[50vh] p-2 mb-15 border-2 border-[#78146235] bg-gradient-to-b from-[#1E0523cd] to-[#00000050]">
+          <div className="w-[145vh] m-5 p-5">
             <DataTable
               title="Order History"
               columns={columns}
@@ -200,6 +280,7 @@ export const OrderHistory = () => {
               highlightOnHover
               striped
               customStyles={tableCustomStyles}
+              paginationPerPage={10}
             />
           </div>
         </div>

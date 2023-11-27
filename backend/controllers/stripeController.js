@@ -204,7 +204,7 @@ const createOrder = async (customer, data) => {
       updateStock(item.product, item.quantity);
     });
     let shippingDays = "5-7";
-    if (data.shipping_cost !== 0) {
+    if (data.amount_total !== data.amount_subtotal) {
       shippingDays = "1";
     }
     sendMessage(data.customer_details.phone, shippingDays);

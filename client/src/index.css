@@ -253,3 +253,10 @@ a.leenk:hover {
     transform: scale(0.95, 1.05);
   }
 }
+
+.custom-modal .ant-modal-content {
+  background-color: #e9e0f0;
+}
+.custom-modal .ant-modal-header {
+  background-color: #e9e0f0;
+}

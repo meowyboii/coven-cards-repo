@@ -121,7 +121,7 @@ export const Checkout = () => {
                         </div>
                       </td>
                       <td className="border-b border-[#000000] px-4 py-2">
-                        ${product.quantity * product.amountSale}
+                        ${(product.quantity * product.amountSale).toFixed(2)}
                       </td>
                       <td className="border-b border-[#000000] px-4 py-2">
                         <button
