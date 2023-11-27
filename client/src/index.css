@@ -260,3 +260,9 @@ a.leenk:hover {
 .custom-modal .ant-modal-header {
   background-color: #e9e0f0;
 }
+
+.modalForOrderId .ant-modal-content {
+  background-color: #e9e0f0;
+  width: 43vh;
+  align-self: center;
+}
