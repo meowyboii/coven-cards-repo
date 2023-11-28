@@ -312,7 +312,8 @@ export const ManageProduct = () => {
       );
       if (response) {
         toast.success("Successfully deleted product");
-        window.location.reload();
+        getAllProducts();
+        setIsModalOpen(false);
       }
     } catch (error) {
       console.log(error);

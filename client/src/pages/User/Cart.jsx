@@ -70,7 +70,7 @@ export const Cart = () => {
                     <>
                       <tr
                         key={product.id}
-                        className="transition ease-in-out delay-100 hover:bg-[#ebdfeb]"
+                        className="transition ease-in-out delay-100 hover:bg-[#e7d4e7]"
                       >
                         <td className="flex justify-left items-center py-2">
                           <div className="flex justify-center items-center shadow-md h-[8vh] w-[8vh] mr-6">

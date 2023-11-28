@@ -86,15 +86,15 @@ export const OrderHistory = () => {
     Modal.info({
       title: "Order Details",
       content: (
-        <div className="text-justify">
-          <h3>Name: {row.shipping.name}</h3>
-          <h3>
-            Shipping Address: {row.shipping.address.line1},{" "}
+        <div className="text-justify font-main mt-5">
+          <span className="flex items-center"><h3 className="font-bold mr-5">Name:</h3> <h3>{row.shipping.name}</h3></span>
+          <span className="flex items-center"><h3 className="font-bold mr-5">
+            Shipping Address:</h3> <h3>{row.shipping.address.line1},{" "}
             {row.shipping.address.city}, {row.shipping.address.country}
-          </h3>
-          <h3>Payment Status: {row.payment_status}</h3>
-          <h3 className="mb-4">Delivery Status: {row.delivery_status}</h3>
-          <h2>Products: </h2>
+          </h3></span>
+          <span className="flex items-center"><h3 className="font-bold mr-5">Payment Status:</h3> <h3>{row.payment_status}</h3></span>
+          <span className="flex items-center"><h3 className="font-bold mr-5 mb-4">Delivery Status:</h3> <h3>{row.delivery_status}</h3></span>
+          <span className="flex items-center"><h3 className="font-bold">Products: </h3></span>
           {row.products.map((item) => (
             <>
               <tr
@@ -119,15 +119,23 @@ export const OrderHistory = () => {
               </tr>
             </>
           ))}
-          <h3 className="mt-4">Total Amount Paid: ${row.total.toFixed(2)}</h3>
+          <span className="flex items-center"><h3 className="font-bold mr-5 mt-4">Total Amount Paid:</h3> <h3 className="mt-4"> ${row.total.toFixed(2)}</h3></span>
         </div>
       ),
       onCancel: () => setVisible(false),
-      style: { width: "80%" },
+      style: {
+        width: "90%",
+      },
       okButtonProps: {
         style: {
-          backgroundColor: "#ff0000", // Change button background color
+          backgroundColor: "#A484A9", // Change button background color
           color: "#ffffff", // Change button text color
+        },
+        onMouseEnter: (e) => {
+          e.target.style.backgroundColor = "#7B0E90"; // Change color on hover
+        },
+        onMouseLeave: (e) => {
+          e.target.style.backgroundColor = "#A484A9"; // Revert to original color on leave
         },
       },
     });

@@ -12,6 +12,7 @@ import { CartProvider } from "./context/cart";
 import "react-sliding-side-panel/lib/index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <AuthProvider>
     <SearchProvider>

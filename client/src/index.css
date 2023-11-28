@@ -253,3 +253,15 @@ a.leenk:hover {
     transform: scale(0.95, 1.05);
   }
 }
+
+.ant-modal-header {
+  color: red;
+}
+
+.ant-modal-content {
+  border-radius: 20px;
+}
+
+.modalStyle2 {
+  border-radius: 20px;
+}
