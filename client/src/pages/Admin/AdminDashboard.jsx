@@ -339,7 +339,7 @@ export const AdminDashboard = () => {
                   <Metric className="text-xl">$ {yearlyAmount}</Metric>
                   <Flex>
                     <Text>
-                      {(yearlyAmount * 100) / 100000}% of annual target
+                      {((yearlyAmount * 100) / 100000).toFixed(2)}% of annual target
                     </Text>
                     <Text>$ 100,000</Text>
                   </Flex>

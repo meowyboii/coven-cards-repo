@@ -115,7 +115,7 @@ export const OrderHistory = () => {
       borderRadius: "8px",
       width: "90%", 
     };
-  
+
     const contentStyle = {
       textAlign: "justify",
     };
@@ -124,31 +124,31 @@ export const OrderHistory = () => {
       className: "modalForOrderId",
       title: "Order Details",
       content: (
-        <div style={Object.assign({}, contentStyle, modalContentStyle)}>
-          <h3 style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
-            Name: {row.shipping.name}
+        <div style={Object.assign({}, contentStyle, modalContentStyle)} className="font-main text-purplerest">
+          <h3 style={{ fontWeight: "bold", fontSize: "1rem" }}>
+          <span className="text-purpler">Name</span>: {row.shipping.name}
           </h3>
           <h3 style={{ fontWeight: "bold", marginTop: "1.5rem", fontSize: "1rem" }}>
-            Shipping Address: 
+          <span className="text-purpler">Shipping Address</span>: 
           </h3>
           {row.shipping.address.line1},{" "}
             {row.shipping.address.city}, {row.shipping.address.country}
           <h3 style={{ fontWeight: "bold", marginTop: "1rem", fontSize: "1rem" }}>
-            Payment Status: 
+          <span className="text-purpler">Payment Status</span>: 
           </h3>
           {row.payment_status}
           <h3 style={{ fontWeight: "bold", marginTop: "1rem", fontSize: "1rem" }}>
-            Delivery Status: 
+          <span className="text-purpler">Delivery Status</span>: 
           </h3>
           {row.delivery_status}
-          <h2 style={{ marginTop: "1rem", fontSize: "1.5rem", fontWeight: "bold" }}>
-            Products:
+          <h2 style={{ marginTop: "1rem", fontSize: "1rem", fontWeight: "bold" }}>
+          <span className="text-purpler">Products</span>:
           </h2>
           {row.products.map((item) => (
             <>
               <tr
                 key={item?.id}
-                className="transition ease-in-out delay-100 hover:bg-[#A27EBD]"
+                className="transition ease-in-out delay-100 hover:bg-[#e7d4e7]"
               >
                 <td className="flex justify-left items-center py-2">
                   <div className="flex justify-center items-center shadow-md h-[8vh] w-[8vh] mr-6">
@@ -168,8 +168,8 @@ export const OrderHistory = () => {
               </tr>
             </>
         ))}
-        <h3 style={{ marginTop: "1rem", fontSize: "1rem", fontWeight: "bold" }}>
-          Total Amount Paid: ${row.total.toFixed(2)}
+        <h3 style={{ marginTop: "2rem", fontSize: "1rem", fontWeight: "bold" }} className="flex justify-center">
+          <span className="text-purpler">Total Amount Paid</span>: ${row.total.toFixed(2)}
         </h3>
       </div>
     ),
@@ -180,7 +180,7 @@ export const OrderHistory = () => {
     },
     okButtonProps: {
       style: {
-        backgroundColor: "#ff0000",
+        backgroundColor: "#A484A9",
         color: "#ffffff",
       },
       onMouseEnter: (e) => {
@@ -305,7 +305,7 @@ export const OrderHistory = () => {
     <LayoutMerch>
       <div style={container}>
         <div className=" flex justify-center h-[110vh] min-w-[50vh] p-2 mb-15 border-2 border-[#78146235] bg-gradient-to-b from-[#1E0523cd] to-[#00000050]">
-          <div className="w-[145vh] m-5 p-5">
+          <div className="w-[145vh] m-5 p-5 font-main">
             <DataTable
               title="Order History"
               columns={columns}

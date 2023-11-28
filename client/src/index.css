@@ -254,15 +254,16 @@ a.leenk:hover {
   }
 }
 
-.custom-modal .ant-modal-content {
+.modalForOrderId .ant-modal-content {
   background-color: #e9e0f0;
 }
-.custom-modal .ant-modal-header {
+
+.modalForOrderId .ant-modal-header {
   background-color: #e9e0f0;
 }
 
 .modalForOrderId .ant-modal-content {
   background-color: #e9e0f0;
-  width: 43vh;
+  width: 50vh;
   align-self: center;
 }
