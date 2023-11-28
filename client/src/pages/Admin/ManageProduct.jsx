@@ -191,6 +191,7 @@ export const ManageProduct = () => {
               open={isModalOpen}
               footer={null}
               onCancel={() => setIsModalOpen(false)}
+              maskStyle={{ backgroundColor: "#00000040" }}
             >
               <p>Are you sure you want to delete the product?</p>
               <div>

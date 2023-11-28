@@ -5,8 +5,13 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Layout } from "../../components/LayoutAdmin";
 import { MdCancelPresentation } from "react-icons/md";
+import { Modal } from "antd";
+
 export const ManageOrder = () => {
   const [orders, setOrders] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currRow, setCurrRow] = useState({});
+  const [reason, setReason] = useState();
 
   const tableCustomStyles = {
     headRow: {
@@ -34,6 +39,7 @@ export const ManageOrder = () => {
       );
       if (data.success) {
         setOrders(data?.orders);
+        console.log(data?.orders);
       }
     } catch (error) {
       console.log(error);
@@ -45,6 +51,24 @@ export const ManageOrder = () => {
     getAllOrder();
   }, []);
 
+  const sendMessage = async (text) => {
+    const message = {
+      phone: currRow.shipping.phone,
+      text: text,
+    };
+
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/message/send-message`,
+        message
+      );
+      console.log("SMS sent successfully:", response.data);
+      console.log(message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleUpdate = async (orderId, currentStatus) => {
     let newStatus;
     if (currentStatus === "Not Processed") {
@@ -55,6 +79,10 @@ export const ManageOrder = () => {
       newStatus = "Delivered";
     } else {
       newStatus = currentStatus;
+      setIsModalOpen(false);
+      sendMessage(
+        `Your order has been cancelled for the following reason: ${reason}`
+      );
     }
     console.log(orderId, currentStatus, newStatus);
     try {
@@ -84,6 +112,11 @@ export const ManageOrder = () => {
     return formattedDate;
   };
 
+  const handleCancelOrder = (row) => {
+    setCurrRow(row);
+    setIsModalOpen(true);
+  };
+
   const columns = [
     {
       name: "Buyer",
@@ -92,7 +125,7 @@ export const ManageOrder = () => {
     },
     {
       name: "Total Amount",
-      selector: (row) => row.total,
+      selector: (row) => `$${row.total.toFixed(2)}`,
       sortable: true,
     },
     {
@@ -124,12 +157,53 @@ export const ManageOrder = () => {
           <div className="mx-1">
             {row.delivery_status !== "Cancelled" &&
             row.delivery_status !== "Delivered" ? (
-              <button
-                className="bg-slate-300 p-2 rounded-[4px]"
-                onClick={() => handleUpdate(row._id, "Cancelled")}
-              >
-                Cancel
-              </button>
+              <>
+                <button
+                  className="bg-slate-300 p-2 rounded-[4px]"
+                  onClick={() => handleCancelOrder(row)}
+                >
+                  Cancel
+                </button>
+                <>
+                  <>
+                    <Modal
+                      title="Confirm Order Cancellation"
+                      open={isModalOpen}
+                      footer={null}
+                      onCancel={() => setIsModalOpen(false)}
+                      maskStyle={{ backgroundColor: "#00000040" }}
+                    >
+                      <p>State your reason for cancelling this order:</p>
+                      <div className="mb-4 ">
+                        <textarea
+                          rows="4"
+                          cols="50"
+                          id="categoryName"
+                          className=" bg-white px-4 py-2 border rounded-md text-[#343434] font-main w-[35vh] h-[10vh] mb-3 resize-none"
+                          placeholder="Enter your reason"
+                          value={reason}
+                          onChange={(e) => setReason(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <button
+                          className="px-4 py-2 text-white rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler my-2 mx-2 text-sm"
+                          onClick={() => handleUpdate(currRow._id, "Cancelled")}
+                        >
+                          Confirm
+                        </button>
+                        <button
+                          className="px-4 py-2 text-white rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler my-2 mx-2 text-sm"
+                          onClick={() => setIsModalOpen(false)}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </Modal>
+                  </>
+                </>
+              </>
             ) : null}
           </div>
         </div>

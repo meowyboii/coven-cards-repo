@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Snowfall from "react-snowfall";
-import DataTable from "react-data-table-component";
+import DataTable, { Alignment } from "react-data-table-component";
 import axios from "axios";
 import toast from "react-hot-toast";
 import React from "react";
@@ -20,11 +20,13 @@ export const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
   const [auth, setAuth] = useAuth();
   const [visible, setVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currRow, setCurrRow] = useState({});
 
   const tableCustomStyles = {
     header: {
       style: {
-        fontSize: "40px",
+        fontSize: "35px",
         height: "10vh",
         color: "#e7a5f2",
         backgroundColor: "#1e1e1f",
@@ -37,7 +39,7 @@ export const OrderHistory = () => {
       style: {
         color: "#e7a5f2",
         backgroundColor: "#303030",
-        fontSize: "25px",
+        fontSize: "23px",
         height: "7vh",
       },
     },
@@ -45,7 +47,7 @@ export const OrderHistory = () => {
       style: {
         color: "#e7a5f2",
         backgroundColor: "#1e1e1f",
-        fontSize: "18px",
+        fontSize: "17px",
         height: "7vh",
       },
       stripedStyle: {
@@ -82,29 +84,76 @@ export const OrderHistory = () => {
     },
   };
 
+  const handleCancelOrder = (row) => {
+    setCurrRow(row);
+    setIsModalOpen(true);
+  };
+  const handleUpdate = async () => {
+    console.log(currRow);
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_API}/api/v1/order/update-order/${currRow._id}`,
+        { delivery_status: "Cancelled" }
+      );
+      if (data?.success) {
+        toast.success("Successfully cancelled order");
+        getAllOrder();
+        setIsModalOpen(false);
+        setCurrRow({});
+      } else {
+        toast.error(data?.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Error in cancelling order");
+    }
+  };
   const displayDetails = (row) => {
+    const modalContentStyle = {
+      backgroundColor: "#e9e0f0",
+      padding: "20px",
+      borderRadius: "8px",
+      width: "90%", 
+    };
+  
+    const contentStyle = {
+      textAlign: "justify",
+    };
+  
     Modal.info({
+      className: "modalForOrderId",
       title: "Order Details",
       content: (
-        <div className="text-justify font-main mt-5">
-          <span className="flex items-center"><h3 className="font-bold mr-5">Name:</h3> <h3>{row.shipping.name}</h3></span>
-          <span className="flex items-center"><h3 className="font-bold mr-5">
-            Shipping Address:</h3> <h3>{row.shipping.address.line1},{" "}
+        <div style={Object.assign({}, contentStyle, modalContentStyle)}>
+          <h3 style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+            Name: {row.shipping.name}
+          </h3>
+          <h3 style={{ fontWeight: "bold", marginTop: "1.5rem", fontSize: "1rem" }}>
+            Shipping Address: 
+          </h3>
+          {row.shipping.address.line1},{" "}
             {row.shipping.address.city}, {row.shipping.address.country}
-          </h3></span>
-          <span className="flex items-center"><h3 className="font-bold mr-5">Payment Status:</h3> <h3>{row.payment_status}</h3></span>
-          <span className="flex items-center"><h3 className="font-bold mr-5 mb-4">Delivery Status:</h3> <h3>{row.delivery_status}</h3></span>
-          <span className="flex items-center"><h3 className="font-bold">Products: </h3></span>
+          <h3 style={{ fontWeight: "bold", marginTop: "1rem", fontSize: "1rem" }}>
+            Payment Status: 
+          </h3>
+          {row.payment_status}
+          <h3 style={{ fontWeight: "bold", marginTop: "1rem", fontSize: "1rem" }}>
+            Delivery Status: 
+          </h3>
+          {row.delivery_status}
+          <h2 style={{ marginTop: "1rem", fontSize: "1.5rem", fontWeight: "bold" }}>
+            Products:
+          </h2>
           {row.products.map((item) => (
             <>
               <tr
-                key={item.id}
-                className="transition ease-in-out delay-100 hover:bg-[#ebdfeb]"
+                key={item?.id}
+                className="transition ease-in-out delay-100 hover:bg-[#A27EBD]"
               >
                 <td className="flex justify-left items-center py-2">
                   <div className="flex justify-center items-center shadow-md h-[8vh] w-[8vh] mr-6">
                     <img
-                      src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${item.product._id}`}
+                      src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${item.product?._id}`}
                       alt={item.product.name}
                       className="max-h-full object-cover"
                     />
@@ -118,28 +167,31 @@ export const OrderHistory = () => {
                 <td className="px-4 py-2">{item.quantity}</td>
               </tr>
             </>
-          ))}
-          <span className="flex items-center"><h3 className="font-bold mr-5 mt-4">Total Amount Paid:</h3> <h3 className="mt-4"> ${row.total.toFixed(2)}</h3></span>
-        </div>
-      ),
-      onCancel: () => setVisible(false),
+        ))}
+        <h3 style={{ marginTop: "1rem", fontSize: "1rem", fontWeight: "bold" }}>
+          Total Amount Paid: ${row.total.toFixed(2)}
+        </h3>
+      </div>
+    ),
+    onCancel: () => setVisible(false),
+    style: { 
+      width: "80%",
+      backgroundColor: "#00000040",
+    },
+    okButtonProps: {
       style: {
-        width: "90%",
+        backgroundColor: "#ff0000",
+        color: "#ffffff",
       },
-      okButtonProps: {
-        style: {
-          backgroundColor: "#A484A9", // Change button background color
-          color: "#ffffff", // Change button text color
-        },
-        onMouseEnter: (e) => {
-          e.target.style.backgroundColor = "#7B0E90"; // Change color on hover
-        },
-        onMouseLeave: (e) => {
-          e.target.style.backgroundColor = "#A484A9"; // Revert to original color on leave
-        },
+      onMouseEnter: (e) => {
+        e.target.style.backgroundColor = "#7B0E90"; // Change color on hover
       },
-    });
-  };
+      onMouseLeave: (e) => {
+        e.target.style.backgroundColor = "#A484A9"; // Revert to original color on leave
+      },
+    },
+  });
+};
 
   const getDate = (updatedAt) => {
     const dateObject = new Date(updatedAt);
@@ -153,7 +205,7 @@ export const OrderHistory = () => {
   const getAllOrder = async (req, res) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/order/get-user-order/${auth.user.id}`
+        `${process.env.REACT_APP_API}/api/v1/order/get-user-order/${auth.user?.id}`
       );
       if (data.success) {
         setOrders(data?.orders);
@@ -193,13 +245,67 @@ export const OrderHistory = () => {
       name: "Delivery Status",
       selector: (row) => row.delivery_status,
     },
+    {
+      name: "Action",
+      cell: (row) => (
+        <>
+          {row.delivery_status !== "Cancelled" &&
+          row.delivery_status !== "Shipped" &&
+          row.delivery_status !== "Delivered" ? (
+            <>
+              <button
+                className="px-4 py-2 bg-purple text-white rounded hover:bg-purpler"
+                onClick={() => handleCancelOrder(row)}
+              >
+                Cancel Order
+              </button>
+              <>
+                <Modal
+                  title="Confirm Order Cancellation"
+                  open={isModalOpen}
+                  footer={null}
+                  onCancel={() => setIsModalOpen(false)}
+                  maskStyle={{ backgroundColor: "#00000040" }}
+                  className="custom-modal"
+                >
+                  <p>Are you sure you want to cancel your order?</p>
+                  <div>
+                    <button
+                      className="px-4 py-2 text-white rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler my-2 mx-2 text-sm"
+                      onClick={() => handleUpdate()}
+                    >
+                      Confirm
+                    </button>
+                    <button
+                      className="px-4 py-2 text-white rounded transition ease-in-out delay-100 bg-purple hover:bg-purpler my-2 mx-2 text-sm"
+                      onClick={() => setIsModalOpen(false)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </Modal>
+              </>
+            </>
+          ) : (
+            <div
+              className="px-4 py-2 bg-purple text-white rounded opacity-60"
+              onClick={() =>
+                toast.error("You cannot cancel this order anymore")
+              }
+            >
+              Cancel Order
+            </div>
+          )}
+        </>
+      ),
+    },
   ];
 
   return (
     <LayoutMerch>
-      <div className="min-h-screen" style={container}>
-        <div className="flex justify-center h-[100vh] min-w-[50vh] p-2 mb-15 border-2 border-[#78146235] bg-gradient-to-b from-[#1E0523cd] to-[#00000050]">
-          <div className="w-[125vh] m-5 p-5">
+      <div style={container}>
+        <div className=" flex justify-center h-[110vh] min-w-[50vh] p-2 mb-15 border-2 border-[#78146235] bg-gradient-to-b from-[#1E0523cd] to-[#00000050]">
+          <div className="w-[145vh] m-5 p-5">
             <DataTable
               title="Order History"
               columns={columns}
@@ -208,6 +314,7 @@ export const OrderHistory = () => {
               highlightOnHover
               striped
               customStyles={tableCustomStyles}
+              paginationPerPage={10}
             />
           </div>
         </div>

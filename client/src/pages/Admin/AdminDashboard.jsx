@@ -96,7 +96,7 @@ export const AdminDashboard = () => {
     for (let i = 0; i < dailySale.length; i++) {
       totalAmount += dailySale[i].total;
     }
-    setDailySaleTotal(totalAmount);
+    setDailySaleTotal(totalAmount.toFixed(2));
   };
   useEffect(() => {
     getDailySaleTotal();
@@ -112,7 +112,7 @@ export const AdminDashboard = () => {
       }
       yearlyAmount += orders[i].total;
     }
-    setYearlySale(yearlyAmount);
+    setYearlySale(yearlyAmount.toFixed(2));
   };
 
   const SalesTotal = () => {
@@ -120,7 +120,7 @@ export const AdminDashboard = () => {
     for (let i = 0; i < orders.length; i++) {
       totalAmount += orders[i].total;
     }
-    setTotalSale(totalAmount);
+    setTotalSale(totalAmount.toFixed(2));
   };
 
   useEffect(() => {

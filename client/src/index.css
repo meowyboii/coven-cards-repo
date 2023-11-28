@@ -254,14 +254,15 @@ a.leenk:hover {
   }
 }
 
-.ant-modal-header {
-  color: red;
+.custom-modal .ant-modal-content {
+  background-color: #e9e0f0;
+}
+.custom-modal .ant-modal-header {
+  background-color: #e9e0f0;
 }
 
-.ant-modal-content {
-  border-radius: 20px;
-}
-
-.modalStyle2 {
-  border-radius: 20px;
+.modalForOrderId .ant-modal-content {
+  background-color: #e9e0f0;
+  width: 43vh;
+  align-self: center;
 }
