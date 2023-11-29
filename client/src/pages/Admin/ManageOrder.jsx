@@ -6,12 +6,18 @@ import toast from "react-hot-toast";
 import { Layout } from "../../components/LayoutAdmin";
 import { MdCancelPresentation } from "react-icons/md";
 import { Modal } from "antd";
+import { motion } from 'framer-motion';
 
 export const ManageOrder = () => {
   const [orders, setOrders] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currRow, setCurrRow] = useState({});
   const [reason, setReason] = useState();
+
+  const fadeInVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
 
   const tableCustomStyles = {
     headRow: {
@@ -220,8 +226,13 @@ export const ManageOrder = () => {
     <Layout>
       <div className="flex justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
         <AdminMenu />
-
         <div className="w-[192.5vh] ml-10 mr-10 h-[100vh] py-[10vh]">
+        <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeInVariants}
+        transition={{ duration: 1 }}
+        >
           <DataTable
             title="Manage Orders"
             columns={columns}
@@ -231,6 +242,7 @@ export const ManageOrder = () => {
             striped
             customStyles={tableCustomStyles}
           />
+          </motion.div>
         </div>
       </div>
     </Layout>

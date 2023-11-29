@@ -5,6 +5,7 @@ import axios from "axios";
 import { CategoryForm } from "./CategoryForm";
 import { Modal } from "antd";
 import { Layout } from "../../components/LayoutAdmin";
+import { motion } from 'framer-motion';
 
 export const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -12,6 +13,11 @@ export const CreateCategory = () => {
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState(null);
   const [updatedName, setUpdatedName] = useState("");
+
+  const fadeInVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
 
   const getAllCategory = async (req, res) => {
     try {
@@ -94,6 +100,12 @@ export const CreateCategory = () => {
       <div className="flex justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
         <AdminMenu />
         <div className="container mx-auto mt-2 ml-20 h-[100vh] py-[10vh]">
+        <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeInVariants}
+        transition={{ duration: 1 }}
+        >
           <div className="w-1/3 mb-10">
             <h2 className="text-3xl mb-4 ">Manage Categories</h2>
             <CategoryForm
@@ -163,6 +175,7 @@ export const CreateCategory = () => {
               buttonName="Update Category"
             />
           </Modal>
+          </motion.div>
         </div>
       </div>
     </Layout>

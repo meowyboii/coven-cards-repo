@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { Select, Modal } from "antd";
 import { Layout } from "../../components/LayoutAdmin";
 import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
+import { motion } from 'framer-motion';
 
 const { Option } = Select;
 let modifiedProducts = new Set();
@@ -130,6 +131,11 @@ export const ManageProduct = () => {
   const [categories, setCategories] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(0);
+
+  const fadeInVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
 
   const columns = [
     {
@@ -375,8 +381,13 @@ export const ManageProduct = () => {
     <Layout>
       <div className="flex justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
         <AdminMenu />
-
         <div className="w-[192.5vh] ml-10 mr-10 h-[100vh] py-[10vh]">
+        <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeInVariants}
+        transition={{ duration: 1 }}
+        >
           <DataTable
             title="Manage Products"
             columns={columns}
@@ -401,6 +412,7 @@ export const ManageProduct = () => {
               Save
             </button>
           )}
+          </motion.div>
         </div>
       </div>
     </Layout>
