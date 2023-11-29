@@ -106,7 +106,7 @@ export const CreateCategory = () => {
         variants={fadeInVariants}
         transition={{ duration: 1 }}
         >
-          <div className="w-1/3 mb-10">
+          <div className="w-1/3 mb-10 ml-20">
             <h2 className="text-3xl mb-4 ">Manage Categories</h2>
             <CategoryForm
               handleSubmit={handleSubmit}
@@ -116,7 +116,7 @@ export const CreateCategory = () => {
             />
           </div>
 
-          <table className="table-auto font-main border-collapse w-1/2 ">
+          <table className="table-auto font-main border-collapse w-1/2 ml-20">
             <thead>
               <tr>
                 <th className="border-b border-gray-400 px-4 py-2 text-justify">

@@ -1,5 +1,5 @@
 import React from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Snowfall from "react-snowfall";
 import banner1 from "../assets/img/sale1.png";
 import banner2 from "../assets/img/sale2.png";
 import "./Screenshot.css";
@@ -24,6 +24,8 @@ export const Screenshot = () => {
           />
         </Link>
       </div>
+      <Snowfall color="#A484A9CB" snowflakeCount={20} />
+      <Snowfall color="#f14ad0C2" snowflakeCount={20} />
     </section>
   );
 };
