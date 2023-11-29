@@ -254,16 +254,16 @@ a.leenk:hover {
   }
 }
 
-.modalForOrderId .ant-modal-content {
-  background-color: #e9e0f0;
-}
-
 .modalForOrderId .ant-modal-header {
   background-color: #e9e0f0;
 }
 
 .modalForOrderId .ant-modal-content {
   background-color: #e9e0f0;
-  width: 50vh;
+  width: 61vh;
   align-self: center;
+}
+
+.anticon.anticon-info-circle {
+  color: #7B0E90 !important; 
 }

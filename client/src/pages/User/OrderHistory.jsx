@@ -7,6 +7,7 @@ import React from "react";
 import { LayoutMerch } from "../../components/LayoutMerch";
 import { useAuth } from "../../context/auth";
 import { Modal } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 import bannerImg from "../../assets/img/login_bg.png";
 
 export const OrderHistory = () => {
@@ -113,85 +114,118 @@ export const OrderHistory = () => {
       backgroundColor: "#e9e0f0",
       padding: "20px",
       borderRadius: "8px",
-      width: "90%", 
     };
 
     const contentStyle = {
       textAlign: "justify",
     };
-  
+
     Modal.info({
       className: "modalForOrderId",
-      title: "Order Details",
+      title: (
+        <div>
+          <span className="font-main text-purpler text-xl">Order Details</span>
+        </div>
+      ),
+      maskClosable: true,
+
       content: (
-        <div style={Object.assign({}, contentStyle, modalContentStyle)} className="font-main text-purplerest">
+        <div
+          style={Object.assign({}, contentStyle, modalContentStyle)}
+          className="font-main text-purplerest"
+        >
           <h3 style={{ fontWeight: "bold", fontSize: "1rem" }}>
-          <span className="text-purpler">Name</span>: {row.shipping.name}
+            <span className="text-purpler">Buyer</span>: {row.shipping.name}
           </h3>
-          <h3 style={{ fontWeight: "bold", marginTop: "1.5rem", fontSize: "1rem" }}>
-          <span className="text-purpler">Shipping Address</span>: 
+          <h3
+            style={{
+              fontWeight: "bold",
+              marginTop: "1.5rem",
+              fontSize: "1rem",
+            }}
+          >
+            <span className="text-purpler">Shipping Address</span>:
           </h3>
-          {row.shipping.address.line1},{" "}
-            {row.shipping.address.city}, {row.shipping.address.country}
-          <h3 style={{ fontWeight: "bold", marginTop: "1rem", fontSize: "1rem" }}>
-          <span className="text-purpler">Payment Status</span>: 
+          {row.shipping.address.line1}, {row.shipping.address.city},{" "}
+          {row.shipping.address.country}
+          <h3
+            style={{ fontWeight: "bold", marginTop: "1rem", fontSize: "1rem" }}
+          >
+            <span className="text-purpler">Payment Status</span>:
           </h3>
           {row.payment_status}
-          <h3 style={{ fontWeight: "bold", marginTop: "1rem", fontSize: "1rem" }}>
-          <span className="text-purpler">Delivery Status</span>: 
+          <h3
+            style={{ fontWeight: "bold", marginTop: "1rem", fontSize: "1rem" }}
+          >
+            <span className="text-purpler">Delivery Status</span>:
           </h3>
           {row.delivery_status}
-          <h2 style={{ marginTop: "1rem", fontSize: "1rem", fontWeight: "bold" }}>
-          <span className="text-purpler">Products</span>:
+          <h2
+            style={{ marginTop: "1rem", fontSize: "1rem", fontWeight: "bold" }}
+          >
+            <span className="text-purpler">Products</span>:
           </h2>
-          {row.products.map((item) => (
-            <>
-              <tr
-                key={item?.id}
-                className="transition ease-in-out delay-100 hover:bg-[#e7d4e7]"
-              >
-                <td className="flex justify-left items-center py-2">
-                  <div className="flex justify-center items-center shadow-md h-[8vh] w-[8vh] mr-6">
-                    <img
-                      src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${item.product?._id}`}
-                      alt={item.product.name}
-                      className="max-h-full object-cover"
-                    />
-                  </div>
-
-                  {item.product.name}
-                </td>
-                <td className="px-4 py-2">
-                  ${item.product.amountSale?.toFixed(2)}
-                </td>
-                <td className="px-4 py-2">{item.quantity}</td>
+          <table>
+            <thead className="text-purple">
+              <tr className="bg-[#340449cd]">
+                <th className=" rounded-tl-md py-2 text-center">Product</th>
+                <th className="px-2 py-2 ">Unit Price</th>
+                <th className="rounded-tr-md px-4  py-2 min-w-[10vh]">
+                  Quantity
+                </th>
               </tr>
-            </>
-        ))}
-        <h3 style={{ marginTop: "2rem", fontSize: "1rem", fontWeight: "bold" }} className="flex justify-center">
-          <span className="text-purpler">Total Amount Paid</span>: ${row.total.toFixed(2)}
-        </h3>
-      </div>
-    ),
-    onCancel: () => setVisible(false),
-    style: { 
-      width: "80%",
-      backgroundColor: "#00000040",
-    },
-    okButtonProps: {
-      style: {
-        backgroundColor: "#A484A9",
-        color: "#ffffff",
+            </thead>
+            {row.products.map((item) => (
+              <tbody>
+                <tr
+                  key={item?.id}
+                  className="transition ease-in-out delay-100 hover:bg-[#e7d4e7]"
+                >
+                  <td className="flex justify-left items-center py-2 text-center">
+                    <div className="flex justify-center items-center shadow-md h-[8vh] w-[8vh] mr-6">
+                      <img
+                        src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${item.product?._id}`}
+                        alt={item.product.name}
+                        className="max-h-full object-cover"
+                      />
+                    </div>
+
+                    {item.product.name}
+                  </td>
+                  <td className="px-4 py-2 px-16 text-center">
+                    ${item.product.amountSale?.toFixed(2)}
+                  </td>
+                  <td className="px-4 py-2 text-center">{item.quantity}</td>
+                </tr>
+              </tbody>
+            ))}
+          </table>
+          <h3
+            style={{ marginTop: "2rem", fontSize: "1rem", fontWeight: "bold" }}
+            className="flex justify-center"
+          >
+            <span className="text-purpler">Total Amount Paid</span>: $
+            {row.total.toFixed(2)}
+          </h3>
+        </div>
+      ),
+      onCancel: () => setVisible(false),
+      onOk() {},
+      width: "50vh",
+      okButtonProps: {
+        style: {
+          backgroundColor: "#A484A9",
+          color: "#ffffff",
+        },
+        onMouseEnter: (e) => {
+          e.target.style.backgroundColor = "#7B0E90"; // Change color on hover
+        },
+        onMouseLeave: (e) => {
+          e.target.style.backgroundColor = "#A484A9"; // Revert to original color on leave
+        },
       },
-      onMouseEnter: (e) => {
-        e.target.style.backgroundColor = "#7B0E90"; // Change color on hover
-      },
-      onMouseLeave: (e) => {
-        e.target.style.backgroundColor = "#A484A9"; // Revert to original color on leave
-      },
-    },
-  });
-};
+    });
+  };
 
   const getDate = (updatedAt) => {
     const dateObject = new Date(updatedAt);
