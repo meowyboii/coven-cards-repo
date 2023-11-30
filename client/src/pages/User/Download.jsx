@@ -4,6 +4,7 @@ import { Layout } from "../../components/Layout";
 import buttonImg from "../../assets/img/button clean.png";
 import bannerImg from "../../assets/img/dlpage.jpg";
 import ScrollAnimation from "react-animate-on-scroll";
+import { motion } from 'framer-motion';
 
 export const Download = () => {
   const container = {
@@ -11,6 +12,11 @@ export const Download = () => {
     backgroundSize: "cover",
     backgroundPosition: "center",
     filter: "saturate(60%)",
+  };
+
+  const fadeInVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
   };
 
   useEffect(() => {
@@ -23,7 +29,14 @@ export const Download = () => {
         style={container}
         className="relative h-screen p-10 overflow-hidden"
       >
+        <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeInVariants}
+        transition={{ duration: 1 }}
+        >
         <div className="flex items-center justify-center mt-[8vh] inline-block">
+        
           <ScrollAnimation animateIn="fadeInLeft">
             <div className="left-[15vh] mt-[25vh] lg:w-[50vh] md:w-48 sm:w-40 w-1/2 glow2">
               <a
@@ -72,7 +85,9 @@ export const Download = () => {
               </ol>
             </div>
           </ScrollAnimation>
+          
         </div>
+        </motion.div>
         <Snowfall color="#A484A9CB" snowflakeCount={20} />
         <Snowfall color="#f14ad0C2" snowflakeCount={20} />
       </section>

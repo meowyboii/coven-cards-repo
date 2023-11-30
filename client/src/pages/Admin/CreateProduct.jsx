@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { Select } from "antd";
 import { Layout } from "../../components/LayoutAdmin";
+import { motion } from 'framer-motion';
 const { Option } = Select;
 
 export const CreateProduct = () => {
@@ -17,6 +18,11 @@ export const CreateProduct = () => {
   const [photo, setPhoto] = useState("");
   const [productImages, setProductImages] = useState([]);
   const [files, setFiles] = useState([]);
+
+  const fadeInVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
 
   const getAllCategory = async (req, res) => {
     try {
@@ -104,6 +110,12 @@ export const CreateProduct = () => {
       <div className="flex justify-center font-main text-[#343434] bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
         <AdminMenu />
         <div className="container mx-auto ml-20 mt-2 min-h-[100vh] py-[10vh]">
+        <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeInVariants}
+        transition={{ duration: 1 }}
+        >
           <div className="flex text-[#343434]">
             <div className="mx-20">
               <h2 className="text-3xl mb-8 ">Create Product</h2>
@@ -305,6 +317,7 @@ export const CreateProduct = () => {
               </div>
             </div>
           </div>
+          </motion.div>
         </div>
       </div>
     </Layout>

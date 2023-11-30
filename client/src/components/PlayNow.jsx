@@ -31,7 +31,7 @@ export const PlayNow = () => {
             <img
               src={witch}
               alt="Dorothea the Great"
-              className=" w-full h-full object-cover float2"
+              className=" w-full h-full object-cover dorofloat"
             />
           </div>
         </ScrollAnimation>
@@ -40,12 +40,12 @@ export const PlayNow = () => {
             className={`${styles.sectionTitle} m-10 text-right font-bold text-purplerest `}
           >
             Dabble in the
-            <p className="text-purpler ">Divisive</p>
+            <p className="text-purpler">Divisive</p>
           </div>
         </ScrollAnimation>
       </div>
       <ScrollAnimation animateIn="bounceIn">
-        <div className="flex justify-center items-center z-10 glow w-1/4 left-[74vh] top-40 ">
+        <div className="flex justify-center items-center z-10 glow w-1/4 left-[72vh] top-40 ">
           <button>
             <div className="flex justify-center items-center">
               <img src={buttonImg} className="button" alt="play-now button" />

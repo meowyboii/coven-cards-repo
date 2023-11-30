@@ -9,6 +9,7 @@ import { useAuth } from "../../context/auth";
 import { Modal } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import bannerImg from "../../assets/img/login_bg.png";
+import { motion } from 'framer-motion';
 
 export const OrderHistory = () => {
   const container = {
@@ -16,6 +17,11 @@ export const OrderHistory = () => {
     backgroundSize: "100% 100%",
     backgroundPosition: "center",
     filter: "saturate(80%)",
+  };
+
+  const fadeInVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
   };
 
   const [orders, setOrders] = useState([]);
@@ -340,6 +346,12 @@ export const OrderHistory = () => {
       <div style={container}>
         <div className=" flex justify-center h-[110vh] min-w-[50vh] p-2 mb-15 border-2 border-[#78146235] bg-gradient-to-b from-[#1E0523cd] to-[#00000050]">
           <div className="w-[145vh] m-5 p-5 font-main">
+            <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeInVariants}
+            transition={{ duration: 1 }}
+            >
             <DataTable
               title="Order History"
               columns={columns}
@@ -350,6 +362,7 @@ export const OrderHistory = () => {
               customStyles={tableCustomStyles}
               paginationPerPage={10}
             />
+            </motion.div>
           </div>
         </div>
       </div>

@@ -17,6 +17,7 @@ import { FiStar } from "react-icons/fi";
 import { Layout } from "../../components/LayoutAdmin";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { motion } from 'framer-motion';
 // import { MdEdit } from "react-icons/md";
 
 export const AdminDashboard = () => {
@@ -32,6 +33,12 @@ export const AdminDashboard = () => {
   const [newArrivals, setNewArrivals] = useState([]);
   const [users, setUsers] = useState([]);
   const [userCount, setTotalUsers] = useState(0);
+
+  const fadeInVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
   const currentDate = new Date();
 
   currentDate.setHours(0, 0, 0, 0);
@@ -312,6 +319,12 @@ export const AdminDashboard = () => {
       <div className="flex justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB] min-h-screen">
         <AdminMenu />
         <div className="container mt-2 ml-20 py-[5vh]">
+        <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeInVariants}
+        transition={{ duration: 1 }}
+        >
           <div>
             <h2 className="text-3xl mb-4 ">Dashboard</h2>
             <div className="grid grid-cols-3 gap-2 mr-[19vh]">
@@ -450,6 +463,7 @@ export const AdminDashboard = () => {
               </div>
             </div>
           </div>
+          </motion.div>
         </div>
       </div>
     </Layout>

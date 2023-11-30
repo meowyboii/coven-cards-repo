@@ -9,6 +9,7 @@ import { useAuth } from "../../context/auth";
 import { Modal } from "antd";
 import profile from "../../assets/img/mystery_man.png";
 import bannerImg from "../../assets/img/login_bg.png";
+import { motion } from 'framer-motion';
 
 export const Dashboard = () => {
   const container = {
@@ -16,6 +17,11 @@ export const Dashboard = () => {
     backgroundSize: "100% 100%",
     backgroundPosition: "center",
     filter: "saturate(80%)",
+  };
+
+  const fadeInVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
   };
 
   const [orders, setOrders] = useState([]);
@@ -75,101 +81,16 @@ export const Dashboard = () => {
       toast.error("Something went wrong");
     }
   };
-
-  const tableCustomStyles = {
-    headRow: {
-      style: {
-        color: "#343434",
-        backgroundColor: "#e7eef0",
-      },
-    },
-    rows: {
-      style: {
-        color: "#343434",
-        backgroundColor: "#ffffff",
-      },
-      stripedStyle: {
-        color: "#343434",
-        backgroundColor: "#ffffff",
-      },
-    },
-  };
-
-  const displayDetails = (row) => {
-    Modal.info({
-      title: "Order Details",
-      content: (
-        <div className="text-justify">
-          <h3>Name: {row.shipping.name}</h3>
-          <h3>
-            Shipping Address: {row.shipping.address.line1},{" "}
-            {row.shipping.address.city}, {row.shipping.address.country}
-          </h3>
-          <h3>Payment Status: {row.payment_status}</h3>
-          <h3>Delivery Status: {row.delivery_status}</h3>
-          <h3>Date Modified: {getDate(row.updatedAt)}</h3>
-        </div>
-      ),
-      onCancel: () => setVisible(false),
-    });
-  };
-
-  const getDate = (updatedAt) => {
-    const dateObject = new Date(updatedAt);
-    const year = dateObject.getFullYear();
-    const month = String(dateObject.getMonth() + 1).padStart(2, "0"); // Adding 1 because January is 0
-    const day = String(dateObject.getDate()).padStart(2, "0");
-    const formattedDate = `${month}-${day}-${year}`;
-    return formattedDate;
-  };
-
-  const getAllOrder = async (req, res) => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/order/get-user-order/${auth.user.id}`
-      );
-      if (data.success) {
-        setOrders(data?.orders);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong while retrieving the orders");
-    }
-  };
-  useEffect(() => {
-    getAllOrder();
-  }, []);
-
-  const columns = [
-    {
-      name: "Order Id",
-      selector: (row) => (
-        <button
-          onClick={() => {
-            displayDetails(row);
-          }}
-        >
-          {row._id}
-        </button>
-      ),
-    },
-    {
-      name: "Order Date",
-      selector: (row) => getDate(row.createdAt),
-    },
-    {
-      name: "Total Amount",
-      selector: (row) => `$${row.total}`,
-    },
-    {
-      name: "Delivery Status",
-      selector: (row) => row.delivery_status,
-    },
-  ];
   return (
     <LayoutMerch>
       <div className="min-h-screen pt-[1px]" style={container}>
         <div className="bg-[#360640cd] p-10 text-purple mt-[8vh] shadow-2xl">
+        <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeInVariants}
+        transition={{ duration: 1 }}
+        >
           <form onSubmit={handleSubmit}>
             <div className="flex justify-center items-center">
               <div className="p-10 text-center flex flex-col justify-center items-center">
@@ -298,6 +219,7 @@ export const Dashboard = () => {
               </div>
             </div>
           </form>
+          </motion.div>
         </div>
       </div>
       <Snowfall color="#e977d3c2" snowflakeCount={20} />
