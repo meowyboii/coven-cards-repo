@@ -31,7 +31,6 @@ const userSchema = new mongoose.Schema(
     },
     parentEmail: {
       type: String,
-      unique: true,
     },
     parentContact: {
       type: String,
