@@ -19,6 +19,10 @@ export const OrderHistory = () => {
     filter: "saturate(80%)",
   };
 
+  const capitalizeFirstLetter=(string) =>{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   const fadeInVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
@@ -127,6 +131,7 @@ export const OrderHistory = () => {
     };
 
     Modal.info({
+
       className: "modalForOrderId",
       title: (
         <div>
@@ -159,7 +164,7 @@ export const OrderHistory = () => {
           >
             <span className="text-purpler">Payment Status</span>:
           </h3>
-          {row.payment_status}
+          {capitalizeFirstLetter(row.payment_status)}
           <h3
             style={{ fontWeight: "bold", marginTop: "1rem", fontSize: "1rem" }}
           >
@@ -222,6 +227,11 @@ export const OrderHistory = () => {
         style: {
           backgroundColor: "#A484A9",
           color: "#ffffff",
+          margin: '10px',
+          minWidth: '6vh',
+          minHeight: '5vh',
+          fontSize: '23px',
+          fontFamily: 'Fredoka, serif',
         },
         onMouseEnter: (e) => {
           e.target.style.backgroundColor = "#7B0E90"; // Change color on hover
@@ -229,6 +239,10 @@ export const OrderHistory = () => {
         onMouseLeave: (e) => {
           e.target.style.backgroundColor = "#A484A9"; // Revert to original color on leave
         },
+      },
+      bodyStyle: {
+        maxHeight: '70vh', // Adjust the value based on your needs
+        overflowY: 'auto',
       },
     });
   };

@@ -280,6 +280,15 @@ a.leenk:hover {
   align-self: center;
 }
 
+.modalForOrderId .ant-modal-body{
+  width: '10vh';
+}
+
+.modalForOrderId .ant-btn{
+  min-width: '10vh';
+
+}
+
 .anticon.anticon-info-circle {
   color: #7B0E90 !important; 
 }
