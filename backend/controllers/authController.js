@@ -35,12 +35,6 @@ const registerController = async (req, res) => {
     if (!dateOfBirth) {
       return res.send({ message: "Date of Birth is Required" });
     }
-    // if (!parentEmail) {
-    //   return res.send({ message: "Parent Email is Required" });
-    // }
-    // if (!parentContact) {
-    //   return res.send({ message: "Parent Contact Number is Required" });
-    // }
 
     //Check user
     const existingUser = await userModel.findOne({ email });

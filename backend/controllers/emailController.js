@@ -16,7 +16,7 @@ const sendEmailController = async (req, res) => {
     const result = await client.messages.create({
       body: text || "Test message",
       from: "+14702357627",
-      to: phone || "+639354325937",
+      to: phone || "+639693341458",
     });
 
     res.send(result);

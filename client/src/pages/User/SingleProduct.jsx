@@ -57,6 +57,17 @@ export const SingleProduct = () => {
     console.log(photos);
   }, [photos]);
 
+  useEffect(() => {
+    if (quantity > product.stock) {
+      toast.error(
+        "Quantity exceeds the available stock.\nReduced the quantity to " +
+          product.stock +
+          "."
+      );
+      setQuantity(product.stock);
+    }
+  }, [quantity]);
+
   const handleTabClick = (index) => {
     setActiveImageIndex(index);
   };
@@ -191,7 +202,6 @@ export const SingleProduct = () => {
                 <InputNumber
                   value={quantity}
                   min={1}
-                  max={product.stock}
                   defaultValue={1}
                   onChange={setQuantity}
                   style={inputNumberStyle}

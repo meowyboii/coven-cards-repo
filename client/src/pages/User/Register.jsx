@@ -40,6 +40,21 @@ export const Register = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Regular expression for validating email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Check if the email format is valid
+    if (!emailRegex.test(formData.email)) {
+      // If the email format is invalid, display an error message to the user
+      toast.error("Invalid Email Format!");
+      return; // Exit the function early since the email is invalid
+    } else if (
+      !emailRegex.test(formData.parentEmail) &&
+      formData.parentEmail != ""
+    ) {
+      toast.error("Invalid Parent Email Format!");
+      return; // Exit the function early since the email is invalid
+    }
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/auth/register`,
@@ -238,29 +253,29 @@ export const Register = () => {
               </div>
             </div>
             <div className="flex items-center justify-center mt-[3vh]">
-            <button type="submit" className="font-bold py-2 px-4 rounded">
-                  <div className="flex justify-center items-center w-[28vh]">
-                    <img src={buttonImg} alt="login button" />
-                    <p className=" text absolute text-[35px] text-purple mt-8">
-                      REGISTER
-                    </p>
-                  </div>
-                </button>
-                <br></br>
-                <br></br>
+              <button type="submit" className="font-bold py-2 px-4 rounded">
+                <div className="flex justify-center items-center w-[28vh]">
+                  <img src={buttonImg} alt="login button" />
+                  <p className=" text absolute text-[35px] text-purple mt-8">
+                    REGISTER
+                  </p>
+                </div>
+              </button>
+              <br></br>
+              <br></br>
             </div>
             <div className="flex items-center text-center justify-center mb-2">
-                  <div className="font-main text-[15px] font-main">
-                    Already have an accout?
-                  </div>
-                  <Link
-                    to={"/login"}
-                    className="text-[17px] font-main text-[#92509C] font-bold ml-1"
-                  >
-                    {" "}
-                    Click here!
-                  </Link>
-                </div>
+              <div className="font-main text-[15px] font-main">
+                Already have an accout?
+              </div>
+              <Link
+                to={"/login"}
+                className="text-[17px] font-main text-[#92509C] font-bold ml-1"
+              >
+                {" "}
+                Click here!
+              </Link>
+            </div>
           </form>
         </div>
         <Toaster />
