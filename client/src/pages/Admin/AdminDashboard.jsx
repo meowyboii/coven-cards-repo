@@ -17,7 +17,7 @@ import { FiStar } from "react-icons/fi";
 import { Layout } from "../../components/LayoutAdmin";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 // import { MdEdit } from "react-icons/md";
 
 export const AdminDashboard = () => {
@@ -218,19 +218,25 @@ export const AdminDashboard = () => {
   }, []);
 
   const ProductCount = () => {
-    if (!categories) {
+    if (!categories || !products) {
       return;
     }
 
     let cats = [];
     for (let i = 0; i < categories.length; i++) {
-      cats = [...cats, { name: categories[i].name, ctr: 0 }];
+      if (categories[i].name) {
+        cats = [...cats, { name: categories[i].name, ctr: 0 }];
+      }
     }
     for (let i = 0; i < products.length; i++) {
-      const index = cats.findIndex(
-        (item) => item["name"] === products[i].category.name
-      );
-      cats[index]["ctr"] = cats[index].ctr + 1;
+      if (products[i].category && products[i].category.name) {
+        const index = cats.findIndex(
+          (item) => item["name"] === products[i].category.name
+        );
+        if (index !== -1) {
+          cats[index]["ctr"] = cats[index].ctr + 1;
+        }
+      }
     }
     setProdCount(cats);
   };
@@ -319,150 +325,153 @@ export const AdminDashboard = () => {
       <div className="flex justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB] min-h-screen">
         <AdminMenu />
         <div className="container mt-2 ml-20 py-[5vh]">
-        <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={fadeInVariants}
-        transition={{ duration: 1 }}
-        >
-          <div>
-            <h2 className="text-3xl mb-4 ">Dashboard</h2>
-            <div className="grid grid-cols-3 gap-2 mr-[19vh]">
-              <div className="col-span-3 p-2 grid grid-cols-1 md:grid-cols-3 gap-32 ml-5">
-                <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
-                  <Flex justifyContent="between" alignItems="center">
-                    <Icon
-                      icon={IoCashOutline}
-                      color="violet"
-                      variant="solid"
-                      tooltip="Sum of Daily Sales"
-                      size="xl"
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeInVariants}
+            transition={{ duration: 1 }}
+          >
+            <div>
+              <h2 className="text-3xl mb-4 ">Dashboard</h2>
+              <div className="grid grid-cols-3 gap-2 mr-[19vh]">
+                <div className="col-span-3 p-2 grid grid-cols-1 md:grid-cols-3 gap-32 ml-5">
+                  <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
+                    <Flex justifyContent="between" alignItems="center">
+                      <Icon
+                        icon={IoCashOutline}
+                        color="violet"
+                        variant="solid"
+                        tooltip="Sum of Daily Sales"
+                        size="xl"
+                      />
+                      <div className="mt-[1vh]">
+                        <Text className="text-lg">Daily Sales</Text>
+                        <Metric className="bounce text-5xl">
+                          $ {dailySaleTotal}
+                        </Metric>
+                      </div>
+                    </Flex>
+                  </Card>
+
+                  <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
+                    <Text className="text-lg">Yearly Sales</Text>
+                    <Metric className="text-xl">$ {yearlyAmount}</Metric>
+                    <Flex>
+                      <Text>
+                        {((yearlyAmount * 100) / 100000).toFixed(2)}% of annual
+                        target
+                      </Text>
+                      <Text>$ 100,000</Text>
+                    </Flex>
+                    <ProgressBar value={(yearlyAmount * 100) / 100000} />
+                  </Card>
+
+                  <Card className="max-w-sm flex-col items-center h-[20vh] w-[35vh] bg-white p-10 rounded">
+                    <Flex justifyContent="between" alignItems="center">
+                      <Icon
+                        icon={FiStar}
+                        color="violet"
+                        variant="solid"
+                        tooltip="Sum of Overall Sales"
+                        size="xl"
+                      />
+                      <div className="mt-[1vh]">
+                        <Text className="text-lg">Overall Sales</Text>
+                        <Metric className="bounce text-5xl">
+                          $ {totalSale}
+                        </Metric>
+                      </div>
+                    </Flex>
+                  </Card>
+                </div>
+                <div className="flex justify-center mt-4">
+                  <div className="ml-[86.5vh] w-[57.5vh]">
+                    <DataTable
+                      title="New Arrivals"
+                      columns={columns}
+                      data={newArrivals}
+                      scrollable
+                      scrollHeight="20vh"
+                      pagination
+                      highlightOnHover
+                      striped
+                      customStyles={tableCustomStyles}
                     />
-                    <div className="mt-[1vh]">
-                      <Text className="text-lg">Daily Sales</Text>
-                      <Metric className="bounce text-5xl">
-                        $ {dailySaleTotal}
+                  </div>
+
+                  <div className="ml-10 w-[57.5vh]">
+                    <DataTable
+                      title="Products on Sale"
+                      columns={columns}
+                      data={saleProducts}
+                      scrollable
+                      scrollHeight="20vh"
+                      pagination
+                      highlightOnHover
+                      striped
+                      customStyles={tableCustomStyles}
+                    />
+                  </div>
+                </div>
+                <div className="col-span-3 p-2 grid grid-cols-1 md:grid-cols-3 gap-32 ml-5 mt-4">
+                  <Card className="card-one max-w-sm h-[20vh] w-[35vh] bg-white rounded p-5">
+                    <Flex justifyContent="between" alignItems="center">
+                      <div className="mt-5">
+                        <Text className="text-lg">Products per Category</Text>
+                      </div>
+                      <DonutChart
+                        className="w-[15vh]"
+                        data={cats}
+                        category="ctr"
+                        index="name"
+                        valueFormatter={textFormatter}
+                        colors={[
+                          "slate",
+                          "violet",
+                          "indigo",
+                          "rose",
+                          "cyan",
+                          "amber",
+                        ]}
+                      />
+                    </Flex>
+                  </Card>
+
+                  <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
+                    <Text className="text-lg">User Count</Text>
+                    <Flex justifyContent="center" alignItems="center">
+                      <Metric className="bounce text-6xl">
+                        {userCount} users
                       </Metric>
-                    </div>
-                  </Flex>
-                </Card>
+                    </Flex>
+                  </Card>
 
-                <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
-                  <Text className="text-lg">Yearly Sales</Text>
-                  <Metric className="text-xl">$ {yearlyAmount}</Metric>
-                  <Flex>
-                    <Text>
-                      {((yearlyAmount * 100) / 100000).toFixed(2)}% of annual target
-                    </Text>
-                    <Text>$ 100,000</Text>
-                  </Flex>
-                  <ProgressBar value={(yearlyAmount * 100) / 100000} />
-                </Card>
-
-                <Card className="max-w-sm flex-col items-center h-[20vh] w-[35vh] bg-white p-10 rounded">
-                  <Flex justifyContent="between" alignItems="center">
-                    <Icon
-                      icon={FiStar}
-                      color="violet"
-                      variant="solid"
-                      tooltip="Sum of Overall Sales"
-                      size="xl"
-                    />
-                    <div className="mt-[1vh]">
-                      <Text className="text-lg">Overall Sales</Text>
-                      <Metric className="bounce text-5xl">$ {totalSale}</Metric>
-                    </div>
-                  </Flex>
-                </Card>
-              </div>
-              <div className="flex justify-center mt-4">
-                <div className="ml-[86.5vh] w-[57.5vh]">
-                  <DataTable
-                    title="New Arrivals"
-                    columns={columns}
-                    data={newArrivals}
-                    scrollable
-                    scrollHeight="20vh"
-                    pagination
-                    highlightOnHover
-                    striped
-                    customStyles={tableCustomStyles}
-                  />
+                  <Card className="card-two max-w-sm h-[20vh] w-[35vh] bg-white rounded p-5">
+                    <Flex justifyContent="between" alignItems="center">
+                      <div className="mt-5">
+                        <Text className="text-lg">Orders per Product</Text>
+                      </div>
+                      <DonutChart
+                        className="w-[20vh]"
+                        data={best}
+                        category="ctr"
+                        index="name"
+                        variant="pie"
+                        valueFormatter={buyFormatter}
+                        colors={[
+                          "slate",
+                          "violet",
+                          "indigo",
+                          "rose",
+                          "cyan",
+                          "amber",
+                        ]}
+                      />
+                    </Flex>
+                  </Card>
                 </div>
-
-                <div className="ml-10 w-[57.5vh]">
-                  <DataTable
-                    title="Products on Sale"
-                    columns={columns}
-                    data={saleProducts}
-                    scrollable
-                    scrollHeight="20vh"
-                    pagination
-                    highlightOnHover
-                    striped
-                    customStyles={tableCustomStyles}
-                  />
-                </div>
-              </div>
-              <div className="col-span-3 p-2 grid grid-cols-1 md:grid-cols-3 gap-32 ml-5 mt-4">
-                <Card className="card-one max-w-sm h-[20vh] w-[35vh] bg-white rounded p-5">
-                  <Flex justifyContent="between" alignItems="center">
-                    <div className="mt-5">
-                      <Text className="text-lg">Products per Category</Text>
-                    </div>
-                    <DonutChart
-                      className="w-[15vh]"
-                      data={cats}
-                      category="ctr"
-                      index="name"
-                      valueFormatter={textFormatter}
-                      colors={[
-                        "slate",
-                        "violet",
-                        "indigo",
-                        "rose",
-                        "cyan",
-                        "amber",
-                      ]}
-                    />
-                  </Flex>
-                </Card>
-
-                <Card className="max-w-sm h-[20vh] w-[35vh] bg-white rounded p-10">
-                  <Text className="text-lg">User Count</Text>
-                  <Flex justifyContent="center" alignItems="center">
-                    <Metric className="bounce text-6xl">
-                      {userCount} users
-                    </Metric>
-                  </Flex>
-                </Card>
-
-                <Card className="card-two max-w-sm h-[20vh] w-[35vh] bg-white rounded p-5">
-                  <Flex justifyContent="between" alignItems="center">
-                    <div className="mt-5">
-                      <Text className="text-lg">Orders per Product</Text>
-                    </div>
-                    <DonutChart
-                      className="w-[20vh]"
-                      data={best}
-                      category="ctr"
-                      index="name"
-                      variant="pie"
-                      valueFormatter={buyFormatter}
-                      colors={[
-                        "slate",
-                        "violet",
-                        "indigo",
-                        "rose",
-                        "cyan",
-                        "amber",
-                      ]}
-                    />
-                  </Flex>
-                </Card>
               </div>
             </div>
-          </div>
           </motion.div>
         </div>
       </div>

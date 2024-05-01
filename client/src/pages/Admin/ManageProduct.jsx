@@ -6,13 +6,14 @@ import toast from "react-hot-toast";
 import { Select, Modal } from "antd";
 import { Layout } from "../../components/LayoutAdmin";
 import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 const { Option } = Select;
 let modifiedProducts = new Set();
 
 const CategorySelect = ({ product, categories, handleCategoryChange }) => {
-  const [category, setCategory] = useState(product.category.name);
+  const defaultCategoryName = product.category ? product.category.name : "";
+  const [category, setCategory] = useState(defaultCategoryName);
 
   const onCategoryChange = (newCategory) => {
     setCategory(newCategory);
@@ -382,36 +383,36 @@ export const ManageProduct = () => {
       <div className="flex justify-center text-[#343434] font-main bg-gradient-to-b from-[#E9DDEE] to-[#D4C1DB]">
         <AdminMenu />
         <div className="w-[192.5vh] ml-10 mr-10 h-[100vh] py-[10vh]">
-        <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={fadeInVariants}
-        transition={{ duration: 1 }}
-        >
-          <DataTable
-            title="Manage Products"
-            columns={columns}
-            data={products}
-            pagination
-            highlightOnHover
-            striped
-            customStyles={tableCustomStyles}
-          />
-          {modifiedProducts.size > 0 ? (
-            <button
-              className=" mt-5 p-5 bg-white text-black hover:bg-slate-100"
-              onClick={handleSubmit}
-            >
-              Save
-            </button>
-          ) : (
-            <button
-              className=" mt-5 p-5 bg-white text-slate-400"
-              onClick={() => toast.error("No changes applied to save")}
-            >
-              Save
-            </button>
-          )}
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeInVariants}
+            transition={{ duration: 1 }}
+          >
+            <DataTable
+              title="Manage Products"
+              columns={columns}
+              data={products}
+              pagination
+              highlightOnHover
+              striped
+              customStyles={tableCustomStyles}
+            />
+            {modifiedProducts.size > 0 ? (
+              <button
+                className=" mt-5 p-5 bg-white text-black hover:bg-slate-100"
+                onClick={handleSubmit}
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                className=" mt-5 p-5 bg-white text-slate-400"
+                onClick={() => toast.error("No changes applied to save")}
+              >
+                Save
+              </button>
+            )}
           </motion.div>
         </div>
       </div>
