@@ -7,5 +7,4 @@ React, Node.js, MongoDB.
 1. Clone the repository: `git clone https://github.com/username/pawsitive.git`
 2. Install dependencies: `npm install`
 3. Start the app: `npm run dev`
-## Screenshots and more info
-https://docs.google.com/presentation/d/1d65HjI72gHqyiZLXnOh_-PNVPwpm90sI4mfSa-q3K1Y/edit?usp=sharing
+## [Screenshots and more info](https://drive.google.com/drive/folders/1407PojoAeSiCPvW8MnN2yZM-yxPE3Dou?usp=sharing)
